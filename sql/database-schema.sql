@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS Conge(
                                     id_demande INT NOT NULL AUTO_INCREMENT,
                                     date_demande DATE NOT NULL,
                                     duree INT,
-                                    etat ENUM('En attente', 'Refuser', 'Accepter') NOT NULL DEFAULT 'En attente',
+                                    etat ENUM('En attente','Refusé','Accepté') NOT NULL DEFAULT 'En attente',
                                     justificatif MEDIUMBLOB NOT NULL,
                                     PRIMARY KEY (id_demande)
 );
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Dem_reins(
                                         id_demande INT NOT NULL AUTO_INCREMENT,
                                         date_demande DATE NOT NULL,
                                         justificatif MEDIUMBLOB NOT NULL,
-                                        etat ENUM('En attente', 'Refuser', 'Accepter') NOT NULL DEFAULT 'En attente',
+                                        etat ENUM('En attente','Refusé','Accepté') NOT NULL DEFAULT 'En attente',
                                         PRIMARY KEY (id_demande)
 );
 
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS Admin(
                                     id_admin INT NOT NULL AUTO_INCREMENT,
                                     nom VARCHAR(255) NOT NULL,
                                     prenom VARCHAR(255) NOT NULL,
-                                    roles SET('admin_conge', 'admin_abondant', 'admin_comptes'),
+                                    roles SET('admin_conge', 'admin_abondant', 'admin_comptes') NOT NULL,
                                     email VARCHAR(63) NOT NULL,
                                     mot_passe VARCHAR(63) NOT NULL,
                                     PRIMARY KEY (id_admin)
