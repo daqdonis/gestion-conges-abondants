@@ -4,23 +4,37 @@ package com.groupe14ing2.gestioncongesabondants.models;
 import java.sql.Timestamp;
 
 public class ActionAdmin {
-
+  // action here is a string that describes what the admin has done
   private long idAdmin;
   private String action;
   private java.sql.Timestamp tempsAction;
-  private long idConge;
-  private long idReins;
-  private long pkAbond;
+  private Long idConge;
+  private Long idReins;
+  private Long pkAbond;
 
-  public ActionAdmin(long idAdmin, String action, Timestamp tempsAction, long idConge, long idReins, long pkAbond) {
+  public ActionAdmin(long idAdmin, String action, Timestamp tempsAction, long idActionfait, char actionChar) {
     this.idAdmin = idAdmin;
     this.action = action;
     this.tempsAction = tempsAction;
-    this.idConge = idConge;
-    this.idReins = idReins;
-    this.pkAbond = pkAbond;
-  }
+    this.idConge = null;
+    this.idReins = null;
+    this.pkAbond = null;
 
+    // switches between A, C and R and sets one of pkAbond, idConge and idReins to idActionFait respectively
+    switch (actionChar) {
+      case 'A':
+        this.pkAbond = idActionfait;
+        break;
+      case 'C':
+        this.idConge = idActionfait;
+        break;
+      case 'R':
+        this.idReins = idActionfait;
+        break;
+      default:
+        throw new IllegalArgumentException("Invalid action char");
+    }
+  }
   public long getIdAdmin() {
     return idAdmin;
   }

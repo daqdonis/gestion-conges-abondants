@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS Admin(
 CREATE TABLE IF NOT EXISTS Abondant(
                                        id_etu INT NOT NULL,
                                        id_admin INT NOT NULL,
+                                       date_dec DATE NOT NULL,
                                        FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu),
                                        FOREIGN KEY (id_admin) REFERENCES Admin(id_admin),
                                        CONSTRAINT pk_abond PRIMARY KEY (id_etu)

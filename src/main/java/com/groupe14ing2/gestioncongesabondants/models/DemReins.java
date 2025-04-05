@@ -1,23 +1,25 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 
 public class DemReins {
 
   private long idDemande;
   private java.sql.Date dateDemande;
-  private String justificatif;
+  private InputStream justificatif;
   private EtatTraitement etat;
 
-  public DemReins(long idDemande, Date dateDemande, String justificatif, EtatTraitement etat) {
+  public DemReins(long idDemande, Date dateDemande, FileInputStream justificatif, EtatTraitement etat) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.justificatif = justificatif;
     this.etat = etat;
   }
 
-  public DemReins(Date dateDemande, String justificatif, EtatTraitement etat) {
+  public DemReins(Date dateDemande, FileInputStream justificatif, EtatTraitement etat) {
     this.dateDemande = dateDemande;
     this.justificatif = justificatif;
     this.etat = etat;
@@ -41,11 +43,11 @@ public class DemReins {
   }
 
 
-  public String getJustificatif() {
+  public InputStream getJustificatif() {
     return justificatif;
   }
 
-  public void setJustificatif(String justificatif) {
+  public void setJustificatif(FileInputStream justificatif) {
     this.justificatif = justificatif;
   }
 
@@ -57,5 +59,7 @@ public class DemReins {
   public void setEtat(EtatTraitement etat) {
     this.etat = etat;
   }
+
+
 
 }

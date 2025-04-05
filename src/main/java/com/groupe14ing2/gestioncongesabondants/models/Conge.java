@@ -1,6 +1,8 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 
 public class Conge {
@@ -9,9 +11,9 @@ public class Conge {
   private java.sql.Date dateDemande;
   private long duree;
   private EtatTraitement etat;
-  private String justificatif;
+  private InputStream justificatif;
 
-  public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, String justificatif) {
+  public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.duree = duree;
@@ -19,7 +21,7 @@ public class Conge {
     this.justificatif = justificatif;
   }
 
-  public Conge(Date dateDemande, long duree, EtatTraitement etat, String justificatif) {
+  public Conge(Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
@@ -62,11 +64,11 @@ public class Conge {
   }
 
 
-  public String getJustificatif() {
+  public InputStream getJustificatif() {
     return justificatif;
   }
 
-  public void setJustificatif(String justificatif) {
+  public void setJustificatif(FileInputStream justificatif) {
     this.justificatif = justificatif;
   }
 

@@ -10,8 +10,8 @@ public class Etudiant {
   private String prenom;
   private java.sql.Date dateNaiss;
   private long idGroupe;
-  private long idConge;
-  private long idDemReins;
+  private Long idConge;
+  private Long idDemReins;
 
   public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, long idGroupe, long idConge, long idDemReins) {
     this.idEtu = idEtu;
@@ -23,13 +23,13 @@ public class Etudiant {
     this.idDemReins = idDemReins;
   }
 
-  public Etudiant(String nom, String prenom, Date dateNaiss, long idGroupe, long idConge, long idDemReins) {
+  public Etudiant(String nom, String prenom, Date dateNaiss, long idGroupe) {
     this.nom = nom;
     this.prenom = prenom;
     this.dateNaiss = dateNaiss;
     this.idGroupe = idGroupe;
-    this.idConge = idConge;
-    this.idDemReins = idDemReins;
+    this.idConge = null;
+    this.idDemReins = null;
   }
 
   public long getIdEtu() {

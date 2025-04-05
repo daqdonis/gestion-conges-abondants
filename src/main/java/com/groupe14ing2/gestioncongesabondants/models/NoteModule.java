@@ -5,9 +5,9 @@ public class NoteModule {
 
   private long idEtu;
   private String idModule;
-  private double noteTd;
-  private double noteTp;
-  private double noteExam;
+  private Double noteTd;
+  private Double noteTp;
+  private Double noteExam;
 
   public NoteModule(long idEtu, String idModule, double noteTd, double noteTp, double noteExam) {
     this.idEtu = idEtu;
@@ -15,6 +15,14 @@ public class NoteModule {
     this.noteTd = noteTd;
     this.noteTp = noteTp;
     this.noteExam = noteExam;
+  }
+
+  public NoteModule(long idEtu, String idModule) {
+    this.idEtu = idEtu;
+    this.idModule = idModule;
+    this.noteTd = null;
+    this.noteTp = null;
+    this.noteExam = null;
   }
 
   public long getIdEtu() {
