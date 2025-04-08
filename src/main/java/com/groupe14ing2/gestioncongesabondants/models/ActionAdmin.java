@@ -1,13 +1,15 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
+import com.almasb.fxgl.entity.action.IdleAction;
+
 import java.sql.Timestamp;
 
 public class ActionAdmin {
   // action here is a string that describes what the admin has done
   private long idAdmin;
   private String action;
-  private java.sql.Timestamp tempsAction;
+  private Timestamp tempsAction;
   private Long idConge;
   private Long idReins;
   private Long pkAbond;
@@ -35,7 +37,11 @@ public class ActionAdmin {
         throw new IllegalArgumentException("Invalid action char");
     }
   }
-  public long getIdAdmin() {
+
+    public ActionAdmin(int idAction, int idAdmin, String action, Timestamp tempsAction, int idConge, int idReins, int pkAbond) {
+    }
+
+    public long getIdAdmin() {
     return idAdmin;
   }
 
@@ -53,11 +59,11 @@ public class ActionAdmin {
   }
 
 
-  public java.sql.Timestamp getTempsAction() {
+  public Timestamp getTempsAction() {
     return tempsAction;
   }
 
-  public void setTempsAction(java.sql.Timestamp tempsAction) {
+  public void setTempsAction(Timestamp tempsAction) {
     this.tempsAction = tempsAction;
   }
 
@@ -87,5 +93,9 @@ public class ActionAdmin {
   public void setPkAbond(long pkAbond) {
     this.pkAbond = pkAbond;
   }
+
+  public Object getIdAction() {
+    Object IdAction = null;
+    return IdAction;}
 
 }
