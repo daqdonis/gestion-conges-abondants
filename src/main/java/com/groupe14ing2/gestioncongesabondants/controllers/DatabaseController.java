@@ -692,7 +692,7 @@ public class DatabaseController {
     }
 
     //ActionAdmin Methods
-    public void updateActionAdmin(ActionAdmin actionAdmin) throws SQLException {
+    /*public void updateActionAdmin(ActionAdmin actionAdmin) throws SQLException {
         String sql = """
             UPDATE conges_abondant.`Action_admin`
             SET action = ?, temps_action = ?, id_conge = ?, id_reins = ?, pk_abond = ?
@@ -706,12 +706,12 @@ public class DatabaseController {
         preparedStatement.setInt(5, (int)actionAdmin.getPkAbond());
         preparedStatement.setInt(6, (int)actionAdmin.getIdAction());
         preparedStatement.executeUpdate();
-    }
+    }*/
 
-    public ActionAdmin getActionAdmin(int id) throws SQLException {
-        String sql = "SELECT * FROM conges_abondant.`Action_admin` WHERE id_action = ?";
+    public ActionAdmin getAllActionAdmin(int idAdmin) throws SQLException {
+        String sql = "SELECT * FROM conges_abondant.`Action_admin` WHERE id_admin = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
+        preparedStatement.setInt(1, idAdmin);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
