@@ -1,3 +1,19 @@
+#General_menu_window{
+    -fx-background-color: black;
+}
 #gestion_des_conges_slide{
-    -fx-background-color: red;
+    -fx-background-color: white;
+}
+#Menu_header{
+    -fx-background-color: blue;
+}
+#menu_slide_left_bar{
+    -fx-background-color: green;
+}
+#More_option_button{
+    -fx-background-color: transparent;
+}
+#more_option_pane{
+    -fx-background-color: green;
+    -fx-background-radius: 0px 10px 10px 0px;
 }
