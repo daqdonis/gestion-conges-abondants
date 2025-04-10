@@ -25,10 +25,10 @@
     -fx-background-color : RED ;
     -fx-text-fill : WHITE ;
 }
-#hideButton{
+#minimizeButton{
     -fx-background-color: WHITE ;
 }
-#hideButton:hover{
+#minimizeButton:hover{
     -fx-background-color : RED ;
     -fx-text-fill : WHITE ;
 }

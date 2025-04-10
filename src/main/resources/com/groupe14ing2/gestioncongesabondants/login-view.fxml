@@ -64,13 +64,13 @@
                   <Image url="@img/cle.png" />
                </image>
             </ImageView>
-            <Button fx:id="exitButton" layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="X" textFill="#0598ff">
+            <Button fx:id="exitButton" layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="X" textFill="#0598ff" wrapText="true">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial" size="15.0" />
                </font></Button>
-            <Button fx:id="hideButton" layoutX="288.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" textFill="#0598ff">
+            <Button fx:id="minimizeButton" layoutX="285.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="26.0" prefWidth="28.0" text="➖" textFill="#0598ff" wrapText="true">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Arial" size="15.0" />
                </font>
             </Button>
          </children>

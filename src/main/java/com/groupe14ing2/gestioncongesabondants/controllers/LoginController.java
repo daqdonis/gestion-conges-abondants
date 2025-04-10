@@ -43,7 +43,7 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
-    private Button hideButton;
+    private Button minimizeButton;
 
     @FXML
     public void initialize() {
@@ -67,5 +67,11 @@ public class LoginController {
     @FXML
     private void exit(){
         System.exit(0);
+    }
+
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) minimizeButton.getScene().getWindow();
+        stage.setIconified(true);
     }
 }
