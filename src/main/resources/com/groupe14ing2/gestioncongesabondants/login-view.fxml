@@ -13,7 +13,7 @@
 
 <BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style/LoginPageStyleSheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.LoginController">
    <left>
-      <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #0598ff; -fx-border-color: #598ff;" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="infoPanel" prefHeight="500.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="26.0" layoutY="226.0" prefHeight="81.0" prefWidth="299.0" text="Service Scolaire" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
@@ -36,9 +36,9 @@
    <center>
       <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="401.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userIdTextField" layoutX="125.0" layoutY="214.0" promptText="User ID" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <PasswordField fx:id="passwordField" layoutX="125.0" layoutY="264.0" promptText="password" style="-fx-background-color: transparent; -fx-border-color: #0598ff; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="loginButton" layoutX="133.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="33.0" prefWidth="67.0" style="-fx-background-color: #0598ff;" text="Log In" textFill="WHITE">
+            <TextField fx:id="userIdTextField" layoutX="125.0" layoutY="214.0" promptText="User ID" />
+            <PasswordField fx:id="passwordField" layoutX="125.0" layoutY="264.0" promptText="password" />
+            <Button fx:id="loginButton" layoutX="133.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="33.0" prefWidth="67.0" text="Log In" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua" size="12.0" />
                </font>
@@ -64,10 +64,15 @@
                   <Image url="@img/cle.png" />
                </image>
             </ImageView>
-            <Button layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" style="-fx-background-color: white;" text="X" textFill="#0598ff">
+            <Button fx:id="exitButton" layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="X" textFill="#0598ff">
                <font>
                   <Font size="15.0" />
                </font></Button>
+            <Button fx:id="hideButton" layoutX="288.0" layoutY="2.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" textFill="#0598ff">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </center>

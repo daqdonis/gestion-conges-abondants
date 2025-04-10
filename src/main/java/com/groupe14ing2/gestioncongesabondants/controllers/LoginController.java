@@ -25,6 +25,9 @@ public class LoginController {
     private AnchorPane loginPanel;
 
     @FXML
+    private AnchorPane infoPanel;
+
+    @FXML
     private BorderPane mainPanel;
 
     @FXML
@@ -38,6 +41,9 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private Button hideButton;
 
     @FXML
     public void initialize() {
