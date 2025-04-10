@@ -40,10 +40,20 @@ public class LoginController {
     private Button loginButton;
 
     @FXML
+    public void initialize() {
+        mainPanel.getStylesheets().add(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/LoginPageStyleSheet.css").toExternalForm());
+    }
+
+    @FXML
     private void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("src/main/resources/com/example/demo/menu.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
+
+//      switching the css to Menu_stylesheet
+        String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
+//
         stage.setScene(scene);
         stage.show();
     }

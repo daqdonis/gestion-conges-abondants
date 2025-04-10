@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style/Style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.LoginController">
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style/LoginPageStyleSheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.LoginController">
    <left>
       <AnchorPane prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #0598ff; -fx-border-color: #598ff;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="41.0" layoutY="224.0" prefHeight="17.0" prefWidth="269.0" text="Service Scolaire" textFill="WHITE">
+            <Label alignment="CENTER" layoutX="26.0" layoutY="226.0" prefHeight="81.0" prefWidth="299.0" text="Service Scolaire" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Bodoni MT Condensed" size="40.0" />
                </font>
