@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
-public class MenuController {
+public class MenuViewController {
     @FXML
     private Pane General_menu_window;
 
