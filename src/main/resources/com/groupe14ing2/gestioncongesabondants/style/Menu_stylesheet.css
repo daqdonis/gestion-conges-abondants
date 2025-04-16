@@ -1,3 +1,33 @@
+#General_menu_window{
+    -fx-background-color: black;
+}
 #gestion_des_conges_slide{
-    -fx-background-color: red;
+    -fx-background-color: #424874;
+}
+#Menu_header{
+    -fx-background-color: #241468;
+}
+#menu_slide_left_bar{
+    -fx-background-color: A6B1E1;
+}
+#list_demande_table_pan{
+    -fx-background-color: #A6B1E1;
+    -fx-background-radius: 10px;
+
+}
+#list_student_table_pan{
+    -fx-background-color: #A6B1E1;
+    -fx-background-radius: 10px;
+}
+#nombre_etudiant_pan{
+    -fx-background-color: #DCD6F7;
+    -fx-background-radius: 10px;
+}
+#nombre_demande_pan{
+    -fx-background-color: #DCD6F7;
+    -fx-background-radius: 10px;
+}
+#stats_pan{
+    -fx-background-color: #DCD6F7;
+    -fx-background-radius: 10px;
 }
