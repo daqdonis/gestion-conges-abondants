@@ -5,6 +5,7 @@ import com.groupe14ing2.gestioncongesabondants.models.Module;
 
 import java.io.FileInputStream;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseController extends DatabaseLink{
 
@@ -704,14 +705,17 @@ public class DatabaseController extends DatabaseLink{
         preparedStatement.executeUpdate();
     }*/
 
-    public ActionAdmin getAllActionAdmin(int idAdmin) throws SQLException {
+    public ArrayList<ActionAdmin> getAllActionAdmin(int idAdmin) throws SQLException {
         String sql = "SELECT * FROM conges_abondant.`Action_admin` WHERE id_admin = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, idAdmin);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return new ActionAdmin(
+
+        ArrayList<ActionAdmin> actionAdmins = new ArrayList<>();
+
+        while (resultSet.next()) {
+            actionAdmins.add(new ActionAdmin(
                     resultSet.getInt("id_action"),
                     resultSet.getInt("id_admin"),
                     resultSet.getString("action"),
@@ -719,10 +723,31 @@ public class DatabaseController extends DatabaseLink{
                     resultSet.getInt("id_conge"),
                     resultSet.getInt("id_reins"),
                     resultSet.getInt("pk_abond")
-            );
+            ));
         }
         return null;
     }
 
 
+    public ArrayList<Conge> getAllConges() throws SQLException {
+        String sql = "SELECT * FROM conges_abondant.`Conge`";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        ArrayList<Conge> conges = new ArrayList<>();
+
+        while (resultSet.next()) {
+
+            conges.add(new Conge(
+                    resultSet.getInt("id_demande"),
+                    resultSet.getDate("date_demande"),
+                    resultSet.getInt("duree"),
+                    EtatTraitement.valueOf(resultSet.getString("etat")),
+                    (FileInputStream) resultSet.getBlob("justificatif")
+            ));
+        }
+
+        return conges;
+    }
 }

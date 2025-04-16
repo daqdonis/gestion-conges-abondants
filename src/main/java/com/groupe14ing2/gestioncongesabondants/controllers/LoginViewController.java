@@ -51,6 +51,11 @@ public class LoginViewController {
     }
 
     @FXML
+    private void login(javafx.event.ActionEvent actionEvent) throws IOException {
+        switchToMenu(actionEvent);
+    }
+
+    @FXML
     private void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
