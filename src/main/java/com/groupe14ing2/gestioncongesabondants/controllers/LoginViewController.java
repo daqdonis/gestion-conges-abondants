@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LoginController {
+public class LoginViewController {
 
     private Stage stage;
     private Scene scene;
@@ -23,6 +23,9 @@ public class LoginController {
 
     @FXML
     private AnchorPane loginPanel;
+
+    @FXML
+    private AnchorPane infoPanel;
 
     @FXML
     private BorderPane mainPanel;
@@ -38,6 +41,9 @@ public class LoginController {
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private Button minimizeButton;
 
     @FXML
     public void initialize() {
@@ -61,5 +67,11 @@ public class LoginController {
     @FXML
     private void exit(){
         System.exit(0);
+    }
+
+    @FXML
+    private void minimizeWindow() {
+        Stage stage = (Stage) minimizeButton.getScene().getWindow();
+        stage.setIconified(true);
     }
 }

@@ -1,0 +1,34 @@
+#loginPanel{
+    -fx-background-color: WHITE ;
+}
+#infoPanel{
+    -fx-background-color : #0598ff ;
+    -fx-border-color : #0598ff ;
+}
+#userIdTextField{
+    -fx-background-color :  transparent ;
+    -fx-border-color:  #0598ff;
+    -fx-border-width:   0px 0px 2px 0px ;
+}
+#passwordField{
+    -fx-background-color :  transparent ;
+    -fx-border-color:  #0598ff;
+    -fx-border-width:   0px 0px 2px 0px ;
+}
+#loginButton{
+    -fx-background-color :  #0598ff;
+}
+#exitButton{
+    -fx-background-color: WHITE ;
+}
+#exitButton:hover{
+    -fx-background-color : RED ;
+    -fx-text-fill : WHITE ;
+}
+#minimizeButton{
+    -fx-background-color: WHITE ;
+}
+#minimizeButton:hover{
+    -fx-background-color : RED ;
+    -fx-text-fill : WHITE ;
+}

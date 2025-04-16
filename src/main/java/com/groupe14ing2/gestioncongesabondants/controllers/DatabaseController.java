@@ -6,14 +6,10 @@ import com.groupe14ing2.gestioncongesabondants.models.Module;
 import java.io.FileInputStream;
 import java.sql.*;
 
-public class DatabaseController {
-    private static final String URL = "jdbc:mysql://localhost:3306/conges_abondant"; // Change to your MySQL URL
-    private static final String USER = "username"; // Change to your MySQL username
-    private static final String PASSWORD = "password"; // Change to your MySQL password
-    private final Connection connection;
+public class DatabaseController extends DatabaseLink{
 
     public DatabaseController() throws SQLException {
-        connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        super();
     }
 
     // adds a new admin account
