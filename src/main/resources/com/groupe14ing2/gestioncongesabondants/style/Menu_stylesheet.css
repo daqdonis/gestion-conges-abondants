@@ -1,33 +1,80 @@
-#General_menu_window{
-    -fx-background-color: black;
+#main_window{
+    -fx-background-color: white;
 }
-#gestion_des_conges_slide{
-    -fx-background-color: #424874;
+#main_background{
+    -fx-background-color: #dedede;
+    -fx-background-radius: 0px 20px 20px 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 4, 5); /* X=0, Y=5 */
 }
-#Menu_header{
-    -fx-background-color: #241468;
+#table_pan{
+    -fx-background-radius: 20px;
+    -fx-background-color: white;
 }
-#menu_slide_left_bar{
-    -fx-background-color: A6B1E1;
+#left_bar_menu{
+    -fx-background-color: white;
 }
-#list_demande_table_pan{
-    -fx-background-color: #A6B1E1;
-    -fx-background-radius: 10px;
+#text_field_rechercher_demande{
+    -fx-background-color: white;
+    -fx-text-fill: grey;
+    -fx-background-radius: 20px;
+    -fx-border-width: 0px;
+}
+#gestino_des_cong_button {
+    -fx-background-color: transparent;
+}#gestion_des_abondant_button {
+    -fx-background-color: transparent;
+}#profile_button {
+    -fx-background-color: transparent;
+}#more_button{
+    -fx-background-color: transparent;
+}
+#gestino_des_cong_button:hover {
+    -fx-background-color: dedede;
+    -fx-background-radius: 20px;
 
+}#gestion_des_abondant_button:hover {
+     -fx-background-color: dedede;
+     -fx-background-radius: 20px;
+
+ }#profile_button :hover{
+      -fx-background-color: dedede;
+    -fx-background-radius: 20px;
+  }#more_button:hover{
+       -fx-background-color: dedede;
+          -fx-background-radius: 20px;
+
+      }
+
+.chart-pie {
+    /*-fx-pie-label-visible: true;*/
 }
-#list_student_table_pan{
-    -fx-background-color: #A6B1E1;
-    -fx-background-radius: 10px;
+.chart-pie-data:nth-child(1) {
+    -fx-pie-color: #44f600;
 }
-#nombre_etudiant_pan{
-    -fx-background-color: #DCD6F7;
-    -fx-background-radius: 10px;
+
+.chart-pie-data:nth-child(2) {
+    -fx-pie-color: #ffd800;
 }
-#nombre_demande_pan{
-    -fx-background-color: #DCD6F7;
-    -fx-background-radius: 10px;
+
+.chart-pie-data:nth-child(3) {
+    -fx-pie-color: #ff0000;
 }
-#stats_pan{
-    -fx-background-color: #DCD6F7;
-    -fx-background-radius: 10px;
+.chart-pie-label {
+    -fx-opacity: 0;
+    -fx-font-size: 0px;
+}
+.chart-pie-label-line {
+    -fx-stroke: transparent;
+}
+
+#button_ajouter_demande:hover{
+    -fx-background-color: #bababa;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2); /* X=0, Y=5 */
+}
+#button_ajouter_demande{
+    -fx-background-color: white;
+    -fx-text-fill: #4b4b4b;
+    -fx-background-radius: 20px;
 }
