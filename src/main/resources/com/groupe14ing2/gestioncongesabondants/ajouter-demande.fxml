@@ -32,7 +32,7 @@
          <font>
             <Font name="Arial" size="15.0" />
          </font></Button>
-        <Button fx:id="AJT_D_ConfirmerButton" layoutX="216.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Confirmer" textFill="#3cd14e" />
+        <Button fx:id="AJT_D_ConfirmerButton"  layoutX="216.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Confirmer" textFill="#3cd14e" />
         <TextField fx:id="AJT_D_Date" disable="true" editable="false" layoutX="361.0" layoutY="195.0" prefHeight="25.0" prefWidth="135.0" />
         <TextField fx:id="AJT_D_GroupID" disable="true" editable="false" layoutX="361.0" layoutY="270.0" prefHeight="25.0" prefWidth="135.0" />
       <QuadCurve controlX="-50.0" controlY="-100.0" endX="39.062774658203125" endY="-99.99999237060547" fill="#dedede" layoutX="462.0" layoutY="180.0" startX="39.062774658203125" startY="35.01634216308594" stroke="WHITE" strokeType="INSIDE" />
