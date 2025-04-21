@@ -106,7 +106,7 @@
                      </font>
                   </Text>
                   <Circle fill="#dedede" layoutX="903.0" layoutY="100.0" radius="56.0" stroke="#dedede" strokeType="INSIDE" />
-                  <Button fx:id="button_ajouter_demande" layoutX="537.0" layoutY="144.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="171.0" text="Ajouter une demande       " textFill="#4b4b4b" />
+                  <Button fx:id="button_ajouter_demande" layoutX="537.0" layoutY="144.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="171.0" text="Ajouter une demande       " />
                   <ImageView fitHeight="27.0" fitWidth="168.0" layoutX="381.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/loupe.png" />
@@ -117,7 +117,6 @@
                         <Image url="@img/plus.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="button_traiter_demande" layoutX="537.0" layoutY="93.0" mnemonicParsing="false" onAction="#traiter_demande" prefHeight="43.0" prefWidth="171.0" text="traiter une demande       " textFill="#4b4b4b" />
                </children>
             </Pane>
             <Pane fx:id="table_pan" layoutX="35.0" layoutY="211.0" prefHeight="900.0" prefWidth="1159.0" />
