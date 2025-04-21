@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@style/traiter-une-demande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="500.0" style="-fx-background-color: white; -fx-border-color: #1f75ff; -fx-border-width: 1px;" stylesheets="@style/traiter-une-demande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f75ff" height="247.0" layoutX="-1.0" layoutY="-148.0" stroke="#dedede" strokeType="INSIDE" style="-fx-rotate: 23.7;" width="599.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f75ff" height="247.0" layoutX="-1.0" layoutY="-148.0" stroke="#1f75ff" strokeType="INSIDE" style="-fx-rotate: 23.7;" width="599.0" />
         <CubicCurve fx:id="shape" controlX1="328.3426818847656" controlX2="392.3426818847656" controlY1="-9.810516357421875" controlY2="188.0" endX="662.0" endY="143.78948974609375" fill="#1f75ff" layoutX="-162.0" layoutY="53.0" startX="136.61849975585938" startY="-89.37428283691406" stroke="#1f75ff" />
         <CubicCurve fx:id="shape" controlX1="318.1999816894531" controlX2="407.63238525390625" controlY1="-22.399993896484375" controlY2="210.63446044921875" endX="299.0000305175781" endY="123.39999389648438" fill="#1f75ff" layoutX="-303.0" layoutY="393.0" startX="292.0000305175781" startY="-235.20001220703125" stroke="#1f75ff" />
         <Text fill="WHITE" layoutX="149.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traiter Une Demande" textAlignment="CENTER" wrappingWidth="381.7161865234375">

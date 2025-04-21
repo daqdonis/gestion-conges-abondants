@@ -12,6 +12,7 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.IOException;
@@ -98,6 +99,7 @@ public class MenuViewController {
             stage.setOnHidden(e -> mainRoot.setEffect(null));
             String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/traiter-une-demande.css").toExternalForm();
             scene.getStylesheets().add(css);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
 
         } catch (IOException ex) {
