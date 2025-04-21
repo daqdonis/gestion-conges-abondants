@@ -2,15 +2,24 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 public class MenuViewController {
 
+
     @FXML
     private Button button_ajouter_demande;
+
+    @FXML
+    private Button button_traiter_demande;
 
     @FXML
     private Button gestino_des_cong_button;
@@ -54,5 +63,20 @@ public class MenuViewController {
         );
 
 
+    }
+
+    @FXML
+    public void traiter_demande() {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Traiter demande");
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException ex){
+            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            ex.printStackTrace();
+        }
     }
 }
