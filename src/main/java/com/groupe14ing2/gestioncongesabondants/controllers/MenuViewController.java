@@ -2,10 +2,18 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class MenuViewController {
 
@@ -53,6 +61,38 @@ public class MenuViewController {
                 new PieChart.Data("", 12)
         );
 
+    }
+
+
+    //it s not working try to fix it  FXMLFILE is not Loading
+
+    @FXML
+    public void ajouterDemandeFenetre() {
+        try {
+            // Étape 1 : Obtenir le chemin du fichier FXML
+            String fxmlPath = "com.groupe14ing2.gestioncongesabondants.ajouter-demande.fxml";
+            InputStream fxmlStream = getClass().getClassLoader().getResourceAsStream(fxmlPath);
+
+            if (fxmlStream == null) {
+                System.err.println("❌ Fichier FXML introuvable : " + fxmlPath);
+                return;
+            }
+
+            // Étape 2 : Créer un FXMLLoader et charger le contenu
+            FXMLLoader loader = new FXMLLoader();
+            Parent root = loader.load(fxmlStream);
+
+            // Étape 3 : Créer une nouvelle scène et une nouvelle fenêtre
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Ajouter Demande");
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("❌ Erreur lors du chargement de la fenêtre :");
+            e.printStackTrace();
+        }
 
     }
 }
