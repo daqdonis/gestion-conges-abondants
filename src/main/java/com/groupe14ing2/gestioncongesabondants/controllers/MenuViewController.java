@@ -8,8 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+
 import java.io.IOException;
 
 public class MenuViewController {
@@ -32,10 +36,6 @@ public class MenuViewController {
 
     @FXML
     private Pane main_background;
-
-    @FXML
-    private Pane main_window;
-
     @FXML
     private Button more_button;
 
@@ -66,30 +66,42 @@ public class MenuViewController {
     }
 
     @FXML
+    private Parent mainRoot; // Tu dois lier fx:id="mainRoot" dans ton FXML principal
+
+    @FXML
     public void traiter_demande() {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
-            stage.setTitle("Traiter demande");
-            stage.setScene(scene);
-            stage.show();
-        }catch (IOException ex){
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            ex.printStackTrace();
-        }
+        ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml", "Traiter demande");
     }
     @FXML
     public void ajouter_demande() {
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/ajouter-demande.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+        ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml", "Traiter demande");
+    }
+    private void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(cheminFXML));
+            Parent newRoot = fxmlLoader.load();
+            Scene scene = new Scene(newRoot);
             Stage stage = new Stage();
-            stage.setTitle("Ajouter demande");
+            stage.setTitle(titre);
             stage.setScene(scene);
+            // Positionner et attacher à la fenêtre principale
+            Window mainWindow = mainRoot.getScene().getWindow();
+            stage.initOwner(mainWindow);
+            stage.initModality(Modality.WINDOW_MODAL); // rend la fenêtre modale
+            stage.centerOnScreen();
+
+            // Appliquer un effet de flou
+            GaussianBlur blur = new GaussianBlur(10);
+            mainRoot.setEffect(blur);
+
+            // Retirer le flou à la fermeture
+            stage.setOnHidden(e -> mainRoot.setEffect(null));
+            String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/traiter-une-demande.css").toExternalForm();
+            scene.getStylesheets().add(css);
             stage.show();
-        }catch (IOException ex){
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        } catch (IOException ex) {
+            System.out.println("Erreur lors du chargement de la fenêtre : " + cheminFXML);
             ex.printStackTrace();
         }
     }
