@@ -1,14 +1,14 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.File;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+
 
 public class MenuViewController {
     @FXML
@@ -84,5 +84,8 @@ public class MenuViewController {
 
     }
 
-
+    @FXML
+    private void exit(){
+        System.exit(0);
+    }
 }
