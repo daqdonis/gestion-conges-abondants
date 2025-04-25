@@ -1,6 +1,8 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
-public enum EtatTraitement {
+import java.io.Serializable;
+
+public enum EtatTraitement implements Serializable {
     ENATTENTE("En attente"),
     REFUSE("Refusé"),
     ACCEPTE("Accepté");

@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Semestre {
+import java.io.Serializable;
+
+public class Semestre implements Serializable {
 
   private long idSemestre;
   private long numSemestre;

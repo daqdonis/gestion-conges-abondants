@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Filiere {
+import java.io.Serializable;
+
+public class Filiere implements Serializable {
 
   private long idFiliere;
   private String designFiliere;

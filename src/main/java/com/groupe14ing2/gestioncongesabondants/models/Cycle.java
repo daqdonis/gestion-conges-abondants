@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Cycle {
+import java.io.Serializable;
+
+public class Cycle implements Serializable {
 
   private long idCycle;
   private String designCycle;

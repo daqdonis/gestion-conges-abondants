@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class NoteModule {
+import java.io.Serializable;
+
+public class NoteModule implements Serializable {
 
   private long idEtu;
   private String idModule;

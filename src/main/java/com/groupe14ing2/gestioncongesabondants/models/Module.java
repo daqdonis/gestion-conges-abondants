@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Module {
+import java.io.Serializable;
+
+public class Module implements Serializable {
 
   private String idModule;
   private String nomModule;

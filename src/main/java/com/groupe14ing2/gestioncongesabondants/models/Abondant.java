@@ -1,9 +1,10 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Abondant {
+public class Abondant implements Serializable {
 
   private long idEtu;
   private long idAdmin;

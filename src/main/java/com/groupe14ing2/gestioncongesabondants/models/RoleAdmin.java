@@ -1,6 +1,8 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
-public enum RoleAdmin {
+import java.io.Serializable;
+
+public enum RoleAdmin implements Serializable {
     ADMINCONGE("admin_conge"),
     ADMINABONDANT("admin_abondant"),
     ADMINCOMPTES("admin_comptes");

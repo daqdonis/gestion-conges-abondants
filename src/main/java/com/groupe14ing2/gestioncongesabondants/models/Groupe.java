@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Groupe {
+import java.io.Serializable;
+
+public class Groupe implements Serializable {
 
   private long idGroupe;
   private long numGroupe;

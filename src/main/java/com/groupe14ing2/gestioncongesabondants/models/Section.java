@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Section {
+import java.io.Serializable;
+
+public class Section implements Serializable {
 
   private long idSection;
   private long numSection;

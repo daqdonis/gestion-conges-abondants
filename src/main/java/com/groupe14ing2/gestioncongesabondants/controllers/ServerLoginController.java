@@ -1,6 +1,7 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-import com.groupe14ing2.gestioncongesabondants.models.Abondant;
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
+import com.groupe14ing2.gestioncongesabondants.models.RoleAdmin;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ public class ServerLoginController extends DatabaseLink {
         super();
     }
     // this login function is temporary until we make a better one
-    public boolean login(String username, String password) throws SQLException {
+    public Admin login(String username, String password) throws SQLException {
         String sql = "SELECT * FROM Admin WHERE email = ? AND mot_passe = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -19,6 +20,15 @@ public class ServerLoginController extends DatabaseLink {
         preparedStatement.setString(2, password);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        return resultSet.next();
+        if(resultSet.next())
+            return new Admin(
+                    resultSet.getInt("id_admin"),
+                    resultSet.getString("nom"),
+                    resultSet.getString("prenom"),
+                    RoleAdmin.ADMINCONGE,
+                    resultSet.getString("email"),
+                    null
+            );
+        return null;
     }
 }

@@ -3,9 +3,10 @@ package com.groupe14ing2.gestioncongesabondants.models;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class DemReins {
+public class DemReins implements Serializable {
 
   private long idDemande;
   private java.sql.Date dateDemande;

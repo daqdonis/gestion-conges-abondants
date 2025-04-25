@@ -3,9 +3,10 @@ package com.groupe14ing2.gestioncongesabondants.models;
 
 import com.almasb.fxgl.entity.action.IdleAction;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ActionAdmin {
+public class ActionAdmin implements Serializable {
   // action here is a string that describes what the admin has done
   private long idAdmin;
   private String action;

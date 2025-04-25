@@ -50,7 +50,8 @@ public class ServerApplication implements Runnable {
                             case "login":
                                 ServerLoginController loginController = new ServerLoginController();
 
-                                bufferedWriter.write(String.valueOf(loginController.login(
+                                // sends an Admin instance to the client app
+                                objectOutputStream.writeObject((loginController.login(
                                         bufferedReader.readLine(), // admin's username
                                         bufferedReader.readLine() // admin's password
                                 )));

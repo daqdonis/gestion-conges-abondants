@@ -1,7 +1,9 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable {
 
   private long idAdmin;
   private String nom;

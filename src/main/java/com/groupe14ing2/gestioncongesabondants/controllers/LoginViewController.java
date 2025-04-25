@@ -1,5 +1,6 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -57,9 +58,10 @@ public class LoginViewController {
     private void login(javafx.event.ActionEvent actionEvent) throws IOException {
         UserLoginController userLoginController = new UserLoginController();
 
-        try (Socket socket = userLoginController.login(userIdTextField.getText(), passwordField.getText())){
+        try {
+            Admin admin = userLoginController.login(userIdTextField.getText(), passwordField.getText());
             switchToMenu(actionEvent);
-        }   catch (IOException | FailedLoginException e) {
+        }   catch (IOException | FailedLoginException | ClassNotFoundException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
