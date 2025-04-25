@@ -1,6 +1,7 @@
 package com.groupe14ing2.gestioncongesabondants;
 
 import com.groupe14ing2.gestioncongesabondants.controllers.ServerLoginController;
+import com.groupe14ing2.gestioncongesabondants.models.ServerURL;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -12,6 +13,8 @@ public class ServerApplication implements Runnable {
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private ObjectOutputStream objectOutputStream;
+    private ObjectInputStream objectInputStream;
 
     @Override
     public void run() {
@@ -21,7 +24,7 @@ public class ServerApplication implements Runnable {
             while (true) {
                 try {
                     socket = serverSocket.accept();
-
+                    System.out.println("Accepted connection from " + socket.getInetAddress().getHostAddress());
                     bufferedReader = new BufferedReader(
                             new InputStreamReader(socket.getInputStream())
                     );
@@ -30,12 +33,19 @@ public class ServerApplication implements Runnable {
                             new OutputStreamWriter(socket.getOutputStream())
                     );
 
+                    objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                    objectInputStream = new ObjectInputStream(socket.getInputStream());
+
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+
                 while (true) {
                     try {
+                        System.out.println("Waiting for command");
                         String clientMessage = bufferedReader.readLine();
+                        System.out.println(clientMessage);
+
                         switch (clientMessage) {
                             case "login":
                                 ServerLoginController loginController = new ServerLoginController();
