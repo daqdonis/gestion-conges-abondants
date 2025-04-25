@@ -1,0 +1,23 @@
+#main_Panel {
+    -fx-background-color: WHITE;
+}
+
+#AJT_D_exitButton {
+     -fx-background-color: WHITE;
+}
+#AJT_D_exitButton:hover {
+     -fx-background-color: WHITE;
+     -fx-text-fill : RED ;
+}
+
+#AJT_D_ConfirmerButton{
+    -fx-background-color: WHITE;
+}
+#AJT_D_ConfirmerButton:hover{
+    -fx-background-color: GREEN;
+    -fx-text-fill : WHITE ;
+}
+
+#AJT_D_MotifButton{
+    -fx-background-color: #dedede;
+}

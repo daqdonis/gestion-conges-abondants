@@ -66,6 +66,7 @@ public class LoginViewController {
         scene.getStylesheets().add(css);
 //
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 

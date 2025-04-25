@@ -1,21 +1,24 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
+
+import java.io.IOException;
 
 
 public class MenuViewController {
-    @FXML
-    private Pane General_menu_window;
 
-    @FXML
-    private Pane Menu_header;
 
     @FXML
     private Button button_ajouter_demande;
@@ -24,64 +27,85 @@ public class MenuViewController {
     private Button button_traiter_demande;
 
     @FXML
-    private Button formulaire_anullerButton;
+    private Button gestino_des_cong_button;
 
     @FXML
-    private Button formulaire_confirmerButton;
+    private Button gestion_des_abondant_button;
 
     @FXML
-    private DatePicker formulaire_date_picker;
+    private Pane left_bar_menu;
 
     @FXML
-    private TextField formulaire_text_field_groupID;
+    private Pane main_background;
+    @FXML
+    private Button more_button;
 
     @FXML
-    private TextField formulaire_text_field_matricule;
+    private PieChart myPieChart;
 
     @FXML
-    private TextField formulaire_text_field_nom;
+    private Button profile_button;
 
     @FXML
-    private TextField formulaire_text_field_prenom;
+    private Pane switch_chap;
 
     @FXML
-    private Button formulaire_uploadButton;
+    private Pane table_pan;
 
     @FXML
-    private Pane gestion_des_conges_slide;
+    private TextField text_field_rechercher_demande;
 
     @FXML
-    private Pane list_demande_table_pan;
+    public void initialize() {
+        myPieChart.getData().addAll(
+                new PieChart.Data("", 20),
+                new PieChart.Data("", 40),
+                new PieChart.Data("", 12)
+        );
+
+
+    }
 
     @FXML
-    private Pane list_student_table_pan;
+    private Parent mainRoot; // Tu dois lier fx:id="mainRoot" dans ton FXML principal
 
     @FXML
-    private Pane menu_slide_left_bar;
-
+    public void traiter_demande() {
+        ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml", "Traiter demande");
+    }
     @FXML
-    private Pane nombre_demande_pan;
+    public void ajouter_demande() {
+        ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml", "Traiter demande");
+    }
+    private void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(cheminFXML));
+            Parent newRoot = fxmlLoader.load();
+            Scene scene = new Scene(newRoot);
+            Stage stage = new Stage();
+            stage.setTitle(titre);
+            stage.setScene(scene);
+            // Positionner et attacher à la fenêtre principale
+            Window mainWindow = mainRoot.getScene().getWindow();
+            stage.initOwner(mainWindow);
+            stage.initModality(Modality.WINDOW_MODAL); // rend la fenêtre modale
+            stage.centerOnScreen();
 
-    @FXML
-    private Pane nombre_etudiant_pan;
+            // Appliquer un effet de flou
+            GaussianBlur blur = new GaussianBlur(10);
+            mainRoot.setEffect(blur);
 
-    @FXML
-    private TextField search_field_demande;
+            // Retirer le flou à la fermeture
+            stage.setOnHidden(e -> mainRoot.setEffect(null));
+            String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/traiter-une-demande.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.show();
 
-    @FXML
-    private TextField search_field_etudiant;
-
-    @FXML
-    private Pane stats_pan;
-
-    @FXML
-    private Label text_field_groupID;
-
-
-    @FXML
-    private void handleUploadFile(ActionEvent event) {
-
-
+        } catch (IOException ex) {
+            System.out.println("Erreur lors du chargement de la fenêtre : " + cheminFXML);
+            ex.printStackTrace();
+        }
     }
 
     @FXML
