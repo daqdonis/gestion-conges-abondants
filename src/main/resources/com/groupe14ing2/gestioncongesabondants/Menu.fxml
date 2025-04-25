@@ -13,6 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+
 <Pane fx:id="mainRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" stylesheets="@style/Menu_stylesheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.MenuViewController">
    <children>
       <Pane fx:id="left_bar_menu" layoutY="-7.0" prefHeight="772.0" prefWidth="60.0">
@@ -104,9 +105,11 @@
                      <font>
                         <Font name="Calibri" size="19.0" />
                      </font>
+
                   </Text>
                   <Circle fill="#dedede" layoutX="896.0" layoutY="114.0" radius="56.0" stroke="#dedede" strokeType="INSIDE" />
                   <Button fx:id="button_ajouter_demande" contentDisplay="CENTER" layoutX="486.0" layoutY="163.0" mnemonicParsing="false" onAction="#ajouter_demande" prefHeight="43.0" prefWidth="171.0" text="Ajouter une demande" textFill="WHITE">
+
                      <font>
                         <Font name="Arial" size="21.0" />
                      </font>

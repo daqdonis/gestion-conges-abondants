@@ -34,11 +34,11 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="401.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="391.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="userIdTextField" layoutX="125.0" layoutY="214.0" promptText="User ID" />
             <PasswordField fx:id="passwordField" layoutX="125.0" layoutY="264.0" promptText="password" />
-            <Button fx:id="loginButton" layoutX="133.0" layoutY="333.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="33.0" prefWidth="67.0" text="Log In" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="133.0" layoutY="333.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="67.0" text="Log In" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua" size="12.0" />
                </font>

@@ -51,6 +51,8 @@ public class ServerApplication implements Runnable {
                                 break;
                             default:
                                 bufferedWriter.write(clientMessage + " is an invalid message!");
+                                bufferedWriter.newLine();
+                                bufferedWriter.flush();
                         }
                     } catch (IOException | SQLException e) {
                         throw new RuntimeException(e);

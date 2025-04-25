@@ -17,4 +17,5 @@ module com.groupe14ing2.gestioncongesabondants {
     exports com.groupe14ing2.gestioncongesabondants.controllers;
     exports com.groupe14ing2.gestioncongesabondants.models;
     opens com.groupe14ing2.gestioncongesabondants.controllers to javafx.fxml;
+    opens com.groupe14ing2.gestioncongesabondants.models to javafx.fxml;
 }

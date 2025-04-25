@@ -1,6 +1,5 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +15,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.IOException;
+
 
 public class MenuViewController {
 
@@ -108,4 +108,8 @@ public class MenuViewController {
         }
     }
 
+    @FXML
+    private void exit(){
+        System.exit(0);
+    }
 }
