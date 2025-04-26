@@ -151,17 +151,29 @@ public class DatabaseController extends DatabaseLink{
 
     public void addConge(Conge conge) throws SQLException {
         String sql = """
-                INSERT INTO conges_abondant.`Conge`
-                (date_demande, duree, etat, justificatif)
-                VALUES(?, ?,?,?);""";
+        INSERT INTO conges_abondant.`Conge`
+        (date_demande, duree, etat, justificatif)
+        VALUES(?, ?, ?, ?);""";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setDate(1, conge.getDateDemande());
         preparedStatement.setInt(2, (int)conge.getDuree());
         preparedStatement.setString(3, conge.getEtat().toString());
-        preparedStatement.setBlob(4, conge.getJustificatif());
+
+        // Convert InputStream to Blob
+        if (conge.getJustificatif() != null) {
+            preparedStatement.setBlob(4, conge.getJustificatif());
+        } else {
+            preparedStatement.setNull(4, Types.BLOB);
+        }
 
         preparedStatement.executeUpdate();
+
+        // Get the generated ID
+        ResultSet rs = preparedStatement.getGeneratedKeys();
+        if (rs.next()) {
+            conge.setIdDemande(rs.getLong(1));
+        }
     }
 
     public void removeConge(int id) throws SQLException {

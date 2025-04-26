@@ -1,18 +1,19 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.sql.Date;
 
 public class Conge implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   private long idDemande;
   private java.sql.Date dateDemande;
   private long duree;
   private EtatTraitement etat;
-  private InputStream justificatif;
+  private transient InputStream justificatif;
+  private byte[] justificatifData; // For serialization
 
   public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
     this.idDemande = idDemande;
@@ -27,6 +28,20 @@ public class Conge implements Serializable {
     this.duree = duree;
     this.etat = etat;
     this.justificatif = justificatif;
+  }
+  private void writeObject(ObjectOutputStream out) throws IOException {
+    out.defaultWriteObject();
+    if (justificatif != null) {
+      justificatifData = justificatif.readAllBytes();
+      out.writeObject(justificatifData);
+    }
+  }
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    justificatifData = (byte[]) in.readObject();
+    if (justificatifData != null) {
+      justificatif = new ByteArrayInputStream(justificatifData);
+    }
   }
 
   public long getIdDemande() {

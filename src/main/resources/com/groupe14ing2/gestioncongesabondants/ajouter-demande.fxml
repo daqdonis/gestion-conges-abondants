@@ -29,12 +29,12 @@
          <font>
             <Font name="Calibri" size="19.0" />
          </font></Label>
-        <TextField fx:id="AJT_D_Nom" disable="true" editable="false" layoutX="77.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="AJT_D_Nom" layoutX="77.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
         <Label alignment="CENTER" layoutX="23.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />
          </font></Label>
-        <TextField fx:id="AJT_D_PreNom" disable="true" editable="false" layoutX="77.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="AJT_D_PreNom" layoutX="77.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
         <Label alignment="CENTER" layoutX="273.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />
@@ -43,10 +43,10 @@
          <font>
             <Font name="Calibri" size="18.0" />
          </font></Label>
-        <Button fx:id="AJT_D_MotifButton" layoutX="207.0" layoutY="408.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="89.0" text="Motif" />
-        <Button fx:id="AJT_D_ConfirmerButton" layoutX="185.0" layoutY="473.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
-        <TextField fx:id="AJT_D_Date" disable="true" editable="false" layoutX="321.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <TextField fx:id="AJT_D_GroupID" disable="true" editable="false" layoutX="321.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Button fx:id="AJT_D_MotifButton" onAction="#handleMotifButton" layoutX="207.0" layoutY="408.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="89.0" text="Motif" />
+        <Button fx:id="AJT_D_ConfirmerButton" onAction="#handleConfirmerButton" layoutX="185.0" layoutY="473.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
+        <TextField fx:id="AJT_D_Date" layoutX="321.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="AJT_D_GroupID" layoutX="321.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
       <Button fx:id="fermer_button" layoutX="471.0" layoutY="-1.0" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
          <font>
             <Font name="Arial" size="13.0" />
