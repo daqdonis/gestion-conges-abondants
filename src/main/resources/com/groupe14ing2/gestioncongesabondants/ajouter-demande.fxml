@@ -4,37 +4,55 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.CubicCurve?>
-<?import javafx.scene.shape.QuadCurve?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="main_Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@style/ajouter-une-demande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.AjouterDemandeController">
+<Pane fx:id="main_Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@style/ajouter-une-demande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.AjouterDemandeController">
     <children>
-      <CubicCurve controlX1="-187.9584197998047" controlX2="20.281982421875" controlY1="103.6163330078125" controlY2="32.41632080078125" endX="359.33636474609375" endY="27.197895050048828" fill="#dedede" layoutX="189.0" layoutY="85.0" startX="-217.939208984375" startY="27.23157501220703" stroke="WHITE" style="-fx-rotate: -25;" />
-      <CubicCurve controlX1="-159.99996948242188" controlX2="369.318603515625" controlY1="-341.78369140625" controlY2="67.01629638671875" endX="257.7186584472656" endY="-18.0" fill="#dedede" layoutX="150.0" layoutY="518.0" startX="-159.99996948242188" startY="-18.0" stroke="WHITE" />
-      <CubicCurve controlX1="-340.3999938964844" controlX2="-385.99566650390625" controlY1="-180.59999084472656" controlY2="-238.15562438964844" endX="225.99996948242188" endY="-155.0" fill="#dedede" layoutX="274.0" layoutY="155.0" startX="-288.8534851074219" startY="89.61708068847656" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
-        <Text layoutX="152.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Une Demande">
+      <CubicCurve controlX1="-374.8194885253906" controlX2="-278.4974365234375" controlY1="-262.5640869140625" controlY2="-16.67034912109375" endX="209.30133056640625" endY="-169.0" fill="#1f75ff" layoutX="116.0" layoutY="778.0" startX="-128.86050415039062" startY="-284.8603515625" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+      <CubicCurve controlX1="177.26129150390625" controlX2="-19.782222747802734" controlY1="300.6261901855469" controlY2="14.639622688293457" endX="327.3266296386719" endY="99.58792877197266" fill="#1f75ff" layoutX="189.0" layoutY="18.0" startX="-213.37571716308594" startY="-7.7634172439575195" stroke="#1f75ff" style="-fx-rotate: -25;" />
+      <CubicCurve controlX1="16.77984619140625" controlX2="-142.38763427734375" controlY1="-84.48736572265625" controlY2="-274.20709228515625" endX="137.18051147460938" endY="-1.0" fill="#1f75ff" layoutX="517.0" layoutY="650.0" startX="-294.3875732421875" startY="-84.48736572265625" stroke="#1f75ff" />
+      <CubicCurve controlX1="-340.3999938964844" controlX2="-385.99566650390625" controlY1="-180.59999084472656" controlY2="-238.15562438964844" endX="234.18051147460938" endY="-156.48736572265625" fill="#1f75ff" layoutX="274.0" layoutY="155.0" startX="-292.2898864746094" startY="-12.357986450195312" stroke="#1f75ff" strokeType="INSIDE" strokeWidth="0.0" />
+        <Text fill="WHITE" layoutX="-8.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Une Demande" textAlignment="CENTER" wrappingWidth="334.4521484375">
             <font>
-                <Font name="Arial Italic" size="20.0" />
+                <Font name="Arial Bold" size="46.0" />
             </font>
         </Text>
-        <Label alignment="CENTER" layoutX="90.0" layoutY="125.0" prefHeight="17.0" prefWidth="78.0" text="Matricule" />
-        <TextField fx:id="AJT_D_matricule" layoutX="200.0" layoutY="120.0" />
-        <Label alignment="CENTER" layoutX="14.0" layoutY="200.0" prefHeight="17.0" prefWidth="78.0" text="Nom " />
-        <TextField fx:id="AJT_D_Nom" disable="true" editable="false" layoutX="92.0" layoutY="195.0" prefHeight="25.0" prefWidth="135.0" />
-        <Label alignment="CENTER" layoutX="14.0" layoutY="275.0" prefHeight="17.0" prefWidth="78.0" text="PreNom " />
-        <TextField fx:id="AJT_D_PreNom" disable="true" editable="false" layoutX="92.0" layoutY="270.0" prefHeight="25.0" prefWidth="135.0" />
-        <Label alignment="CENTER" layoutX="271.0" layoutY="275.0" prefHeight="17.0" prefWidth="78.0" text="GroupID" />
-        <Label alignment="CENTER" layoutX="241.0" layoutY="200.0" prefHeight="17.0" prefWidth="113.0" text="Date De Naissence " />
-        <Button fx:id="AJT_D_MotifButton" layoutX="211.0" layoutY="350.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" text="Motif" />
-        <Button fx:id="AJT_D_exitButton" layoutX="455.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="24.0" text="X" wrapText="true">
+        <Label alignment="CENTER" layoutX="101.0" layoutY="201.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
          <font>
-            <Font name="Arial" size="15.0" />
-         </font></Button>
-        <Button fx:id="AJT_D_ConfirmerButton" layoutX="216.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="70.0" text="Confirmer" textFill="#3cd14e" />
-        <TextField fx:id="AJT_D_Date" disable="true" editable="false" layoutX="361.0" layoutY="195.0" prefHeight="25.0" prefWidth="135.0" />
-        <TextField fx:id="AJT_D_GroupID" disable="true" editable="false" layoutX="361.0" layoutY="270.0" prefHeight="25.0" prefWidth="135.0" />
-      <QuadCurve controlX="-50.0" controlY="-100.0" endX="39.062774658203125" endY="-99.99999237060547" fill="#dedede" layoutX="462.0" layoutY="180.0" startX="39.062774658203125" startY="35.01634216308594" stroke="WHITE" strokeType="INSIDE" />
+            <Font name="Calibri" size="19.0" />
+         </font></Label>
+        <TextField fx:id="AJT_D_matricule" layoutX="209.0" layoutY="199.0" prefHeight="27.0" prefWidth="142.0" />
+        <Label alignment="CENTER" layoutX="14.0" layoutY="250.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
+         <font>
+            <Font name="Calibri" size="19.0" />
+         </font></Label>
+        <TextField fx:id="AJT_D_Nom" disable="true" editable="false" layoutX="77.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="23.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
+         <font>
+            <Font name="Calibri" size="19.0" />
+         </font></Label>
+        <TextField fx:id="AJT_D_PreNom" disable="true" editable="false" layoutX="77.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="273.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
+         <font>
+            <Font name="Calibri" size="19.0" />
+         </font></Label>
+        <Label alignment="CENTER" layoutX="273.0" layoutY="244.0" prefHeight="35.0" prefWidth="155.0" text="Date De Naissence :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
+         <font>
+            <Font name="Calibri" size="18.0" />
+         </font></Label>
+        <Button fx:id="AJT_D_MotifButton" layoutX="207.0" layoutY="408.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="89.0" text="Motif" />
+        <Button fx:id="AJT_D_ConfirmerButton" layoutX="185.0" layoutY="473.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
+        <TextField fx:id="AJT_D_Date" disable="true" editable="false" layoutX="321.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="AJT_D_GroupID" disable="true" editable="false" layoutX="321.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+      <Button fx:id="fermer_button" layoutX="471.0" layoutY="-1.0" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
+      <Circle fx:id="234shape" fill="#1f75ff" layoutX="487.0" layoutY="143.0" radius="31.0" stroke="#1f75ff" strokeType="INSIDE" />
+      <Circle fx:id="2344shape" fill="#1f75ff" layoutX="451.0" layoutY="100.0" radius="12.0" stroke="#1f75ff" strokeType="INSIDE" />
     </children>
 </Pane>

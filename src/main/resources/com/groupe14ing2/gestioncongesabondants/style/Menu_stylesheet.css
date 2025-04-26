@@ -84,3 +84,6 @@
     -fx-font-size: 14px;
     -fx-font-weight: 900;
 }
+#scroll_pane{
+    -fx-border-color: white;
+}

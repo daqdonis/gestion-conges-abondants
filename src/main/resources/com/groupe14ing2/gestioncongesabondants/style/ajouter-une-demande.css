@@ -11,13 +11,44 @@
 }
 
 #AJT_D_ConfirmerButton{
-    -fx-background-color: WHITE;
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
 }
 #AJT_D_ConfirmerButton:hover{
     -fx-background-color: GREEN;
-    -fx-text-fill : WHITE ;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
 }
 
 #AJT_D_MotifButton{
     -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+#AJT_D_MotifButton:hover{
+    -fx-background-color: #4f92ff;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+#AJT_D_matricule{
+    -fx-border-color: #4b4b4b;
+}
+#fermer_button{
+    -fx-background-color: transparent;
+    -fx-text-fill: red;
+}
+#fermer_button:hover{
+    -fx-background-color: red;
+    -fx-text-fill: white;
 }

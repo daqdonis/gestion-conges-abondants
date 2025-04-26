@@ -75,7 +75,7 @@ public class MenuViewController {
     }
     @FXML
     public void ajouter_demande() {
-        ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml", "Traiter demande");
+        ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/ajouter-demande.fxml", "ajouter-demande.fxml");
     }
     private void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
         try {

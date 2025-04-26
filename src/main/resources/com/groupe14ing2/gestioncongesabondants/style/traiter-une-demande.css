@@ -46,3 +46,11 @@
     -fx-font-weight: 900;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2); /* X=0, Y=5 */
 }
+#fermer_button{
+    -fx-background-color: transparent;
+    -fx-text-fill: red;
+}
+#fermer_button:hover{
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}

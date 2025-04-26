@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class AjouterDemandeController {
 
@@ -26,12 +27,18 @@ public class AjouterDemandeController {
     private TextField AJT_D_PreNom;
 
     @FXML
-    private Button AJT_D_exitButton;
-
-    @FXML
     private TextField AJT_D_matricule;
 
     @FXML
+    private Button fermer_button;
+
+    @FXML
     private Pane main_Panel;
+
+    @FXML
+    public void fermer_button_onAction() {
+        Stage stage = (Stage) fermer_button.getScene().getWindow();
+        stage.close();
+    }
 
 }
