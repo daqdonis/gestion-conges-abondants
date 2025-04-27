@@ -88,22 +88,24 @@ public class MenuViewController {
             DatabaseController db = new DatabaseController();
             List<Conge> requests = db.getAllCongesWithStudents();
 
-            System.out.println("Received " + requests.size() + " requests from DB");
             requestsContainer.getChildren().clear();
 
             for (Conge request : requests) {
                 try {
-                    HBox row = createRequestRow(request);
-                    if (!row.getChildren().isEmpty()) {  // Only add non-empty rows
-                        requestsContainer.getChildren().add(row);
-                    }
-                } catch (Exception e) {
-                    System.err.println("Error creating row for request " + request.getIdDemande());
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleDemande.fxml"));
+                    HBox tupleView = loader.load(); // charger le FXML
+
+                    TupleDemandeController tupleController = loader.getController();
+                    tupleController.setData(request); // injecter les données
+
+                    requestsContainer.getChildren().add(tupleView); // ajouter au container
+                } catch (IOException e) {
+                    System.err.println("Erreur de chargement du TupleDemande.fxml");
                     e.printStackTrace();
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Database error:");
+            System.err.println("Erreur base de données");
             e.printStackTrace();
         }
     }
@@ -116,59 +118,27 @@ public class MenuViewController {
             requestsContainer.getChildren().clear();
 
             for (Conge request : requests) {
-                HBox requestRow = createRequestRow(request);
-                requestsContainer.getChildren().add(requestRow);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("com/groupe14ing2/gestioncongesabondants/TupleDemande.fxml"));
+                    HBox tupleView = loader.load(); // charge la vue FXML
+
+                    TupleDemandeController tupleController = loader.getController();
+                    tupleController.setData(request); // injecte les données dans la ligne
+
+                    requestsContainer.getChildren().add(tupleView); // ajoute au container
+                } catch (IOException e) {
+                    System.err.println("Erreur de chargement du TupleDemande.fxml pour la demande " + request.getIdDemande());
+                    e.printStackTrace();
+                }
             }
         } catch (SQLException e) {
+            System.err.println("Erreur base de données lors du chargement des demandes");
             e.printStackTrace();
-            // Show error alert
         }
     }
 
-    private HBox createRequestRow(Conge request) {
-        HBox row = new HBox();
-        row.setAlignment(Pos.CENTER_LEFT);
-        row.setStyle("-fx-background-color: #f5f5f5; -fx-background-radius: 5;");
-        row.setPadding(new Insets(8.0, 8.0, 8.0, 8.0));
-        row.setSpacing(20);
 
-        // Handle null student case
-        Etudiant etudiant = request.getEtudiant();
-        if (etudiant == null) {
-            System.out.println("Warning: Found conge without student: " + request.getIdDemande());
-            return row;
-        }
 
-        // Matricule
-        Text matricule = new Text(String.valueOf(etudiant.getIdEtu()));
-        matricule.setWrappingWidth(150);
-        matricule.setStyle("-fx-font-size: 14px;");
-
-        // Name
-        Text nom = new Text(etudiant.getNom());
-        nom.setWrappingWidth(150);
-        nom.setStyle("-fx-font-size: 14px;");
-
-        // Surname
-        Text prenom = new Text(etudiant.getPrenom());
-        prenom.setWrappingWidth(150);
-        prenom.setStyle("-fx-font-size: 14px;");
-
-        // Status
-        Text status = new Text(request.getEtat().toString());
-        status.setWrappingWidth(150);
-        status.setStyle("-fx-font-size: 14px;");
-
-        // View Button
-        Button viewBtn = new Button("View");
-        viewBtn.setStyle("-fx-background-color: #1f75ff; -fx-text-fill: white; -fx-font-size: 14px;");
-        viewBtn.setOnAction(e -> viewJustification(request));
-
-        // Add all elements to row
-        row.getChildren().addAll(matricule, nom, prenom, status, viewBtn);
-
-        return row;
-    }
     private void viewJustification(Conge request) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
@@ -188,25 +158,24 @@ public class MenuViewController {
     }
 
     @FXML
-    private Parent mainRoot; // Tu dois lier fx:id="mainRoot" dans ton FXML principal
+    private Parent mainRoot;
 
     @FXML
     public void traiter_demande() {
         ouvrirFenetreAvecEffet("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml", "Traiter demande");
     }
-    @FXML
     public void ajouter_demande() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "/com/groupe14ing2/gestioncongesabondants/ajouter-demande.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/ajouter-demande.fxml"));
             Parent root = loader.load();
+
+            // Passer la référence du MenuViewController au contrôleur AjouterDemandeController
+            AjouterDemandeController controller = loader.getController();
+            controller.setMenuController(this);  // Passer la référence du contrôleur MenuViewController
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Ajouter une demande");
-
-            // Pass reference to this controller
-            stage.setUserData(this);
 
             stage.show();
         } catch (IOException ex) {

@@ -29,12 +29,15 @@ public class AjouterDemandeController {
     @FXML private Pane main_Panel;
 
     private File selectedFile;
+    private MenuViewController menuController;  // Référence du contrôleur MenuViewController
 
+    // Initialisation, définir la date par défaut
     @FXML
     public void initialize() {
         AJT_D_Date.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
+    // Gérer le bouton de sélection du fichier de justification
     @FXML
     private void handleMotifButton() {
         FileChooser fileChooser = new FileChooser();
@@ -50,19 +53,25 @@ public class AjouterDemandeController {
         }
     }
 
+    // Gérer la confirmation de la demande
     @FXML
     private void handleConfirmerButton() {
         try {
-            //Validate inputs
+            // Validation des entrées
             if (selectedFile == null) {
-                showAlert("Error", "Please select a justification file");
+                showAlert("Error", "Please select a justification file.");
                 return;
             }
 
-            //student ID
+            if (AJT_D_matricule.getText().isEmpty()) {
+                showAlert("Error", "Student ID cannot be empty.");
+                return;
+            }
+
+            // ID étudiant
             int etudiantId = Integer.parseInt(AJT_D_matricule.getText());
 
-            //verify student exists
+            // Vérifier si l'étudiant existe
             DatabaseController dbController = new DatabaseController();
             Etudiant etudiant = dbController.getEtudiant(etudiantId);
             if (etudiant == null) {
@@ -70,26 +79,28 @@ public class AjouterDemandeController {
                 return;
             }
 
-            //create Conge object with student reference
+            // Créer l'objet Conge avec les données
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
                     Date.valueOf(AJT_D_Date.getText()),
-                    30, // Default duration
+                    30, // Durée par défaut
                     EtatTraitement.ENATTENTE,
                     fileInputStream
             );
             conge.setEtudiant(etudiant);
 
-            //Add to database
+            // Ajouter à la base de données
             dbController.addConge(conge);
 
+            // Afficher l'alerte de succès
             showAlert("Success", "Demand added successfully!");
+
+            // Fermer la fenêtre actuelle
             fermer_button_onAction();
 
-            Stage stage = (Stage) AJT_D_ConfirmerButton.getScene().getWindow();
-            MenuViewController menuController = (MenuViewController) stage.getUserData();
+            // Actualiser la table dans le MenuViewController
             if (menuController != null) {
-                menuController.refreshTable();
+                menuController.refreshTable();  // Cette méthode va rafraîchir la table avec les nouvelles demandes
             }
 
         } catch (Exception e) {
@@ -98,6 +109,7 @@ public class AjouterDemandeController {
         }
     }
 
+    // Méthode pour afficher les alertes
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -106,9 +118,15 @@ public class AjouterDemandeController {
         alert.showAndWait();
     }
 
+    // Fermer la fenêtre
     @FXML
     public void fermer_button_onAction() {
         Stage stage = (Stage) fermer_button.getScene().getWindow();
         stage.close();
+    }
+
+    // Set MenuViewController reference (pour rafraîchir la table après ajout de la demande)
+    public void setMenuController(MenuViewController menuController) {
+        this.menuController = menuController;
     }
 }
