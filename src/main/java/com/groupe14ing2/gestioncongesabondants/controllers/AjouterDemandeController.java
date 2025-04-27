@@ -4,6 +4,7 @@ import com.groupe14ing2.gestioncongesabondants.models.Conge;
 import com.groupe14ing2.gestioncongesabondants.models.EtatTraitement;
 import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -31,7 +32,6 @@ public class AjouterDemandeController {
 
     @FXML
     public void initialize() {
-        // Set today's date as default
         AJT_D_Date.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
@@ -53,42 +53,57 @@ public class AjouterDemandeController {
     @FXML
     private void handleConfirmerButton() {
         try {
-            // Validate inputs
+            //Validate inputs
             if (selectedFile == null) {
-                // Show error alert
+                showAlert("Error", "Please select a justification file");
                 return;
             }
 
-            // Create Conge object
+            //student ID
+            int etudiantId = Integer.parseInt(AJT_D_matricule.getText());
+
+            //verify student exists
+            DatabaseController dbController = new DatabaseController();
+            Etudiant etudiant = dbController.getEtudiant(etudiantId);
+            if (etudiant == null) {
+                showAlert("Error", "Student not found with ID: " + etudiantId);
+                return;
+            }
+
+            //create Conge object with student reference
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
                     Date.valueOf(AJT_D_Date.getText()),
-                    30, // Default duration of 30 days - adjust as needed
+                    30, // Default duration
                     EtatTraitement.ENATTENTE,
                     fileInputStream
             );
+            conge.setEtudiant(etudiant);
 
-            // Get student ID (you'll need to implement this)
-            int etudiantId = Integer.parseInt(AJT_D_matricule.getText());
-
-            // Add to database (using your existing DatabaseController)
-            DatabaseController dbController = new DatabaseController();
+            //Add to database
             dbController.addConge(conge);
 
-            // Update student record with conge ID
-            Etudiant etudiant = dbController.getEtudiant(etudiantId);
-            if (etudiant != null) {
-                etudiant.setIdConge((int) conge.getIdDemande());
-                dbController.updateEtudiant(etudiant);
-            }
-
-            // Close the window
+            showAlert("Success", "Demand added successfully!");
             fermer_button_onAction();
+
+            Stage stage = (Stage) AJT_D_ConfirmerButton.getScene().getWindow();
+            MenuViewController menuController = (MenuViewController) stage.getUserData();
+            if (menuController != null) {
+                menuController.refreshTable();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
-            // Show error alert
+            showAlert("Error", "Error adding demand: " + e.getMessage());
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML

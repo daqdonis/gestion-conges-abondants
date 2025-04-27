@@ -55,21 +55,37 @@ public class LoginViewController {
     }
 
     @FXML
+
     private void login(javafx.event.ActionEvent actionEvent) throws IOException {
-        UserLoginController userLoginController = new UserLoginController();
+        String username = userIdTextField.getText();
+        String password = passwordField.getText();
+
+        System.out.println("Login attempt for: " + username);
 
         try {
-            Admin admin = userLoginController.login(userIdTextField.getText(), passwordField.getText());
-            switchToMenu(actionEvent);
-        }   catch (IOException | FailedLoginException | ClassNotFoundException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            UserLoginController userLoginController = new UserLoginController();
+            Admin admin = userLoginController.login(username, password);
+
+            if (admin != null) {
+                System.out.println("Login successful for: " + admin.getNom());
+                switchToMenu(actionEvent);
+            } else {
+                System.out.println("Login failed - invalid credentials");
+                showAlert("Login Failed", "Invalid username or password");
+            }
+        } catch (Exception e) {
+            System.out.println("Login error: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Error", "Login failed: " + e.getMessage());
         }
+    }
 
-
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -78,10 +94,9 @@ public class LoginViewController {
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
-//      switching the css to Menu_stylesheet
         String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
         scene.getStylesheets().add(css);
-//
+
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.show();

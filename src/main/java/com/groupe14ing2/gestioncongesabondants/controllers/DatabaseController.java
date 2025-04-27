@@ -4,8 +4,10 @@ import com.groupe14ing2.gestioncongesabondants.models.*;
 import com.groupe14ing2.gestioncongesabondants.models.Module;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseController extends DatabaseLink{
 
@@ -42,19 +44,18 @@ public class DatabaseController extends DatabaseLink{
     // adds a new student to the db
     public void addEtudiant(Etudiant etudiant) throws SQLException {
         String sql = """
-                INSERT INTO conges_abondant.Etudiant
-                (id_etu, nom, prenom, date_naiss, id_groupe, id_conge, id_dem_reins)
-                VALUES(?, ?, ?, ?, ?, ?, ?);""";
+        INSERT INTO Etudiant
+        (id_etu, nom, prenom, date_naiss, id_groupe)
+        VALUES(?, ?, ?, ?, ?);""";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, etudiant.getNom());
-        preparedStatement.setString(2, etudiant.getPrenom());
-        preparedStatement.setDate(3, etudiant.getDateNaiss());
-        preparedStatement.setInt(4, (int)etudiant.getIdGroupe());
-        preparedStatement.setInt(5, (int)etudiant.getIdConge());
-        preparedStatement.setInt(6, (int)etudiant.getIdDemReins());
-
-        preparedStatement.executeUpdate();
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, etudiant.getIdEtu());
+            stmt.setString(2, etudiant.getNom());
+            stmt.setString(3, etudiant.getPrenom());
+            stmt.setDate(4, etudiant.getDateNaiss());
+            stmt.setLong(5, etudiant.getIdGroupe());
+            stmt.executeUpdate();
+        }
     }
 
     // removes a student from the db
@@ -150,32 +151,39 @@ public class DatabaseController extends DatabaseLink{
     }
 
     public void addConge(Conge conge) throws SQLException {
-        String sql = """
-        INSERT INTO conges_abondant.`Conge`
-        (date_demande, duree, etat, justificatif)
-        VALUES(?, ?, ?, ?);""";
-
-        PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setDate(1, conge.getDateDemande());
-        preparedStatement.setInt(2, (int)conge.getDuree());
-        preparedStatement.setString(3, conge.getEtat().toString());
-
-        // Convert InputStream to Blob
-        if (conge.getJustificatif() != null) {
-            preparedStatement.setBlob(4, conge.getJustificatif());
-        } else {
-            preparedStatement.setNull(4, Types.BLOB);
+        if (conge.getEtudiant() == null) {
+            throw new SQLException("Cannot add conge without student reference");
         }
 
-        preparedStatement.executeUpdate();
+        String sql = """
+        INSERT INTO Conge 
+        (id_etu, date_demande, duree, etat, justificatif)
+        VALUES(?, ?, ?, ?, ?);""";
 
-        // Get the generated ID
-        ResultSet rs = preparedStatement.getGeneratedKeys();
-        if (rs.next()) {
-            conge.setIdDemande(rs.getLong(1));
+        try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setInt(1, (int)conge.getEtudiant().getIdEtu());
+            stmt.setDate(2, conge.getDateDemande());
+            stmt.setInt(3, (int)conge.getDuree());
+            stmt.setString(4, conge.getEtat().toString());
+
+            if (conge.getJustificatif() != null) {
+                stmt.setBlob(5, conge.getJustificatif());
+            } else {
+                stmt.setNull(5, Types.BLOB);
+            }
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating demand failed, no rows affected");
+            }
+
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    conge.setIdDemande(rs.getLong(1));
+                }
+            }
         }
     }
-
     public void removeConge(int id) throws SQLException {
         String sql = "DELETE FROM conges_abondant.`Conge` WHERE id_demande=?;";
 
@@ -363,8 +371,6 @@ public class DatabaseController extends DatabaseLink{
         preparedStatement.setString(2, etudiant.getPrenom());
         preparedStatement.setDate(3, etudiant.getDateNaiss());
         preparedStatement.setInt(4, (int)etudiant.getIdGroupe());
-        preparedStatement.setInt(5, (int)etudiant.getIdConge());
-        preparedStatement.setInt(6, (int)etudiant.getIdDemReins());
         preparedStatement.setInt(7, (int)etudiant.getIdEtu());
         preparedStatement.executeUpdate();
     }
@@ -381,9 +387,7 @@ public class DatabaseController extends DatabaseLink{
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     resultSet.getDate("date_naiss"),
-                    resultSet.getInt("id_groupe"),
-                    resultSet.getInt("id_conge"),
-                    resultSet.getInt("id_dem_reins")
+                    resultSet.getInt("id_groupe")
             );
         }
         return null;
@@ -761,5 +765,78 @@ public class DatabaseController extends DatabaseLink{
         }
 
         return conges;
+    }
+
+    public List<Conge> getAllCongesWithStudents() throws SQLException {
+        System.out.println("Fetching leave requests from database...");
+        String sql = """
+    SELECT c.id_demande, c.date_demande, c.duree, c.etat, 
+           e.id_etu, e.nom, e.prenom, e.date_naiss, e.id_groupe
+    FROM Conge c 
+    JOIN Etudiant e ON c.id_etu = e.id_etu
+    ORDER BY c.date_demande DESC""";
+
+        List<Conge> conges = new ArrayList<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Etudiant etudiant = new Etudiant(
+                        rs.getInt("id_etu"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getDate("date_naiss"),
+                        Long.valueOf(rs.getInt("id_groupe"))
+                );
+
+                Conge conge = new Conge(
+                        rs.getInt("id_demande"),
+                        rs.getDate("date_demande"),
+                        rs.getInt("duree"),
+                        EtatTraitement.valueOf(rs.getString("etat").replace(" ", "").toUpperCase()),
+                        null
+                );
+                conge.setEtudiant(etudiant);
+                conges.add(conge);
+            }
+        }
+        System.out.println("Total requests loaded: " + conges.size());
+        return conges;
+    }
+    public InputStream getJustificationFile(int demandeId) throws SQLException {
+        String sql = "SELECT justificatif FROM Conge WHERE id_demande = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, demandeId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBinaryStream("justificatif");
+            }
+        }
+        return null;
+    }
+    public Admin getAdminByUsername(String username) throws SQLException {
+        System.out.println("Attempting to find admin with username: " + username);
+        String sql = "SELECT * FROM Admin WHERE email = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("Found admin: " + rs.getString("nom") + " " + rs.getString("prenom"));
+                return new Admin(
+                        rs.getInt("id_admin"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        RoleAdmin.valueOf(rs.getString("roles")),
+                        rs.getString("email"),
+                        rs.getString("mot_passe") // Note: Never log actual passwords
+                );
+            } else {
+                System.out.println("No admin found with username: " + username);
+                return null;
+            }
+        }
     }
 }

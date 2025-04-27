@@ -165,9 +165,9 @@
                         </Text>
                      </children>
                   </HBox>
-                  <ScrollPane layoutX="34.0" layoutY="84.0" prefHeight="427.0" prefWidth="1136.0" style="-fx-border-color: white;">
+                  <ScrollPane fx:id="scrollPane" layoutX="34.0" layoutY="84.0" prefHeight="427.0" prefWidth="1136.0" style="-fx-border-color: white;">
                      <content>
-                        <VBox prefHeight="430.0" prefWidth="1117.0">
+                        <VBox fx:id="requestsContainer" prefHeight="430.0" prefWidth="1117.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1117.0" style="-fx-background-color: red;">
                                  <children>

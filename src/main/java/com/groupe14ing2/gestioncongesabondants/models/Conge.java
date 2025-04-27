@@ -13,10 +13,18 @@ public class Conge implements Serializable {
   private long duree;
   private EtatTraitement etat;
   private transient InputStream justificatif;
-  private byte[] justificatifData; // For serialization
+  private byte[] justificatifData;
+  private Etudiant etudiant;
+
 
   public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
     this.idDemande = idDemande;
+    this.dateDemande = dateDemande;
+    this.duree = duree;
+    this.etat = etat;
+    this.justificatif = justificatif;
+  }
+  public Conge(Date dateDemande, long duree, EtatTraitement etat, InputStream justificatif) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
@@ -88,4 +96,13 @@ public class Conge implements Serializable {
     this.justificatif = justificatif;
   }
 
+  public Etudiant getEtudiant() {
+    return etudiant;
+  }
+
+  public void setEtudiant(Etudiant etudiant) {
+    this.etudiant = etudiant;
+  }
+
 }
+
