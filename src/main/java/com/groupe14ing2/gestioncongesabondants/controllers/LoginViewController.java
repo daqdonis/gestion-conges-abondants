@@ -55,8 +55,7 @@ public class LoginViewController {
     }
 
     @FXML
-
-    private void login(javafx.event.ActionEvent actionEvent) throws IOException {
+   private void login(javafx.event.ActionEvent actionEvent) throws IOException {
         String username = userIdTextField.getText();
         String password = passwordField.getText();
 
@@ -78,7 +77,8 @@ public class LoginViewController {
             e.printStackTrace();
             showAlert("Error", "Login failed: " + e.getMessage());
         }
-    }
+    } 
+   
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

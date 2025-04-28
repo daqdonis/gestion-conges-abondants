@@ -1,13 +1,18 @@
+-- 1. Create the database
+DROP DATABASE IF EXISTS conges_abondant;
 CREATE DATABASE conges_abondant;
-
 USE conges_abondant;
 
+-- 2. Create tables with proper relationships
+
+-- Filiere table
 CREATE TABLE IF NOT EXISTS Filiere(
     id_filiere INT NOT NULL AUTO_INCREMENT,
     design_filiere VARCHAR(63) NOT NULL,
     PRIMARY KEY (id_filiere)
 );
 
+-- Cycle table
 CREATE TABLE IF NOT EXISTS Cycle(
     id_cycle INT NOT NULL AUTO_INCREMENT,
     design_cycle VARCHAR(63) NOT NULL,
@@ -16,12 +21,14 @@ CREATE TABLE IF NOT EXISTS Cycle(
     FOREIGN KEY (id_filiere) REFERENCES Filiere(id_filiere)
 );
 
+-- Semestre table
 CREATE TABLE IF NOT EXISTS Semestre(
     id_semestre INT NOT NULL AUTO_INCREMENT,
     num_semestre INT NOT NULL,
     PRIMARY KEY (id_semestre)
 );
 
+-- Section table
 CREATE TABLE IF NOT EXISTS Section(
     id_section INT NOT NULL AUTO_INCREMENT,
     num_section INT NOT NULL,
@@ -30,6 +37,7 @@ CREATE TABLE IF NOT EXISTS Section(
     FOREIGN KEY (id_cycle) REFERENCES Cycle(id_cycle)
 );
 
+-- Groupe table
 CREATE TABLE IF NOT EXISTS Groupe(
     id_groupe INT NOT NULL AUTO_INCREMENT,
     num_groupe INT NOT NULL,
@@ -40,6 +48,7 @@ CREATE TABLE IF NOT EXISTS Groupe(
     FOREIGN KEY (id_semestre) REFERENCES Semestre(id_semestre)
 );
 
+-- Etudiant table (simplified without id_conge and id_dem_reins)
 CREATE TABLE IF NOT EXISTS Etudiant(
     id_etu INT NOT NULL,
     nom VARCHAR(255) NOT NULL,
@@ -50,6 +59,7 @@ CREATE TABLE IF NOT EXISTS Etudiant(
     FOREIGN KEY (id_groupe) REFERENCES Groupe(id_groupe)
 );
 
+-- Conge table with reference to Etudiant
 CREATE TABLE IF NOT EXISTS Conge(
     id_demande INT NOT NULL AUTO_INCREMENT,
     id_etu INT NOT NULL,  -- References student
@@ -61,6 +71,7 @@ CREATE TABLE IF NOT EXISTS Conge(
     FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu)
 );
 
+-- Dem_reins table with reference to Etudiant
 CREATE TABLE IF NOT EXISTS Dem_reins(
     id_demande INT NOT NULL AUTO_INCREMENT,
     id_etu INT NOT NULL,  -- References student
@@ -71,6 +82,7 @@ CREATE TABLE IF NOT EXISTS Dem_reins(
     FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu)
 );
 
+-- Module table
 CREATE TABLE IF NOT EXISTS Module(
     id_module VARCHAR(31) NOT NULL,
     nom_module VARCHAR(31) NOT NULL,
@@ -79,6 +91,7 @@ CREATE TABLE IF NOT EXISTS Module(
     FOREIGN KEY (id_semestre) REFERENCES Semestre(id_semestre)
 );
 
+-- Note_module table
 CREATE TABLE IF NOT EXISTS Note_module(
     id_etu INT NOT NULL,
     id_module VARCHAR(31) NOT NULL,
@@ -89,6 +102,7 @@ CREATE TABLE IF NOT EXISTS Note_module(
     FOREIGN KEY (id_module) REFERENCES Module(id_module)
 );
 
+-- Admin table
 CREATE TABLE IF NOT EXISTS Admin(
     id_admin INT NOT NULL AUTO_INCREMENT,
     nom VARCHAR(255) NOT NULL,
@@ -99,6 +113,7 @@ CREATE TABLE IF NOT EXISTS Admin(
     PRIMARY KEY (id_admin)
 );
 
+-- Abondant table
 CREATE TABLE IF NOT EXISTS Abondant(
     id_etu INT NOT NULL,
     id_admin INT NOT NULL,
@@ -108,6 +123,7 @@ CREATE TABLE IF NOT EXISTS Abondant(
     CONSTRAINT pk_abond PRIMARY KEY (id_etu)
 );
 
+-- Action_admin table
 CREATE TABLE IF NOT EXISTS Action_admin(
     id_action INT NOT NULL AUTO_INCREMENT,
     id_admin INT NOT NULL,
