@@ -68,14 +68,15 @@ public class TraiterDemandeController  {
     }
 
 }
-
 @FXML
 private void handleRefuser() {
     try {
         int idDemande = Integer.parseInt(traiter_numero_demande.getText());
 
         DatabaseController dbController = new DatabaseController();
-        dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSE);
+        
+        // ✅ استخدام REFUSE بدلاً من "Refusé"
+        dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSÉ);  
 
         showAlert("Succès", "Demande refusée avec succès.");
         fermer_button_onAction(); // fermer la fenêtre après refus
@@ -85,13 +86,14 @@ private void handleRefuser() {
     }
 }
 
+
 @FXML
 private void handleAccepter() {
     try {
         int idDemande = Integer.parseInt(traiter_numero_demande.getText());
 
         DatabaseController dbController = new DatabaseController();
-        dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTE);
+        dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);
 
         showAlert("Succès", "Demande acceptée avec succès.");
         fermer_button_onAction(); // fermer la fenêtre après acceptation
