@@ -1,6 +1,7 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import com.groupe14ing2.gestioncongesabondants.models.EtatTraitement;
 
 import java.io.*;
 import java.net.Socket;
@@ -43,6 +44,18 @@ public class ServerCongeController{
                             // sends an arraylist of conges to the user using the socket
                             objectOutputStream.writeObject(db.getAllConges());
                             objectOutputStream.flush();
+                            break;
+                                  case "update_etat":
+                            // Receives ID and new EtatTraitement to update Conge
+                            int idDemande = Integer.parseInt(bufferedReader.readLine()); 
+                            String etatStr = bufferedReader.readLine(); 
+
+                            // Attempt to update the state in the database
+                            EtatTraitement etat = EtatTraitement.valueOf(etatStr); 
+                            db.updateCongeEtat(idDemande, etat); 
+                            bufferedWriter.write("État de la demande mis à jour avec succès.");
+                            bufferedWriter.newLine();
+                            bufferedWriter.flush();
                             break;
                         default:
                             bufferedWriter.write(clientMessage + " is an invalid message!");

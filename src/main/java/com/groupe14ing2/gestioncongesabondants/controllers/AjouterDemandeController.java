@@ -84,7 +84,7 @@ public class AjouterDemandeController {
             Conge conge = new Conge(
                     Date.valueOf(AJT_D_Date.getText()),
                     30, // Durée par défaut
-                    EtatTraitement.ENATTENTE,
+                    EtatTraitement.EN_ATTENTE,
                     fileInputStream
             );
             conge.setEtudiant(etudiant);
