@@ -3,6 +3,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Button;
 
 public class ProfileController {
 
@@ -20,5 +21,9 @@ public class ProfileController {
 
     @FXML
     private ImageView Profile_User_Img;
+
+    @FXML
+    private Button Profile_GestionDesComptButton;
+
 
 }

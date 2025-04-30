@@ -1,10 +1,15 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import java.io.IOException;
+
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -12,8 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class LoginViewController {
 
@@ -51,8 +54,37 @@ public class LoginViewController {
     }
 
     @FXML
+
     private void login(javafx.event.ActionEvent actionEvent) throws IOException {
-        switchToMenu(actionEvent);
+        String username = userIdTextField.getText();
+        String password = passwordField.getText();
+
+        System.out.println("Login attempt for: " + username);
+
+        try {
+            UserLoginController userLoginController = new UserLoginController();
+            Admin admin = userLoginController.login(username, password);
+
+            if (admin != null) {
+                System.out.println("Login successful for: " + admin.getNom());
+                switchToMenu(actionEvent);
+            } else {
+                System.out.println("Login failed - invalid credentials");
+                showAlert("Login Failed", "Invalid username or password");
+            }
+        } catch (Exception e) {
+            System.out.println("Login error: " + e.getMessage());
+            e.printStackTrace();
+            showAlert("Error", "Login failed: " + e.getMessage());
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML

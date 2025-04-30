@@ -18,7 +18,7 @@ public class ServerApplication implements Runnable {
 
     @Override
     public void run() {
-        try {
+        try {     
             serverSocket = new ServerSocket(2514);
 
             while (true) {

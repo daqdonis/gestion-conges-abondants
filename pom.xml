@@ -117,11 +117,10 @@
             <version>8.0.33</version>
         </dependency>
         <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>charm-glisten</artifactId>
-            <version>6.0.6</version>
-
-        </dependency>
+    <groupId>org.mindrot</groupId>
+    <artifactId>jbcrypt</artifactId>  // for password hashing
+    <version>0.4</version>
+</dependency>
 
     </dependencies>
 
