@@ -57,13 +57,13 @@ public class TupleDemandeController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml"));
         Parent root = loader.load();
 
-        // الحصول على الكونترولر الجديد
+      
         TraiterDemandeController controller = loader.getController();
 
-        // إرسال البيانات للكونترولر
+       
         controller.setConge(conge);
 
-        // إظهار الواجهة داخل نافذة جديدة أو ضمن منطقة معينة حسب تصميمك
+       
         Stage stage = new Stage();
         stage.setTitle("Traiter une demande");
         stage.setScene(new Scene(root));
