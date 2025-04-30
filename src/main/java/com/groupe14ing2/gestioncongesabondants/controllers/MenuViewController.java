@@ -1,14 +1,16 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
-import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -20,12 +22,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import javafx.geometry.Insets;
-import javafx.scene.text.Text;
 
 
 
@@ -82,6 +78,8 @@ public class MenuViewController {
         refreshTable();
     }
 
+  
+
     public void refreshTable() {
         System.out.println("Refreshing table...");
         try {
@@ -97,6 +95,9 @@ public class MenuViewController {
 
                     TupleDemandeController tupleController = loader.getController();
                     tupleController.setData(request); // injecter les données
+                    tupleController.setMenuController(this); // injecter le contrôleur MenuViewController
+                    
+
 
                     requestsContainer.getChildren().add(tupleView); // ajouter au container
                 } catch (IOException e) {
@@ -123,7 +124,9 @@ public class MenuViewController {
                     HBox tupleView = loader.load(); // charge la vue FXML
 
                     TupleDemandeController tupleController = loader.getController();
-                    tupleController.setData(request); // injecte les données dans la ligne
+                    tupleController.setData(request); 
+                    tupleController.setMenuController(this); // هذا هو السطر الذي يربط بين الزرين والنافذة
+// injecte les données dans la ligne
 
                     requestsContainer.getChildren().add(tupleView); // ajoute au container
                 } catch (IOException e) {
@@ -182,7 +185,7 @@ public class MenuViewController {
             ex.printStackTrace();
         }
     }
-    private void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
+    void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(cheminFXML));
             Parent newRoot = fxmlLoader.load();
@@ -212,6 +215,8 @@ public class MenuViewController {
             ex.printStackTrace();
         }
     }
+
+    
 
     @FXML
     private void exit(){

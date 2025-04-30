@@ -1,10 +1,17 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
 
+import java.io.IOException;
+
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class TupleDemandeController {
 
@@ -25,6 +32,7 @@ public class TupleDemandeController {
 
     @FXML
     private Button traiter_jst_button;
+    private MenuViewController menuController;
 
     public void setData(Conge conge) {
         if (conge.getEtudiant() != null) {
@@ -43,9 +51,31 @@ public class TupleDemandeController {
             // Appelle ici la méthode pour voir la justification
         });
 
-        traiter_jst_button.setOnAction(e -> {
-            System.out.println("Traiter demande " + conge.getIdDemande());
-            // Appelle ici la méthode pour traiter la demande
-        });
+       traiter_jst_button.setOnAction(e -> {
+    System.out.println("Traiter demande " + conge.getIdDemande());
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml"));
+        Parent root = loader.load();
+
+        // الحصول على الكونترولر الجديد
+        TraiterDemandeController controller = loader.getController();
+
+        // إرسال البيانات للكونترولر
+        controller.setConge(conge);
+
+        // إظهار الواجهة داخل نافذة جديدة أو ضمن منطقة معينة حسب تصميمك
+        Stage stage = new Stage();
+        stage.setTitle("Traiter une demande");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+});
+
+    }
+    public void setMenuController(MenuViewController controller) {
+        this.menuController = controller;
     }
 }

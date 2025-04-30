@@ -853,7 +853,7 @@ public class DatabaseController extends DatabaseLink{
                         rs.getString("prenom"),
                         RoleAdmin.valueOf(rs.getString("roles")),
                         rs.getString("email"),
-                        rs.getString("mot_passe") // Note: Never log actual passwords
+                        rs.getString("mot_passe") // Note: Never log actual passwords for security reasons (this is just for demonstration)
                 );
             } else {
                 System.out.println("No admin found with username: " + username);
