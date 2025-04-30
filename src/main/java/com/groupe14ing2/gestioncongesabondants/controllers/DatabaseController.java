@@ -2,6 +2,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -861,4 +862,26 @@ public class DatabaseController extends DatabaseLink{
             }
         }
     }
+
+
+    public void updateCongeEtat(int idDemande, EtatTraitement etat) throws SQLException {
+        DatabaseLink dbLink = new DatabaseLink();
+        Connection connection = dbLink.getConnection();
+
+        String sql = "UPDATE Conge SET etat = ? WHERE id_demande = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, etat.name());
+            pstmt.setInt(2, idDemande);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("État de la demande mis à jour avec succès.");
+            } else {
+                System.out.println("Aucune demande trouvée avec cet ID.");
+            }
+        }
+
+        connection.close();
+    }
+
 }
