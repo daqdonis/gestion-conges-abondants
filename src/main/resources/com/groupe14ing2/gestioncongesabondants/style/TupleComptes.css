@@ -1,0 +1,23 @@
+#main_hbox{
+    -fx-border-color: white;
+}
+#modifer_jst_button>{
+    -fx-background-color: #1f75ff;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}
+#supp_jst_button{
+    -fx-background-color: RED;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}
+#modifer_jst_button:hover{
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 20px;
+}
+#supp_jst_button:hover{
+    -fx-background-color: #dedede;
+    -fx-text-fill: #dfa300;
+    -fx-background-radius: 20px;
+}
