@@ -4,6 +4,7 @@ import com.groupe14ing2.gestioncongesabondants.models.*;
 import com.groupe14ing2.gestioncongesabondants.models.Module;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
@@ -167,7 +168,9 @@ public class DatabaseController extends DatabaseLink{
             stmt.setString(4, conge.getEtat().toString());
 
             if (conge.getJustificatif() != null) {
-                stmt.setBlob(5, conge.getJustificatif());
+                try {
+                    stmt.setBlob(5, new FileInputStream(conge.getJustificatif()));
+                } catch (FileNotFoundException e) {e.printStackTrace();}
             } else {
                 stmt.setNull(5, Types.BLOB);
             }
@@ -515,6 +518,7 @@ public class DatabaseController extends DatabaseLink{
 
     // Conge Methods
     public void updateConge(Conge conge) throws SQLException {
+        try {
         String sql = """
             UPDATE conges_abondant.`Conge`
             SET date_demande = ?, duree = ?, etat = ?, justificatif = ?
@@ -524,10 +528,12 @@ public class DatabaseController extends DatabaseLink{
         preparedStatement.setDate(1, conge.getDateDemande());
         preparedStatement.setInt(2, (int)conge.getDuree());
         preparedStatement.setString(3, conge.getEtat().toString());
-        preparedStatement.setBlob(4, conge.getJustificatif());
+        preparedStatement.setBlob(4, new FileInputStream(conge.getJustificatif()));
         preparedStatement.setInt(5, (int)conge.getIdDemande());
         preparedStatement.executeUpdate();
-    }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+    }}
 
     public Conge getConge(int id) throws SQLException {
         String sql = "SELECT * FROM conges_abondant.`Conge` WHERE id_demande = ?";
@@ -770,8 +776,7 @@ public class DatabaseController extends DatabaseLink{
     public List<Conge> getAllCongesWithStudents() throws SQLException {
         System.out.println("Fetching leave requests from database...");
         String sql = """
-    SELECT c.id_demande, c.date_demande, c.duree, c.etat, 
-           e.id_etu, e.nom, e.prenom, e.date_naiss, e.id_groupe
+    SELECT *
     FROM Conge c 
     JOIN Etudiant e ON c.id_etu = e.id_etu
     ORDER BY c.date_demande DESC""";
@@ -795,7 +800,7 @@ public class DatabaseController extends DatabaseLink{
                         rs.getDate("date_demande"),
                         rs.getInt("duree"),
                         EtatTraitement.valueOf(rs.getString("etat").replace(" ", "").toUpperCase()),
-                        null
+                        rs.getBlob("justificatif").getBinaryStream()
                 );
                 conge.setEtudiant(etudiant);
                 conges.add(conge);

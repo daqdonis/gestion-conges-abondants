@@ -6,6 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.awt.*;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
 public class TupleDemandeController {
 
     @FXML
@@ -39,8 +46,20 @@ public class TupleDemandeController {
         statutText.setText(conge.getEtat().toString());
 
         voir_jst_button.setOnAction(e -> {
-            System.out.println("Voir justification pour " + conge.getIdDemande());
-            // Appelle ici la méthode pour voir la justification
+                //File file = File.createTempFile("conge", ".pdf");
+
+                //Files.copy(conge.getJustificatif(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println(conge.getJustificatif());
+                if( Desktop.isDesktopSupported() )
+                {
+                    new Thread(() -> {
+                        try {
+                            Desktop.getDesktop().open(conge.getJustificatif());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }).start();
+                }
         });
 
         traiter_jst_button.setOnAction(e -> {

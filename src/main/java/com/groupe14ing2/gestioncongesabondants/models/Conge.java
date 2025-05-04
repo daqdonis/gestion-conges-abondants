@@ -2,6 +2,8 @@ package com.groupe14ing2.gestioncongesabondants.models;
 
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 
 public class Conge implements Serializable {
@@ -12,45 +14,45 @@ public class Conge implements Serializable {
   private java.sql.Date dateDemande;
   private long duree;
   private EtatTraitement etat;
-  private transient InputStream justificatif;
+  private transient File justificatif;
   private byte[] justificatifData;
   private Etudiant etudiant;
 
 
-  public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
+  public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, InputStream justificatif) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
-    this.justificatif = justificatif;
+    createJustificatifFile(justificatif);
   }
   public Conge(Date dateDemande, long duree, EtatTraitement etat, InputStream justificatif) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
-    this.justificatif = justificatif;
+    createJustificatifFile(justificatif);
   }
 
   public Conge(Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
-    this.justificatif = justificatif;
+    createJustificatifFile(justificatif);
   }
-  private void writeObject(ObjectOutputStream out) throws IOException {
+  /*private void writeObject(ObjectOutputStream out) throws IOException {
     out.defaultWriteObject();
     if (justificatif != null) {
       justificatifData = justificatif.readAllBytes();
       out.writeObject(justificatifData);
     }
-  }
-  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+  }*/
+  /*private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
     in.defaultReadObject();
     justificatifData = (byte[]) in.readObject();
     if (justificatifData != null) {
       justificatif = new ByteArrayInputStream(justificatifData);
     }
-  }
+  }*/
 
   public long getIdDemande() {
     return idDemande;
@@ -88,11 +90,11 @@ public class Conge implements Serializable {
   }
 
 
-  public InputStream getJustificatif() {
+  public File getJustificatif() {
     return justificatif;
   }
 
-  public void setJustificatif(FileInputStream justificatif) {
+  public void setJustificatif(File justificatif) {
     this.justificatif = justificatif;
   }
 
@@ -104,5 +106,14 @@ public class Conge implements Serializable {
     this.etudiant = etudiant;
   }
 
+  private void createJustificatifFile(InputStream justificatif) {
+    try {
+      this.justificatif = File.createTempFile("conge", ".pdf");
+      Files.copy(justificatif, this.justificatif.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }
 

@@ -1,7 +1,6 @@
 package com.groupe14ing2.gestioncongesabondants;
 
 import com.groupe14ing2.gestioncongesabondants.controllers.ServerLoginController;
-import com.groupe14ing2.gestioncongesabondants.models.ServerURL;
 
 import java.io.*;
 import java.net.ServerSocket;
