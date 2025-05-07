@@ -67,7 +67,16 @@ public class LoginViewController {
 
             if (admin != null) {
                 System.out.println("Login successful for: " + admin.getNom());
-                switchToMenu(actionEvent);
+                switch (admin.getRoles()) {
+                    case ADMINCONGE:
+                        switchToMenu(actionEvent);
+                        break;
+                    case ADMINABONDANT:
+                        switchToAbondantMenu(actionEvent);
+                        break;
+                    case ADMINCOMPTES:
+                        switchToComptesMenu(actionEvent);
+                }
             } else {
                 System.out.println("Login failed - invalid credentials");
                 showAlert("Login Failed", "Invalid username or password");
@@ -91,6 +100,34 @@ public class LoginViewController {
     @FXML
     private void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    private void switchToAbondantMenu(javafx.event.ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    private void switchToComptesMenu(javafx.event.ActionEvent actionEvent) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 

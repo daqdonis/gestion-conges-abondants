@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ServerLoginController extends DatabaseLink {
-    public ServerLoginController() throws SQLException {
+public class LoginController extends DatabaseLink {
+    public LoginController() throws SQLException {
         super();
     }
     // this login function is temporary until we make a better one
@@ -25,7 +25,7 @@ public class ServerLoginController extends DatabaseLink {
                     resultSet.getInt("id_admin"),
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
-                    RoleAdmin.ADMINCONGE,
+                    RoleAdmin.valueOf(resultSet.getString("roles").trim().toUpperCase().replace("_", "")),
                     resultSet.getString("email"),
                     null
             );

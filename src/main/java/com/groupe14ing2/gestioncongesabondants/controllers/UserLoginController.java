@@ -1,21 +1,26 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
-import com.groupe14ing2.gestioncongesabondants.models.ServerURL;
 
 import javax.security.auth.login.FailedLoginException;
 import java.io.*;
-import java.net.Socket;
+import java.sql.SQLException;
 
-public class UserLoginController extends UserSocket {
+public class UserLoginController/* extends UserSocket*/ {
 
     public UserLoginController() throws IOException {
         super();
     }
 
     public Admin login(String username, String password) throws FailedLoginException, IOException, ClassNotFoundException {
-
-        // Send login command
+        try {
+            LoginController loginController = new LoginController();
+            return loginController.login(username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        /*// Send login command
         bufferedWriter.write("login");
         bufferedWriter.newLine();
 
@@ -39,6 +44,6 @@ public class UserLoginController extends UserSocket {
         }
 
         System.out.println("Login failed");
-        throw new FailedLoginException();
+        throw new FailedLoginException();*/
     }
 }
