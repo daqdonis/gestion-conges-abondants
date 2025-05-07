@@ -1,6 +1,11 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,9 +23,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 
 public class MenuViewController {
@@ -76,6 +78,8 @@ public class MenuViewController {
         refreshTable();
     }
 
+  
+
     public void refreshTable() {
         System.out.println("Refreshing table...");
         try {
@@ -91,6 +95,9 @@ public class MenuViewController {
 
                     TupleDemandeController tupleController = loader.getController();
                     tupleController.setData(request); // injecter les données
+                    tupleController.setMenuController(this); // injecter le contrôleur MenuViewController
+                    
+
 
                     requestsContainer.getChildren().add(tupleView); // ajouter au container
                 } catch (IOException e) {
@@ -117,7 +124,9 @@ public class MenuViewController {
                     HBox tupleView = loader.load(); // charge la vue FXML
 
                     TupleDemandeController tupleController = loader.getController();
-                    tupleController.setData(request); // injecte les données dans la ligne
+                    tupleController.setData(request); 
+                    tupleController.setMenuController(this); // هذا هو السطر الذي يربط بين الزرين والنافذة
+// injecte les données dans la ligne
 
                     requestsContainer.getChildren().add(tupleView); // ajoute au container
                 } catch (IOException e) {
@@ -176,7 +185,7 @@ public class MenuViewController {
             ex.printStackTrace();
         }
     }
-    private void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
+    void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(cheminFXML));
             Parent newRoot = fxmlLoader.load();
@@ -206,6 +215,8 @@ public class MenuViewController {
             ex.printStackTrace();
         }
     }
+
+    
 
     @FXML
     private void exit(){

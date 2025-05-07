@@ -25,4 +25,9 @@ INSERT INTO Etudiant (id_etu, nom, prenom, date_naiss, id_groupe) VALUES
 (12346, 'Smith', 'John', '2004-05-15', 2);
 
 INSERT INTO admin (id_admin, nom, prenom, roles, email, mot_passe)
-VALUES (1, "Mhamed", "Yasser", "admin_conge", "aa", "aa");
+
+
+VALUES (1, "Mhamed", "Yasser", "admin_conge", "aa", "$2a$10$U3XviDJRJCa7/4oicje14.C6jpNxw99gf15qLDY2C2k/rFBRc0M76");
+/* here we are using the password "aa" for the admin .*/
+-- The password is hashed using bcrypt with a cost factor of 10.
+

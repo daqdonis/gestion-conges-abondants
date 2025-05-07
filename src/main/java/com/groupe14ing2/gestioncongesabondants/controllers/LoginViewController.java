@@ -1,6 +1,10 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+
+import java.io.IOException;
+
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,9 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.security.auth.login.FailedLoginException;
-import java.io.IOException;
-import java.net.Socket;
 
 public class LoginViewController {
 
@@ -55,7 +56,9 @@ public class LoginViewController {
     }
 
     @FXML
+
    private void login(javafx.event.ActionEvent actionEvent) throws IOException {
+
         String username = userIdTextField.getText();
         String password = passwordField.getText();
 
@@ -67,6 +70,7 @@ public class LoginViewController {
 
             if (admin != null) {
                 System.out.println("Login successful for: " + admin.getNom());
+
                 switch (admin.getRoles()) {
                     case ADMINCONGE:
                         switchToMenu(actionEvent);
@@ -77,6 +81,7 @@ public class LoginViewController {
                     case ADMINCOMPTES:
                         switchToComptesMenu(actionEvent);
                 }
+
             } else {
                 System.out.println("Login failed - invalid credentials");
                 showAlert("Login Failed", "Invalid username or password");
@@ -86,8 +91,11 @@ public class LoginViewController {
             e.printStackTrace();
             showAlert("Error", "Login failed: " + e.getMessage());
         }
+
     } 
    
+    
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -1,12 +1,11 @@
 package com.groupe14ing2.gestioncongesabondants;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.IOException;
 
 public class MainApplication extends Application {
     @Override
@@ -20,6 +19,8 @@ public class MainApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+       launch();
+      
     }
+
 }
