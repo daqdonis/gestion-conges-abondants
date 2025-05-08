@@ -78,8 +78,7 @@ public class TupleDemandeController {
 
       
         TraiterDemandeController controller = loader.getController();
-
-       
+        controller.setMenuController(menuController);
         controller.setConge(conge);
 
        
@@ -95,6 +94,7 @@ public class TupleDemandeController {
 
     }
     public void setMenuController(MenuViewController controller) {
+        System.out.println("the contoller is: " + menuController);
         this.menuController = controller;
     }
 }

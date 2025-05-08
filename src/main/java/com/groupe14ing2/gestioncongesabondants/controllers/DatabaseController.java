@@ -376,7 +376,7 @@ public class DatabaseController extends DatabaseLink{
                     resultSet.getInt("id_admin"),
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
-                    RoleAdmin.valueOf(resultSet.getString("roles")),
+                    RoleAdmin.valueOf(resultSet.getString("roles").replace("_","").toUpperCase()),
                     resultSet.getString("email"),
                     null
             );
@@ -856,9 +856,9 @@ public class DatabaseController extends DatabaseLink{
                         rs.getInt("id_admin"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        RoleAdmin.valueOf(rs.getString("roles")),
+                        RoleAdmin.valueOf(rs.getString("roles").replace("_","").toUpperCase()),
                         rs.getString("email"),
-                        rs.getString("mot_passe") // Note: Never log actual passwords for security reasons (this is just for demonstration)
+                        null
                 );
             } else {
                 System.out.println("No admin found with username: " + username);
@@ -886,4 +886,24 @@ public class DatabaseController extends DatabaseLink{
         connection.close();
     }
 
+    public List<Admin> getAllAdmins() throws SQLException {
+        String sql = "SELECT * FROM Admin";
+        List<Admin> admins = new ArrayList<>();
+
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            admins.add(
+                    new Admin(
+                            rs.getInt("id_admin"),
+                            rs.getString("nom"),
+                            rs.getString("prenom"),
+                            RoleAdmin.valueOf(rs.getString("roles").replace("_","").toUpperCase()),
+                            rs.getString("email"),
+                            null
+                    )
+            );
+        }
+        return admins;
+    }
 }

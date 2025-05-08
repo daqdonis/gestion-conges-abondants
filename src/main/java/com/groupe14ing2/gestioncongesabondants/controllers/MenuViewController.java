@@ -94,8 +94,8 @@ public class MenuViewController {
                     HBox tupleView = loader.load(); // charger le FXML
 
                     TupleDemandeController tupleController = loader.getController();
-                    tupleController.setData(request); // injecter les données
                     tupleController.setMenuController(this); // injecter le contrôleur MenuViewController
+                    tupleController.setData(request); // injecter les données
                     
 
 

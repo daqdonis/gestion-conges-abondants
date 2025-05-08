@@ -6,28 +6,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" stylesheets="@style/Gestion-Des-Comptes.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.GestionComptesController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1315.0" stylesheets="@style/Gestion-Des-Comptes.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.GestionComptesController">
    <children>
       <Text layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Comptes">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="add_Acc_button" layoutX="980.0" layoutY="105.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="25.0" prefWidth="110.0" text="+ ADD ACC" />
-      <TextField fx:id="filtrer_textField" layoutX="941.0" layoutY="155.0" promptText="filtrer" />
+      <Button fx:id="add_Acc_button" layoutX="1120.0" layoutY="105.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="25.0" prefWidth="110.0" text="+ ADD ACC" />
+      <TextField fx:id="filtrer_textField" layoutX="1080.0" layoutY="155.0" promptText="filtrer" />
       <Button fx:id="all_acc_button" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="All Acc" />
       <Button fx:id="admin_acc_button" layoutX="120.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Admin" />
       <Button fx:id="regulaire_acc_button" layoutX="220.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Nrml" />
-      <Pane fx:id="table_pan" layoutY="182.0" prefHeight="869.0" prefWidth="1100.0">
+      <Pane fx:id="table_pan" layoutY="182.0" prefHeight="869.0" prefWidth="1315.0">
          <children>
-            <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="32.0" prefHeight="50.0" prefWidth="1051.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
+            <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="32.0" prefHeight="50.0" prefWidth="1300.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
                <children>
                   <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="159.7240982055664">
                      <font>
                         <Font name="Arial" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="PreNom" textAlignment="CENTER" wrappingWidth="163.6640625">
+                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" textAlignment="CENTER" wrappingWidth="163.6640625">
                      <font>
                         <Font name="Arial" size="21.0" />
                      </font>
@@ -37,28 +37,38 @@
                         <Font name="Arial" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot De Pass" textAlignment="CENTER" wrappingWidth="208.9390869140625">
+                  <Text fill="#4b4b4b" layoutX="886.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role" textAlignment="CENTER" wrappingWidth="153.0221405029297">
                      <font>
                         <Font name="Arial" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifer" textAlignment="CENTER" wrappingWidth="229.61849212646484">
+                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier" textAlignment="CENTER" wrappingWidth="265.9390869140625">
                      <font>
                         <Font name="Arial" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer" textAlignment="CENTER" wrappingWidth="147.0221405029297">
+                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer" textAlignment="CENTER" wrappingWidth="113.61849212646484">
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#4b4b4b" layoutX="938.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="22.618492126464844">
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Voir les actions" textAlignment="CENTER" wrappingWidth="233.0221405029297">
                      <font>
                         <Font name="Arial" size="21.0" />
                      </font>
                   </Text>
                </children>
             </HBox>
-            <ScrollPane fx:id="scrollPane" layoutX="3.0" layoutY="82.0" prefHeight="421.0" prefWidth="1095.0" style="-fx-border-color: white;">
+            <ScrollPane fx:id="scrollPane" layoutX="3.0" layoutY="82.0" prefHeight="421.0" prefWidth="1300.0" style="-fx-border-color: white;">
                <content>
                   <VBox fx:id="requestsContainer">
                      <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1117.0" style="-fx-background-color: red;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1242.0" style="-fx-background-color: red;">
                            <children>
                               <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="244erz" textAlignment="CENTER" wrappingWidth="166.39073181152344">
                                  <font>
@@ -260,12 +270,12 @@
          </children>
       </Pane>
       <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="926.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="user_Name_Lable" layoutX="980.0" layoutY="20.0" prefHeight="17.0" prefWidth="100.0" text="Admin">
+      <Label fx:id="user_Name_Lable" layoutX="1160.0" layoutY="20.0" prefHeight="17.0" prefWidth="100.0" text="Admin">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1061.0" layoutY="153.0">
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1040.0" layoutY="153.0">
          <image>
             <Image url="@img/loupe.png" />
          </image>
