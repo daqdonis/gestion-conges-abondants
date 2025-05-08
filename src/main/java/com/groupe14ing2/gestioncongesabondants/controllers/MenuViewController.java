@@ -185,7 +185,7 @@ public class MenuViewController {
             ex.printStackTrace();
         }
     }
-    void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
+    public void ouvrirFenetreAvecEffet(String cheminFXML, String titre) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(cheminFXML));
             Parent newRoot = fxmlLoader.load();

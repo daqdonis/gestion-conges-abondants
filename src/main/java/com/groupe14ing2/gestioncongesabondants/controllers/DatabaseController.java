@@ -11,6 +11,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.groupe14ing2.gestioncongesabondants.utils.PasswordUtils;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.groupe14ing2.gestioncongesabondants.models.Abondant;
@@ -43,13 +44,12 @@ public class DatabaseController extends DatabaseLink{
                    VALUES(?, ?, ?, ?, ?);""";
 
            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-           String hashedPassword = BCrypt.hashpw(admin.getMotPasse(), BCrypt.gensalt());
+
            preparedStatement.setString(1, admin.getNom());
            preparedStatement.setString(2, admin.getPrenom());
            preparedStatement.setString(3, admin.getRoles().toString());
            preparedStatement.setString(4, admin.getEmail());
-           preparedStatement.setString(5, hashedPassword); // Hash the password before storing it
-           preparedStatement.executeUpdate();
+           preparedStatement.setString(5, PasswordUtils.hashPassword(admin.getMotPasse())); // Hash the password before storing it
 
            preparedStatement.executeUpdate();
     }
