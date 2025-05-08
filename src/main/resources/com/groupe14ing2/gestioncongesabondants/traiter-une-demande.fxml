@@ -55,8 +55,8 @@
         <TextField fx:id="traiter_matricule_etudiant" editable="false" layoutX="62.0" layoutY="144.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
         <TextField fx:id="traiter_prenom" editable="false" layoutX="62.0" layoutY="271.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
         <TextField fx:id="traiter_date_de_nessance" editable="false" layoutX="62.0" layoutY="341.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
-        <Button fx:id="button_accepter" layoutX="299.0" layoutY="462.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" text="Accepter" />
-        <Button fx:id="button_resuser" layoutX="84.0" layoutY="462.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" text="Refuser" />
+        <Button fx:id="button_accepter" layoutX="299.0" layoutY="462.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" text="Accepter" onAction="#handleAccepter" />
+        <Button fx:id="button_resuser" layoutX="84.0" layoutY="462.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" text="Refuser" onAction="#handleRefuser"  />
         <Button fx:id="fermer_button" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
          <font>
             <Font name="Arial" size="13.0" />

@@ -4,14 +4,35 @@ import java.io.Serializable;
 
 public enum EtatTraitement implements Serializable {
     ENATTENTE("En attente"),
-    REFUSE("Refusé"),
-    ACCEPTE("Accepté");
-    private String displayName;
+    REFUSÉ("Refusé"),
+    ACCEPTÉ("Accepté");
+    //private String displayName;
+
+    private final String displayName;
 
     EtatTraitement(String displayName) {
         this.displayName = displayName;
     }
 
+    @Override
+    public String toString() {
+        return displayName;
+    }
 
-    @Override public String toString() { return displayName; }
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    
+    public static EtatTraitement fromDisplayName(String displayName) {
+        for (EtatTraitement etat : EtatTraitement.values()) {
+            if (etat.displayName.equalsIgnoreCase(displayName)) {
+                return etat;
+            }
+        }
+        throw new IllegalArgumentException("Aucune valeur enum pour: " + displayName);
+    }
 }
+
+
+    

@@ -1,13 +1,33 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-import com.groupe14ing2.gestioncongesabondants.models.*;
-import com.groupe14ing2.gestioncongesabondants.models.Module;
-
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
+
+import com.groupe14ing2.gestioncongesabondants.models.Abondant;
+import com.groupe14ing2.gestioncongesabondants.models.ActionAdmin;
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
+import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import com.groupe14ing2.gestioncongesabondants.models.Cycle;
+import com.groupe14ing2.gestioncongesabondants.models.DemReins;
+import com.groupe14ing2.gestioncongesabondants.models.EtatTraitement;
+import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
+import com.groupe14ing2.gestioncongesabondants.models.Filiere;
+import com.groupe14ing2.gestioncongesabondants.models.Groupe;
+import com.groupe14ing2.gestioncongesabondants.models.Module;
+import com.groupe14ing2.gestioncongesabondants.models.NoteModule;
+import com.groupe14ing2.gestioncongesabondants.models.RoleAdmin;
+import com.groupe14ing2.gestioncongesabondants.models.Section;
+import com.groupe14ing2.gestioncongesabondants.models.Semestre;
 
 public class DatabaseController extends DatabaseLink{
 
@@ -23,11 +43,12 @@ public class DatabaseController extends DatabaseLink{
                    VALUES(?, ?, ?, ?, ?);""";
 
            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+           String hashedPassword = BCrypt.hashpw(admin.getMotPasse(), BCrypt.gensalt());
            preparedStatement.setString(1, admin.getNom());
            preparedStatement.setString(2, admin.getPrenom());
            preparedStatement.setString(3, admin.getRoles().toString());
            preparedStatement.setString(4, admin.getEmail());
-           preparedStatement.setString(5, admin.getMotPasse());
+           preparedStatement.setString(5, hashedPassword); // Hash the password before storing it
            preparedStatement.executeUpdate();
 
            preparedStatement.executeUpdate();
@@ -167,7 +188,9 @@ public class DatabaseController extends DatabaseLink{
             stmt.setString(4, conge.getEtat().toString());
 
             if (conge.getJustificatif() != null) {
-                stmt.setBlob(5, conge.getJustificatif());
+                try {
+                    stmt.setBlob(5, new FileInputStream(conge.getJustificatif()));
+                } catch (FileNotFoundException e) {e.printStackTrace();}
             } else {
                 stmt.setNull(5, Types.BLOB);
             }
@@ -330,12 +353,14 @@ public class DatabaseController extends DatabaseLink{
             SET nom = ?, prenom = ?, roles = ?, email = ?, mot_passe = ?
             WHERE id_admin = ?;""";
 
+        String hashedPassword = BCrypt.hashpw(admin.getMotPasse(), BCrypt.gensalt());
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, admin.getNom());
         preparedStatement.setString(2, admin.getPrenom());
         preparedStatement.setString(3, admin.getRoles().toString());
         preparedStatement.setString(4, admin.getEmail());
-        preparedStatement.setString(5, admin.getMotPasse());
+        
+        preparedStatement.setString(5, hashedPassword); // Hash the password before storing it
         preparedStatement.setInt(6, (int)admin.getIdAdmin());
         preparedStatement.executeUpdate();
     }
@@ -515,6 +540,7 @@ public class DatabaseController extends DatabaseLink{
 
     // Conge Methods
     public void updateConge(Conge conge) throws SQLException {
+        try {
         String sql = """
             UPDATE conges_abondant.`Conge`
             SET date_demande = ?, duree = ?, etat = ?, justificatif = ?
@@ -524,10 +550,12 @@ public class DatabaseController extends DatabaseLink{
         preparedStatement.setDate(1, conge.getDateDemande());
         preparedStatement.setInt(2, (int)conge.getDuree());
         preparedStatement.setString(3, conge.getEtat().toString());
-        preparedStatement.setBlob(4, conge.getJustificatif());
+        preparedStatement.setBlob(4, new FileInputStream(conge.getJustificatif()));
         preparedStatement.setInt(5, (int)conge.getIdDemande());
         preparedStatement.executeUpdate();
-    }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+    }}
 
     public Conge getConge(int id) throws SQLException {
         String sql = "SELECT * FROM conges_abondant.`Conge` WHERE id_demande = ?";
@@ -770,8 +798,7 @@ public class DatabaseController extends DatabaseLink{
     public List<Conge> getAllCongesWithStudents() throws SQLException {
         System.out.println("Fetching leave requests from database...");
         String sql = """
-    SELECT c.id_demande, c.date_demande, c.duree, c.etat, 
-           e.id_etu, e.nom, e.prenom, e.date_naiss, e.id_groupe
+    SELECT *
     FROM Conge c 
     JOIN Etudiant e ON c.id_etu = e.id_etu
     ORDER BY c.date_demande DESC""";
@@ -795,7 +822,7 @@ public class DatabaseController extends DatabaseLink{
                         rs.getDate("date_demande"),
                         rs.getInt("duree"),
                         EtatTraitement.valueOf(rs.getString("etat").replace(" ", "").toUpperCase()),
-                        null
+                        rs.getBlob("justificatif").getBinaryStream()
                 );
                 conge.setEtudiant(etudiant);
                 conges.add(conge);
@@ -831,7 +858,7 @@ public class DatabaseController extends DatabaseLink{
                         rs.getString("prenom"),
                         RoleAdmin.valueOf(rs.getString("roles")),
                         rs.getString("email"),
-                        rs.getString("mot_passe") // Note: Never log actual passwords
+                        rs.getString("mot_passe") // Note: Never log actual passwords for security reasons (this is just for demonstration)
                 );
             } else {
                 System.out.println("No admin found with username: " + username);
@@ -839,4 +866,24 @@ public class DatabaseController extends DatabaseLink{
             }
         }
     }
+
+
+    public void updateCongeEtat(int idDemande, EtatTraitement etat) throws SQLException {
+       
+        String sql = "UPDATE Conge SET etat = ? WHERE id_demande = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, etat.name());
+            pstmt.setInt(2, idDemande);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("État de la demande mis à jour avec succès.");
+            } else {
+                System.out.println("Aucune demande trouvée avec cet ID.");
+            }
+        }
+
+        connection.close();
+    }
+
 }

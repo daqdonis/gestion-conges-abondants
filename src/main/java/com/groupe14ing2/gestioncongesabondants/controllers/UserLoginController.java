@@ -1,21 +1,29 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-import com.groupe14ing2.gestioncongesabondants.models.Admin;
-import com.groupe14ing2.gestioncongesabondants.models.ServerURL;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.security.auth.login.FailedLoginException;
-import java.io.*;
-import java.net.Socket;
 
-public class UserLoginController extends UserSocket {
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
+
+
+public class UserLoginController/* extends UserSocket*/ {
 
     public UserLoginController() throws IOException {
         super();
     }
 
     public Admin login(String username, String password) throws FailedLoginException, IOException, ClassNotFoundException {
-
-        // Send login command
+        try {
+            LoginController loginController = new LoginController();
+            return loginController.login(username, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        /*// Send login command
         bufferedWriter.write("login");
         bufferedWriter.newLine();
 
@@ -24,6 +32,9 @@ public class UserLoginController extends UserSocket {
         bufferedWriter.newLine();
 
         // Send password
+
+       
+        
         bufferedWriter.write(password);
         bufferedWriter.newLine();
 
@@ -32,13 +43,14 @@ public class UserLoginController extends UserSocket {
         // Read server response
         Admin admin = (Admin) objectInputStream.readObject();
 
-        if (admin != null) {
-            System.out.println("Login successful");
-            System.out.println(admin.getNom() + " " + admin.getPrenom());
+        if (admin != null ) {
+            System.out.println("Connexion réussie");
             return admin;
         }
 
         System.out.println("Login failed");
-        throw new FailedLoginException();
+        throw new FailedLoginException();*/
     }
+
+   
 }

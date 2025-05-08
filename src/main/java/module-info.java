@@ -11,6 +11,7 @@ module com.groupe14ing2.gestioncongesabondants {
     requires com.almasb.fxgl.all;
     requires java.sql;
     requires java.desktop;
+    requires jbcrypt;
 
     opens com.groupe14ing2.gestioncongesabondants to javafx.fxml;
     exports com.groupe14ing2.gestioncongesabondants;
