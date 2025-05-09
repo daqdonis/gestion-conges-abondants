@@ -43,6 +43,8 @@ public class AjouterCompteController {
     @FXML
     private Button exitButton;
 
+    private GestionComptesController gestionComptesController;
+
     @FXML
     public void initialize() {
         mainPanel.getStylesheets().add(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/LoginPageStyleSheet.css").toExternalForm());
@@ -64,7 +66,7 @@ public class AjouterCompteController {
                     userIdTextField.getText(),
                     passwordField.getText()
             ));
-
+            gestionComptesController.refreshTable();
             exit();
         } catch (Exception e) {
             System.out.println("Error adding admin: " + e.getMessage());
@@ -89,5 +91,9 @@ public class AjouterCompteController {
     private void exit(){
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void setGestionComptesController(GestionComptesController gestionComptesController) {
+        this.gestionComptesController = gestionComptesController;
     }
 }
