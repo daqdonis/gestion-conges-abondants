@@ -2,6 +2,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,10 +14,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestionComptesController {
@@ -28,7 +37,7 @@ public class GestionComptesController {
     private Button admin_acc_button;
 
     @FXML
-    private Button all_acc_button;
+    private Button add_students_button;
 
     @FXML
     private TextField filtrer_textField;
@@ -53,6 +62,11 @@ public class GestionComptesController {
 
     @FXML
     private Label user_Name_Lable;
+
+    @FXML
+    private Pane parentPane;
+
+    File selectedFile;
 
     @FXML
     public void initialize() {
@@ -106,6 +120,50 @@ public class GestionComptesController {
         } catch (SQLException e) {
             System.err.println("Erreur base de données");
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void selectFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Liste des étudiants");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        selectedFile = fileChooser.showOpenDialog(parentPane.getScene().getWindow());
+
+        if (selectedFile != null) {
+            try {
+                String[] HEADERS = { "code", "nom", "prenom", "date de naissance", "groupe"};
+                CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
+                        .setHeader(HEADERS)
+                        .setSkipHeaderRecord(true)
+                        .build();
+
+                CSVParser csvParser = new CSVParser(new FileReader(selectedFile), csvFormat);
+                Iterable<CSVRecord> etudiants = csvParser.getRecords();
+                try {
+                    DatabaseController db = new DatabaseController();
+                    etudiants.forEach( etudiant -> {
+                            try {
+                                db.addEtudiant(new Etudiant(
+                                        Long.parseLong(etudiant.get("code")),
+                                        etudiant.get("nom"),
+                                        etudiant.get("prenom"),
+                                        Date.valueOf(etudiant.get("date de naissance")),
+                                        Integer.parseInt(etudiant.get("groupe"))
+                                ));
+                            } catch (SQLException e1) {
+                               e1.printStackTrace();
+                            }
+
+                    });
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }

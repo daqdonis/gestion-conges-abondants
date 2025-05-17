@@ -9,9 +9,10 @@ module com.groupe14ing2.gestioncongesabondants {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
-    requires java.sql;
     requires java.desktop;
     requires jbcrypt;
+    requires org.apache.commons.csv;
+    requires java.sql;
 
     opens com.groupe14ing2.gestioncongesabondants to javafx.fxml;
     exports com.groupe14ing2.gestioncongesabondants;

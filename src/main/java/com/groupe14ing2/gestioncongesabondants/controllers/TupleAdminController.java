@@ -52,7 +52,7 @@ public class TupleAdminController {
         supp_button.setOnAction(e -> {
             try {
                 DatabaseController db = new DatabaseController();
-                db.removeAdmin((int) admin.getIdAdmin());
+                db.removeAdmin(admin.getIdAdmin());
                 gestionComptesController.refreshTable();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);

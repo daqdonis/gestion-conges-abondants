@@ -3,9 +3,9 @@ package com.groupe14ing2.gestioncongesabondants.models;
 
 import java.io.Serializable;
 
-public class Admin implements Serializable {
+public class Admin{
 
-  private long idAdmin;
+  private String idAdmin;
   private String nom;
   private String prenom;
   private RoleAdmin roles;
@@ -20,7 +20,7 @@ public class Admin implements Serializable {
     this.motPasse = motPasse;
   }
 
-  public Admin(long idAdmin, String nom, String prenom, RoleAdmin roles, String email, String motPasse) {
+  public Admin(String idAdmin, String nom, String prenom, RoleAdmin roles, String email, String motPasse) {
     this.idAdmin = idAdmin;
     this.nom = nom;
     this.prenom = prenom;
@@ -29,11 +29,11 @@ public class Admin implements Serializable {
     this.motPasse = motPasse;
   }
 
-  public long getIdAdmin() {
+  public String getIdAdmin() {
     return idAdmin;
   }
 
-  public void setIdAdmin(long idAdmin) {
+  public void setIdAdmin(String idAdmin) {
     this.idAdmin = idAdmin;
   }
 

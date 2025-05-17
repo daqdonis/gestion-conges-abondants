@@ -40,25 +40,44 @@ public class DatabaseController extends DatabaseLink{
     public void addAdmin(Admin admin) throws SQLException {
            String sql = """
                    INSERT INTO conges_abondant.Admin
-                   (nom, prenom, roles, email, mot_passe)
-                   VALUES(?, ?, ?, ?, ?);""";
+                   (id_admin,nom, prenom, roles, email, mot_passe)
+                   VALUES(?, ?, ?, ?, ?, ?);""";
+
+           // get the count of admin accounts and creates an id
+           PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM conges_abondant.Admin");
+           ResultSet resultSet = ps.executeQuery();
+           resultSet.next();
+           String id = String.format("%03d", resultSet.getInt("COUNT(*)"));
 
            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+           switch (admin.getRoles()) {
+               case ADMINCOMPTES:
+                   preparedStatement.setString(1, "AA" + id);
+                   break;
+               case ADMINABONDANT:
+                   preparedStatement.setString(1, "TA" + id);
+                   break;
+               case ADMINCONGE:
+                   preparedStatement.setString(1, "TC" + id);
+                   break;
+               default:
+                   throw new SQLException("Invalid role");
+           }
 
-           preparedStatement.setString(1, admin.getNom());
-           preparedStatement.setString(2, admin.getPrenom());
-           preparedStatement.setString(3, admin.getRoles().toString());
-           preparedStatement.setString(4, admin.getEmail());
-           preparedStatement.setString(5, PasswordUtils.hashPassword(admin.getMotPasse())); // Hash the password before storing it
+           preparedStatement.setString(2, admin.getNom());
+           preparedStatement.setString(3, admin.getPrenom());
+           preparedStatement.setString(4, admin.getRoles().toString());
+           preparedStatement.setString(5, admin.getEmail());
+           preparedStatement.setString(6, PasswordUtils.hashPassword(admin.getMotPasse())); // Hash the password before storing it
 
            preparedStatement.executeUpdate();
     }
 
     // removes an admin account
-    public void removeAdmin(int id) throws SQLException {
+    public void removeAdmin(String id) throws SQLException {
         String sql = "DELETE FROM conges_abondant.Admin WHERE id_admin = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
+        preparedStatement.setString(1, id);
         preparedStatement.executeUpdate();
     }
 
@@ -74,16 +93,16 @@ public class DatabaseController extends DatabaseLink{
             stmt.setString(2, etudiant.getNom());
             stmt.setString(3, etudiant.getPrenom());
             stmt.setDate(4, etudiant.getDateNaiss());
-            stmt.setLong(5, etudiant.getIdGroupe());
+            stmt.setString(5, "G-" + String.valueOf(etudiant.getIdGroupe()));
             stmt.executeUpdate();
         }
     }
 
     // removes a student from the db
-    public void removeEtudiant(int id) throws SQLException {
+    public void removeEtudiant(Long id) throws SQLException {
         String sql = "DELETE FROM conges_abondant.Etudiant WHERE id_etu = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
+        preparedStatement.setLong(1, id);
         preparedStatement.executeUpdate();
     }
 
@@ -182,7 +201,7 @@ public class DatabaseController extends DatabaseLink{
         VALUES(?, ?, ?, ?, ?);""";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, (int)conge.getEtudiant().getIdEtu());
+            stmt.setLong(1, conge.getEtudiant().getIdEtu());
             stmt.setDate(2, conge.getDateDemande());
             stmt.setInt(3, (int)conge.getDuree());
             stmt.setString(4, conge.getEtat().toString());
@@ -282,7 +301,7 @@ public class DatabaseController extends DatabaseLink{
                 WHERE id_module=? AND id_etu=?;""";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, (int)etudiant.getIdEtu());
+        preparedStatement.setLong(1, etudiant.getIdEtu());
         preparedStatement.setString(2, module.getIdModule());
 
         preparedStatement.executeUpdate();
@@ -320,7 +339,7 @@ public class DatabaseController extends DatabaseLink{
         String sql = "DELETE FROM conges_abondant.Abondant WHERE id_etu = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, (int)etudiant.getIdEtu());
+        preparedStatement.setLong(1, etudiant.getIdEtu());
         preparedStatement.executeUpdate();
     }
 
@@ -361,7 +380,7 @@ public class DatabaseController extends DatabaseLink{
         preparedStatement.setString(4, admin.getEmail());
         
         preparedStatement.setString(5, hashedPassword); // Hash the password before storing it
-        preparedStatement.setInt(6, (int)admin.getIdAdmin());
+        preparedStatement.setString(6, admin.getIdAdmin());
         preparedStatement.executeUpdate();
     }
 
@@ -373,7 +392,7 @@ public class DatabaseController extends DatabaseLink{
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             return new Admin(
-                    resultSet.getInt("id_admin"),
+                    resultSet.getString("id_admin"),
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     RoleAdmin.valueOf(resultSet.getString("roles").replace("_","").toUpperCase()),
@@ -396,7 +415,7 @@ public class DatabaseController extends DatabaseLink{
         preparedStatement.setString(2, etudiant.getPrenom());
         preparedStatement.setDate(3, etudiant.getDateNaiss());
         preparedStatement.setInt(4, (int)etudiant.getIdGroupe());
-        preparedStatement.setInt(7, (int)etudiant.getIdEtu());
+        preparedStatement.setLong(7, etudiant.getIdEtu());
         preparedStatement.executeUpdate();
     }
 
@@ -853,7 +872,7 @@ public class DatabaseController extends DatabaseLink{
             if (rs.next()) {
                 System.out.println("Found admin: " + rs.getString("nom") + " " + rs.getString("prenom"));
                 return new Admin(
-                        rs.getInt("id_admin"),
+                        rs.getString("id_admin"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         RoleAdmin.valueOf(rs.getString("roles").replace("_","").toUpperCase()),
@@ -895,7 +914,7 @@ public class DatabaseController extends DatabaseLink{
         while (rs.next()) {
             admins.add(
                     new Admin(
-                            rs.getInt("id_admin"),
+                            rs.getString("id_admin"),
                             rs.getString("nom"),
                             rs.getString("prenom"),
                             RoleAdmin.valueOf(rs.getString("roles").replace("_","").toUpperCase()),

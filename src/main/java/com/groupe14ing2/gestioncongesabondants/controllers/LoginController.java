@@ -23,19 +23,20 @@ public class LoginController extends DatabaseLink {
        
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()){
+        while (resultSet.next()) {
         String hashedPassword = resultSet.getString("mot_passe");
 
          
          if (PasswordUtils.verifyPassword(password, hashedPassword)) {
             return new Admin(
-                    resultSet.getInt("id_admin"),
+                    resultSet.getString("id_admin"),
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     RoleAdmin.valueOf(resultSet.getString("roles").trim().toUpperCase().replace("_", "")),
                     resultSet.getString("email"),
                     null
-            );}
+            );
+         }
         
     }return null;}
 

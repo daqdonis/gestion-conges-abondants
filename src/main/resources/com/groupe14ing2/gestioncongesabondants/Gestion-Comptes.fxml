@@ -6,18 +6,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1315.0" stylesheets="@style/Gestion-Des-Comptes.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.GestionComptesController">
+<Pane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1315.0" stylesheets="@style/Gestion-Des-Comptes.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.GestionComptesController">
    <children>
       <Text layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Comptes">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="add_Acc_button" layoutX="1120.0" layoutY="105.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="25.0" prefWidth="110.0" text="+ ADD ACC" />
+      <Button fx:id="add_Acc_button" layoutX="1070.0" layoutY="105.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="26.0" prefWidth="160.0" text="+ Ajouter un compte" />
       <TextField fx:id="filtrer_textField" layoutX="1080.0" layoutY="155.0" promptText="filtrer" />
-      <Button fx:id="all_acc_button" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="All Acc" />
-      <Button fx:id="admin_acc_button" layoutX="120.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Admin" />
-      <Button fx:id="regulaire_acc_button" layoutX="220.0" layoutY="155.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="89.0" text="Nrml" />
+      <Button fx:id="add_students_button" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" onAction="#selectFile" prefHeight="26.0" prefWidth="176.0" text="Ajouter des étudiants" />
       <Pane fx:id="table_pan" layoutY="182.0" prefHeight="869.0" prefWidth="1315.0">
          <children>
             <HBox alignment="CENTER_LEFT" layoutX="3.0" layoutY="32.0" prefHeight="50.0" prefWidth="1300.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
