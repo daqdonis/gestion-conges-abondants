@@ -578,15 +578,11 @@ public class DatabaseController extends DatabaseLink {
     }
 
     // DemReins methods
-    public void addDemReins(DemReins demReins) throws SQLException {
-        // Generate demand ID (X-AA-00000000 format)
-        String idPrefix = "R" + String.valueOf(demReins.getIdEtu()).substring(0, 2) + "-";
-        String sqlCount = "SELECT COUNT(*) FROM Dem_reins WHERE id_demande LIKE ?";
-        PreparedStatement ps = connection.prepareStatement(sqlCount);
-        ps.setString(1, idPrefix + "%");
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);
+    public void addDemReins(DemReins demReins, char type) throws SQLException {
+        // Generate demand ID (X-X-00000000 format)
+        // type is to tell if the demand is for conge or abandont
+        String id = "R" + type + demReins.getIdEtu();
+
 
         String sql = "INSERT IGNORE INTO Dem_reins (id_demande, id_etu, date_demande, justificatif, etat) VALUES(?, ?, ?, ?, ?)";
 
