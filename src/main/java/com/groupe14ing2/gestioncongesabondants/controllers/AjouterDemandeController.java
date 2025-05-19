@@ -71,7 +71,7 @@ public class AjouterDemandeController {
             }
 
             // ID étudiant
-            int etudiantId = Integer.parseInt(AJT_D_matricule.getText());
+            long etudiantId = Long.parseLong(AJT_D_matricule.getText());
 
             // Vérifier si l'étudiant existe
             DatabaseController dbController = new DatabaseController();

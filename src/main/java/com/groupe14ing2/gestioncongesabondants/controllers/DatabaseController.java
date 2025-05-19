@@ -425,7 +425,7 @@ public class DatabaseController extends DatabaseLink {
         }
 
         // Generate conge ID (X-AA-00000000 format)
-        String idPrefix = "C-" + String.valueOf(conge.getEtudiant().getIdEtu()).substring(0, 2) + "-";
+        String idPrefix = "C" + (conge.getDateDemande().getYear() - 100) + conge.getEtudiant().getIdEtu();
         String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
         PreparedStatement ps = connection.prepareStatement(sqlCount);
         ps.setString(1, idPrefix + "%");
@@ -507,7 +507,7 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("id_demande"),
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
-                    EtatTraitement.valueOf(resultSet.getString("etat")),
+                    EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
                     (FileInputStream) resultSet.getBlob("justificatif")
             );
         }
@@ -526,7 +526,7 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("id_demande"),
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
-                    EtatTraitement.valueOf(resultSet.getString("etat")),
+                    EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
                     (FileInputStream) resultSet.getBlob("justificatif")
             ));
         }
@@ -554,7 +554,7 @@ public class DatabaseController extends DatabaseLink {
                         rs.getString("c.id_demande"),
                         rs.getDate("c.date_demande"),
                         rs.getInt("c.duree"),
-                        EtatTraitement.valueOf(rs.getString("c.etat")),
+                        EtatTraitement.valueOf(rs.getString("c.etat").replaceAll(" ", "").toUpperCase()),
                         rs.getBlob("c.justificatif") != null ?
                                 rs.getBlob("c.justificatif").getBinaryStream() : null
                 );
@@ -580,7 +580,7 @@ public class DatabaseController extends DatabaseLink {
     // DemReins methods
     public void addDemReins(DemReins demReins) throws SQLException {
         // Generate demand ID (X-AA-00000000 format)
-        String idPrefix = "R-" + String.valueOf(demReins.getIdEtu()).substring(0, 2) + "-";
+        String idPrefix = "R" + String.valueOf(demReins.getIdEtu()).substring(0, 2) + "-";
         String sqlCount = "SELECT COUNT(*) FROM Dem_reins WHERE id_demande LIKE ?";
         PreparedStatement ps = connection.prepareStatement(sqlCount);
         ps.setString(1, idPrefix + "%");
@@ -632,7 +632,7 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getLong("id_etu"),
                     resultSet.getDate("date_demande"),
                     (FileInputStream) resultSet.getBlob("justificatif"),
-                    EtatTraitement.valueOf(resultSet.getString("etat"))
+                    EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase())
             );
         }
         return null;

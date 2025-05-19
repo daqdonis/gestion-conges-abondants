@@ -18,7 +18,7 @@ CREATE TABLE Cycle(
 
 -- Semestre (CYCLE-NUM)
 CREATE TABLE Semestre(
-                         id_semestre VARCHAR(10) PRIMARY KEY,
+                         id_semestre VARCHAR(13) PRIMARY KEY,
                          num_semestre INT NOT NULL,
                          id_cycle VARCHAR(4) NOT NULL,
                          FOREIGN KEY (id_cycle) REFERENCES Cycle(id_cycle)
@@ -26,7 +26,7 @@ CREATE TABLE Semestre(
 
 -- Section (S-NUM)
 CREATE TABLE Section(
-                        id_section VARCHAR(10) PRIMARY KEY,
+                        id_section VARCHAR(12) PRIMARY KEY,
                         num_section INT NOT NULL,
                         id_cycle VARCHAR(4) NOT NULL,
                         FOREIGN KEY (id_cycle) REFERENCES Cycle(id_cycle)
@@ -34,11 +34,11 @@ CREATE TABLE Section(
 
 -- Groupe (G-NUM)
 CREATE TABLE Groupe(
-                       id_groupe VARCHAR(10) PRIMARY KEY,
+                       id_groupe VARCHAR(15) PRIMARY KEY,
                        num_groupe INT NOT NULL,
-                       id_section VARCHAR(10) NOT NULL,
-                       id_semestre_pair VARCHAR(10) NOT NULL,
-                       id_semestre_impair VARCHAR(10) NOT NULL,
+                       id_section VARCHAR(12) NOT NULL,
+                       id_semestre_pair VARCHAR(13) NOT NULL,
+                       id_semestre_impair VARCHAR(13) NOT NULL,
                        FOREIGN KEY (id_section) REFERENCES Section(id_section),
                        FOREIGN KEY (id_semestre_pair) REFERENCES Semestre(id_semestre),
                        FOREIGN KEY (id_semestre_impair) REFERENCES Semestre(id_semestre)
@@ -50,7 +50,7 @@ CREATE TABLE Etudiant(
                          nom VARCHAR(255) NOT NULL,
                          prenom VARCHAR(255) NOT NULL,
                          date_naiss DATE NOT NULL,
-                         id_groupe VARCHAR(10) NOT NULL,
+                         id_groupe VARCHAR(15) NOT NULL,
                          FOREIGN KEY (id_groupe) REFERENCES Groupe(id_groupe)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

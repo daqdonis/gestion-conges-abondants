@@ -68,9 +68,9 @@ public class MenuViewController {
     @FXML
     public void initialize() {
         myPieChart.getData().addAll(
-                new PieChart.Data("", 20),
-                new PieChart.Data("", 40),
-                new PieChart.Data("", 12)
+                new PieChart.Data("acp", 0),
+                new PieChart.Data("att", 0),
+                new PieChart.Data("ref", 0)
         );
 
         refreshTable();
@@ -93,6 +93,17 @@ public class MenuViewController {
                     tupleController.setData(request); // injecter les données
 
                     requestsContainer.getChildren().add(tupleView); // ajouter au container
+                    switch (request.getEtat()) {
+                        case REFUSÉ:
+                            myPieChart.getData().get(0).setPieValue(myPieChart.getData().get(0).getPieValue() + 1);
+                            break;
+                        case ACCEPTÉ:
+                            myPieChart.getData().get(2).setPieValue(myPieChart.getData().get(2).getPieValue() + 1);
+                            break;
+                        case ENATTENTE:
+                            myPieChart.getData().get(1).setPieValue(myPieChart.getData().get(1).getPieValue() + 1);
+                            break;
+                    }
                 } catch (IOException e) {
                     System.err.println("Erreur de chargement du TupleDemande.fxml");
                     e.printStackTrace();
@@ -180,6 +191,7 @@ public class MenuViewController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(cheminFXML));
             Parent newRoot = fxmlLoader.load();
+            ((TraiterDemandeController)fxmlLoader.getController()).setMenuController(this);
             Scene scene = new Scene(newRoot);
             Stage stage = new Stage();
             stage.setTitle(titre);

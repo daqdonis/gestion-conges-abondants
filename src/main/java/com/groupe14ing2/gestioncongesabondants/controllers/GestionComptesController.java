@@ -159,7 +159,7 @@ public class GestionComptesController {
                                 db.addCycle(cycle);
 
                                 Section section = new Section(
-                                        cycle.getIdCycle() + filiere.getIdFiliere() + etudiant.get("section") + etudiant.get("année universitaire") + "-" + etudiant.get("année"),
+                                        cycle.getIdCycle() + etudiant.get("année") + filiere.getIdFiliere() + etudiant.get("année universitaire").replaceAll("/", "") + etudiant.get("section"),
                                         Integer.parseInt(etudiant.get("section")),
                                         cycle.getIdCycle()
                                 );
