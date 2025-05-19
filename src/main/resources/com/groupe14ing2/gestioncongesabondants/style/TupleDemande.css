@@ -11,6 +11,11 @@
     -fx-text-fill: white;
     -fx-background-radius: 20px;
 }
+#reinscription_button {
+    -fx-background-color: LIME;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}
 #voir_jst_button:hover{
     -fx-background-color: #dedede;
     -fx-text-fill: #1f75ff;
@@ -19,5 +24,10 @@
 #traiter_jst_button:hover{
     -fx-background-color: #dedede;
     -fx-text-fill: #dfa300;
+    -fx-background-radius: 20px;
+}
+#reinscription_button:hover{
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
     -fx-background-radius: 20px;
 }
