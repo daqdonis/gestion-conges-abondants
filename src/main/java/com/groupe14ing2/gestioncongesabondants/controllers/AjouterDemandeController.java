@@ -85,7 +85,7 @@ public class AjouterDemandeController {
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
                     Date.valueOf(AJT_D_Date.getText()),
-                    30, // Durée par défaut
+                    2, // Durée par défaut
                     EtatTraitement.ENATTENTE,
                     fileInputStream
             );

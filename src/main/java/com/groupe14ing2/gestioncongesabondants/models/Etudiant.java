@@ -7,11 +7,10 @@ public class Etudiant implements Serializable {
   private long idEtu;
   private String nom;
   private String prenom;
-  private java.sql.Date dateNaiss;
-  private long idGroupe;
-  // REMOVED: idConge and idDemReins fields
+  private Date dateNaiss;
+  private String idGroupe;
 
-  public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, long idGroupe) {
+  public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, String idGroupe) {
     this.idEtu = idEtu;
     this.nom = nom;
     this.prenom = prenom;
@@ -19,13 +18,11 @@ public class Etudiant implements Serializable {
     this.idGroupe = idGroupe;
   }
 
-  public Etudiant(String nom, String prenom, Date dateNaiss, long idGroupe) {
+  public Etudiant(String nom, String prenom, Date dateNaiss, String idGroupe) {
     this(0, nom, prenom, dateNaiss, idGroupe);
   }
 
-  // REMOVE all getIdConge(), setIdConge(), getIdDemReins(), setIdDemReins() methods
-
-  // Keep all other getters and setters except those removed above
+  // Getters and setters
   public long getIdEtu() {
     return idEtu;
   }
@@ -50,19 +47,19 @@ public class Etudiant implements Serializable {
     this.prenom = prenom;
   }
 
-  public java.sql.Date getDateNaiss() {
+  public Date getDateNaiss() {
     return dateNaiss;
   }
 
-  public void setDateNaiss(java.sql.Date dateNaiss) {
+  public void setDateNaiss(Date dateNaiss) {
     this.dateNaiss = dateNaiss;
   }
 
-  public long getIdGroupe() {
+  public String getIdGroupe() {
     return idGroupe;
   }
 
-  public void setIdGroupe(long idGroupe) {
+  public void setIdGroupe(String idGroupe) {
     this.idGroupe = idGroupe;
   }
 }

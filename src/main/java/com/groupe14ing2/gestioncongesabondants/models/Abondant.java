@@ -1,20 +1,20 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
-
 import java.io.Serializable;
 import java.sql.Date;
 
 public class Abondant implements Serializable {
-
   private long idEtu;
-  private long idAdmin;
-//  Added dateDec
+  private String idAdmin;
   private Date dateDec;
 
-  public Abondant(int idEtu, int idAdmin, Date dateDec) {
+  public Abondant(long idEtu, String idAdmin, Date dateDec) {
+    this.idEtu = idEtu;
+    this.idAdmin = idAdmin;
+    this.dateDec = dateDec;
   }
 
-
+  // Getters and setters
   public long getIdEtu() {
     return idEtu;
   }
@@ -23,12 +23,11 @@ public class Abondant implements Serializable {
     this.idEtu = idEtu;
   }
 
-
-  public long getIdAdmin() {
+  public String getIdAdmin() {
     return idAdmin;
   }
 
-  public void setIdAdmin(long idAdmin) {
+  public void setIdAdmin(String idAdmin) {
     this.idAdmin = idAdmin;
   }
 
@@ -39,6 +38,4 @@ public class Abondant implements Serializable {
   public void setDateDec(Date dateDec) {
     this.dateDec = dateDec;
   }
-
 }
-

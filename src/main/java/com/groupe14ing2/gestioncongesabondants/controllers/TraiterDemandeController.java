@@ -68,7 +68,7 @@ public class TraiterDemandeController  {
 @FXML
 private void handleRefuser() {
     try {
-        int idDemande = Integer.parseInt(traiter_numero_demande.getText());
+        String idDemande = traiter_numero_demande.getText();
 
         DatabaseController dbController = new DatabaseController();
         
@@ -91,7 +91,7 @@ private void handleRefuser() {
 @FXML
 private void handleAccepter() {
     try {
-        int idDemande = Integer.parseInt(traiter_numero_demande.getText());
+        String idDemande = traiter_numero_demande.getText();
 
         DatabaseController dbController = new DatabaseController();
         dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);

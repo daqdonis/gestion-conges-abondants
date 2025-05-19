@@ -1,49 +1,44 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
-
 import java.io.Serializable;
 
 public class Section implements Serializable {
+  private String idSection;
+  private int numSection;
+  private String idCycle;
 
-  private long idSection;
-  private long numSection;
-  private long idCycle;
-
-  public Section(long idSection, long numSection, long idCycle) {
+  public Section(String idSection, int numSection, String idCycle) {
     this.idSection = idSection;
     this.numSection = numSection;
     this.idCycle = idCycle;
   }
 
-  public Section(long numSection, long idCycle) {
-    this.numSection = numSection;
-    this.idCycle = idCycle;
+  public Section(int numSection, String idCycle) {
+    this(null, numSection, idCycle);
   }
 
-  public long getIdSection() {
+  // Getters and setters
+  public String getIdSection() {
     return idSection;
   }
 
-  public void setIdSection(long idSection) {
+  public void setIdSection(String idSection) {
     this.idSection = idSection;
   }
 
-
-  public long getNumSection() {
+  public int getNumSection() {
     return numSection;
   }
 
-  public void setNumSection(long numSection) {
+  public void setNumSection(int numSection) {
     this.numSection = numSection;
   }
 
-
-  public long getIdCycle() {
+  public String getIdCycle() {
     return idCycle;
   }
 
-  public void setIdCycle(long idCycle) {
+  public void setIdCycle(String idCycle) {
     this.idCycle = idCycle;
   }
-
 }

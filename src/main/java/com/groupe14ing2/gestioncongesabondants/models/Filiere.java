@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 public class Filiere implements Serializable {
 
-  private long idFiliere;
+  private String idFiliere;
   private String designFiliere;
 
-  public Filiere(long idFiliere, String designFiliere) {
+  public Filiere(String idFiliere, String designFiliere) {
     this.idFiliere = idFiliere;
     this.designFiliere = designFiliere;
   }
@@ -17,11 +17,11 @@ public class Filiere implements Serializable {
     this.designFiliere = designFiliere;
   }
 
-  public long getIdFiliere() {
+  public String getIdFiliere() {
     return idFiliere;
   }
 
-  public void setIdFiliere(long idFiliere) {
+  public void setIdFiliere(String idFiliere) {
     this.idFiliere = idFiliere;
   }
 

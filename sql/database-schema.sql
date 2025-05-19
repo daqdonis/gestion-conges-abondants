@@ -37,9 +37,11 @@ CREATE TABLE Groupe(
                        id_groupe VARCHAR(10) PRIMARY KEY,
                        num_groupe INT NOT NULL,
                        id_section VARCHAR(10) NOT NULL,
-                       id_semestre VARCHAR(10) NOT NULL,
+                       id_semestre_pair VARCHAR(10) NOT NULL,
+                       id_semestre_impair VARCHAR(10) NOT NULL,
                        FOREIGN KEY (id_section) REFERENCES Section(id_section),
-                       FOREIGN KEY (id_semestre) REFERENCES Semestre(id_semestre)
+                       FOREIGN KEY (id_semestre_pair) REFERENCES Semestre(id_semestre),
+                       FOREIGN KEY (id_semestre_impair) REFERENCES Semestre(id_semestre)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Etudiant (8-digit)
@@ -71,29 +73,6 @@ CREATE TABLE Dem_reins(
                           justificatif MEDIUMBLOB NOT NULL,
                           etat ENUM('En attente','Refusé','Accepté') DEFAULT 'En attente',
                           FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Module (XXX-0-X0-XXX)
-CREATE TABLE Module(
-                       id_module VARCHAR(31) PRIMARY KEY,
-                       nom_module VARCHAR(31) NOT NULL,
-                       id_semestre VARCHAR(10) NOT NULL,
-                       id_filiere VARCHAR(10) NOT NULL,
-                       niveau_etude VARCHAR(3) NOT NULL,
-                       FOREIGN KEY (id_semestre) REFERENCES Semestre(id_semestre),
-                       FOREIGN KEY (id_filiere) REFERENCES Filiere(id_filiere)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Note_module
-CREATE TABLE Note_module(
-                            id_etu BIGINT NOT NULL,
-                            id_module VARCHAR(31) NOT NULL,
-                            note_td FLOAT,
-                            note_tp FLOAT,
-                            note_exam FLOAT,
-                            PRIMARY KEY (id_etu, id_module),
-                            FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu),
-                            FOREIGN KEY (id_module) REFERENCES Module(id_module)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Admin (X-X-000)

@@ -13,10 +13,10 @@ public class JustificationViewerController {
     @FXML private ImageView imageView;
     @FXML private Label fileNameLabel;
 
-    public void loadJustification(long demandeId) {
+    public void loadJustification(String  demandeId) {
         try {
             DatabaseController db = new DatabaseController();
-            InputStream is = db.getJustificationFile((int) demandeId);
+            InputStream is = db.getJustificationFile(demandeId);
 
             if (is != null) {
                 // Try to display image if it's an image file
@@ -34,7 +34,7 @@ public class JustificationViewerController {
         }
     }
 
-    private void offerFileDownload(long demandeId, InputStream is) {
+    private void offerFileDownload(String demandeId, InputStream is) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Justification File");
         fileChooser.setInitialFileName("justification_" + demandeId + ".pdf");

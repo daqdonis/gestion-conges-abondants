@@ -1,8 +1,6 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-import com.groupe14ing2.gestioncongesabondants.models.Admin;
-import com.groupe14ing2.gestioncongesabondants.models.Conge;
-import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
+import com.groupe14ing2.gestioncongesabondants.models.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -133,7 +131,7 @@ public class GestionComptesController {
 
         if (selectedFile != null) {
             try {
-                String[] HEADERS = { "code", "nom", "prenom", "date de naissance", "groupe"};
+                String[] HEADERS = { "code", "nom", "prénom", "date de naissance", "groupe", "section", "cycle", "filière", "année", "année universitaire"};
                 CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
                         .setHeader(HEADERS)
                         .setSkipHeaderRecord(true)
@@ -145,12 +143,60 @@ public class GestionComptesController {
                     DatabaseController db = new DatabaseController();
                     etudiants.forEach( etudiant -> {
                             try {
+                                Filiere filiere = new Filiere(
+                                        etudiant.get("filière").substring(0,3).toUpperCase(),
+                                        etudiant.get("filière")
+                                );
+
+                                db.addFiliere(filiere);
+
+                                Cycle cycle = new Cycle(
+                                        etudiant.get("cycle").substring(0,3).toUpperCase(),
+                                        etudiant.get("cycle"),
+                                        filiere.getIdFiliere()
+                                );
+
+                                db.addCycle(cycle);
+
+                                Section section = new Section(
+                                        cycle.getIdCycle() + filiere.getIdFiliere() + etudiant.get("section") + etudiant.get("année universitaire") + "-" + etudiant.get("année"),
+                                        Integer.parseInt(etudiant.get("section")),
+                                        cycle.getIdCycle()
+                                );
+
+                                Semestre semestrePair = new Semestre(
+                                        section.getIdSection() + Integer.parseInt(etudiant.get("année"))*2,
+                                        Integer.parseInt(etudiant.get("année"))*2,
+                                        cycle.getIdCycle()
+                                );
+
+                                Semestre semestreImpair = new Semestre(
+                                        section.getIdSection() + (Integer.parseInt(etudiant.get("année"))*2 -1),
+                                        Integer.parseInt(etudiant.get("année"))*2 - 1,
+                                        cycle.getIdCycle()
+                                );
+
+                                db.addSemestre(semestrePair);
+                                db.addSemestre(semestreImpair);
+
+                                db.addSection(section);
+
+                                Groupe groupe = new Groupe(
+                                        section.getIdSection() + Long.parseLong(etudiant.get("groupe")),
+                                        Long.parseLong(etudiant.get("groupe")),
+                                        section.getIdSection(),
+                                        semestrePair.getIdSemestre(),
+                                        semestreImpair.getIdSemestre()
+                                );
+
+                                db.addGroupe(groupe);
+
                                 db.addEtudiant(new Etudiant(
                                         Long.parseLong(etudiant.get("code")),
                                         etudiant.get("nom"),
-                                        etudiant.get("prenom"),
+                                        etudiant.get("prénom"),
                                         Date.valueOf(etudiant.get("date de naissance")),
-                                        Integer.parseInt(etudiant.get("groupe"))
+                                        groupe.getIdGroupe()
                                 ));
                             } catch (SQLException e1) {
                                e1.printStackTrace();

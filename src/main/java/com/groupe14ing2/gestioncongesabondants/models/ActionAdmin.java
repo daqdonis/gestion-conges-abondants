@@ -1,32 +1,37 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
-
-import com.almasb.fxgl.entity.action.IdleAction;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class ActionAdmin implements Serializable {
-  // action here is a string that describes what the admin has done
-  private long idAdmin;
+  private int idAction;
+  private String idAdmin;
   private String action;
   private Timestamp tempsAction;
-  private Long idConge;
-  private Long idReins;
-  private Long pkAbond;
+  private String idConge;
+  private String idReins;
+  private long pkAbond;
 
-  public ActionAdmin(long idAdmin, String action, Timestamp tempsAction, long idActionfait, char actionChar) {
+  public ActionAdmin(int idAction, String idAdmin, String action, Timestamp tempsAction,
+                     String idConge, String idReins, long pkAbond) {
+    this.idAction = idAction;
     this.idAdmin = idAdmin;
     this.action = action;
     this.tempsAction = tempsAction;
-    this.idConge = null;
-    this.idReins = null;
-    this.pkAbond = null;
+    this.idConge = idConge;
+    this.idReins = idReins;
+    this.pkAbond = pkAbond;
+  }
 
-    // switches between A, C and R and sets one of pkAbond, idConge and idReins to idActionFait respectively
+  // Alternative constructor for creating actions
+  public ActionAdmin(String idAdmin, String action, String idActionfait, char actionChar) {
+    this.idAdmin = idAdmin;
+    this.action = action;
+    this.tempsAction = new Timestamp(System.currentTimeMillis());
+
     switch (actionChar) {
       case 'A':
-        this.pkAbond = idActionfait;
+        this.pkAbond = Long.parseLong(idActionfait);
         break;
       case 'C':
         this.idConge = idActionfait;
@@ -39,64 +44,61 @@ public class ActionAdmin implements Serializable {
     }
   }
 
-    public ActionAdmin(int idAction, int idAdmin, String action, Timestamp tempsAction, int idConge, int idReins, int pkAbond) {
-    }
+  // Getters and setters
+  public int getIdAction() {
+    return idAction;
+  }
 
-    public long getIdAdmin() {
+  public String getIdAdmin() {
     return idAdmin;
   }
 
-  public void setIdAdmin(long idAdmin) {
-    this.idAdmin = idAdmin;
-  }
-
-
   public String getAction() {
     return action;
+  }
+
+  public Timestamp getTempsAction() {
+    return tempsAction;
+  }
+
+  public String getIdConge() {
+    return idConge;
+  }
+
+  public String getIdReins() {
+    return idReins;
+  }
+
+  public long getPkAbond() {
+    return pkAbond;
+  }
+
+  // Setters
+  public void setIdAction(int idAction) {
+    this.idAction = idAction;
+  }
+
+  public void setIdAdmin(String idAdmin) {
+    this.idAdmin = idAdmin;
   }
 
   public void setAction(String action) {
     this.action = action;
   }
 
-
-  public Timestamp getTempsAction() {
-    return tempsAction;
-  }
-
   public void setTempsAction(Timestamp tempsAction) {
     this.tempsAction = tempsAction;
   }
 
-
-  public long getIdConge() {
-    return idConge;
-  }
-
-  public void setIdConge(long idConge) {
+  public void setIdConge(String idConge) {
     this.idConge = idConge;
   }
 
-
-  public long getIdReins() {
-    return idReins;
-  }
-
-  public void setIdReins(long idReins) {
+  public void setIdReins(String idReins) {
     this.idReins = idReins;
-  }
-
-
-  public long getPkAbond() {
-    return pkAbond;
   }
 
   public void setPkAbond(long pkAbond) {
     this.pkAbond = pkAbond;
   }
-
-  public Object getIdAction() {
-    Object IdAction = null;
-    return IdAction;}
-
 }

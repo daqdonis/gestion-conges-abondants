@@ -10,96 +10,73 @@ public class Conge implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  private long idDemande;
-  private java.sql.Date dateDemande;
-  private long duree;
+  private String idDemande;
+  private long idEtu;
+  private Date dateDemande;
+  private int duree;
   private EtatTraitement etat;
   private transient File justificatif;
-  private byte[] justificatifData;
   private Etudiant etudiant;
+  private byte[] justificatifData;
 
 
-  public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, InputStream justificatif) {
+  public Conge(String idDemande, Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
     createJustificatifFile(justificatif);
   }
-  public Conge(Date dateDemande, long duree, EtatTraitement etat, InputStream justificatif) {
+  public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
     createJustificatifFile(justificatif);
   }
 
-  public Conge(Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
-    this.dateDemande = dateDemande;
-    this.duree = duree;
-    this.etat = etat;
-    createJustificatifFile(justificatif);
-  }
-  /*private void writeObject(ObjectOutputStream out) throws IOException {
-    out.defaultWriteObject();
-    if (justificatif != null) {
-      justificatifData = justificatif.readAllBytes();
-      out.writeObject(justificatifData);
-    }
-  }*/
-  /*private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-    in.defaultReadObject();
-    justificatifData = (byte[]) in.readObject();
-    if (justificatifData != null) {
-      justificatif = new ByteArrayInputStream(justificatifData);
-    }
-  }*/
-
-  public long getIdDemande() {
+  public String getIdDemande() {
     return idDemande;
   }
 
-  public void setIdDemande(long idDemande) {
-    this.idDemande = idDemande;
+  public long getIdEtu() {
+    return idEtu;
   }
 
-
-  public java.sql.Date getDateDemande() {
+  public Date getDateDemande() {
     return dateDemande;
   }
 
-  public void setDateDemande(java.sql.Date dateDemande) {
-    this.dateDemande = dateDemande;
-  }
-
-
-  public long getDuree() {
+  public int getDuree() {
     return duree;
   }
-
-  public void setDuree(long duree) {
-    this.duree = duree;
-  }
-
 
   public EtatTraitement getEtat() {
     return etat;
   }
 
-  public void setEtat(EtatTraitement etat) {
-    this.etat = etat;
-  }
-
-
   public File getJustificatif() {
     return justificatif;
   }
 
-  public void setJustificatif(File justificatif) {
-    this.justificatif = justificatif;
-  }
-
   public Etudiant getEtudiant() {
     return etudiant;
+  }
+
+  // Setters
+  public void setIdDemande(String idDemande) {
+    this.idDemande = idDemande;
+  }
+
+  public void setDateDemande(Date dateDemande) {
+    this.dateDemande = dateDemande;
+  }
+
+  public void setDuree(int duree) {
+    this.duree = duree;
+  }
+
+  public void setEtat(EtatTraitement etat) {
+    this.etat = etat;
   }
 
   public void setEtudiant(Etudiant etudiant) {
