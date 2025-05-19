@@ -50,6 +50,8 @@ public class LoginViewController {
     @FXML
     private Button minimizeButton;
 
+    private Admin admin;
+
     @FXML
     public void initialize() {
         mainPanel.getStylesheets().add(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/LoginPageStyleSheet.css").toExternalForm());
@@ -67,7 +69,7 @@ public class LoginViewController {
         try {
             UserLoginController userLoginController = new UserLoginController();
             Admin admin = userLoginController.login(username, password);
-
+            this.admin = admin;
             if (admin != null) {
                 System.out.println("Login successful for: " + admin.getNom());
 
@@ -107,7 +109,9 @@ public class LoginViewController {
 
     @FXML
     private void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
+        root = loader.load();
+        ((MenuViewController)loader.getController()).setAdmin(admin);
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style/LoginPageStyleSheet.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.ActionsController">
+   <center>
+      <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea fx:id="textArea" layoutX="27.0" layoutY="19.0" prefHeight="463.0" prefWidth="667.0" />
+            <Button layoutX="697.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: WHITE;" text="X" textFill="RED">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font></Button>
+         </children></AnchorPane>
+   </center>
+</BorderPane>

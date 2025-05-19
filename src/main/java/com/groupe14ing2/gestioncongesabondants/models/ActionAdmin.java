@@ -8,9 +8,9 @@ public class ActionAdmin implements Serializable {
   private String idAdmin;
   private String action;
   private Timestamp tempsAction;
-  private String idConge;
-  private String idReins;
-  private long pkAbond;
+  private String idConge = null;
+  private String idReins = null;
+  private long pkAbond = -1;
 
   public ActionAdmin(int idAction, String idAdmin, String action, Timestamp tempsAction,
                      String idConge, String idReins, long pkAbond) {

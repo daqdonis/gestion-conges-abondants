@@ -690,7 +690,10 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setTimestamp(3, actionAdmin.getTempsAction());
         preparedStatement.setString(4, actionAdmin.getIdConge());
         preparedStatement.setString(5, actionAdmin.getIdReins());
-        preparedStatement.setLong(6, actionAdmin.getPkAbond());
+        if (actionAdmin.getPkAbond() < 0)
+            preparedStatement.setNull(6, Types.NULL);
+        else
+            preparedStatement.setLong(6, actionAdmin.getPkAbond());
 
         preparedStatement.executeUpdate();
     }

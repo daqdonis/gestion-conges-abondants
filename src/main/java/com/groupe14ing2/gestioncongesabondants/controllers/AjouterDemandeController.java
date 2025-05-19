@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.groupe14ing2.gestioncongesabondants.models.ActionAdmin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
 import com.groupe14ing2.gestioncongesabondants.models.EtatTraitement;
 import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
@@ -93,6 +94,14 @@ public class AjouterDemandeController {
 
             // Ajouter à la base de données
             dbController.addConge(conge);
+            System.out.println(conge.getIdDemande());
+            System.out.println(menuController.getAdmin().getNom());
+            dbController.addActionAdmin(new ActionAdmin(
+                    menuController.getAdmin().getIdAdmin(),
+                    "nouveau congé pour " + etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom(),
+                    "C" + (Date.valueOf(AJT_D_Date.getText()).getYear() - 100) + etudiant.getIdEtu(),
+                    'C'
+            ));
 
             // Afficher l'alerte de succès
             showAlert("Success", "Demand added successfully!");

@@ -1,5 +1,6 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +65,8 @@ public class MenuViewController {
     private ScrollPane scrollPane;
     @FXML
     private VBox requestsContainer;
+
+    private Admin admin;
 
     @FXML
     public void initialize() {
@@ -217,6 +220,14 @@ public class MenuViewController {
             System.out.println("Erreur lors du chargement de la fenêtre : " + cheminFXML);
             ex.printStackTrace();
         }
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public Admin getAdmin() {
+        return admin;
     }
 
     @FXML

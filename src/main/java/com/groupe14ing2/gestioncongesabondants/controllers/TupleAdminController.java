@@ -4,6 +4,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -56,6 +57,21 @@ public class TupleAdminController {
                 gestionComptesController.refreshTable();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
+            }
+        });
+
+        view_actions.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/actions-admin.fxml"));
+                Scene scene = new Scene(loader.load());
+                ActionsController controller = loader.getController();
+                controller.setAdmin(admin);
+                controller.initializeData(); // Call explicitly AFTER setAdmin()
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
     }
