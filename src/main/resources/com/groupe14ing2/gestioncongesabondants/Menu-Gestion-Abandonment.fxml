@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.QuadCurve?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="mainRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" stylesheets="@style/Menu_stylesheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.MenuGestionAbdandenementController">
+   <children>
+      <Pane fx:id="left_bar_menu" layoutY="-7.0" prefHeight="772.0" prefWidth="60.0">
+         <children>
+            <Pane fx:id="switch_chap" layoutX="-47.0" layoutY="315.0" prefHeight="143.0" prefWidth="153.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dedede" height="40.0" layoutX="86.0" layoutY="55.0" stroke="#dedede" strokeType="INSIDE" width="200.0" />
+                  <Circle fill="#dedede" layoutX="76.0" layoutY="75.0" radius="20.0" stroke="#dedede" strokeType="INSIDE" />
+                  <QuadCurve controlX="-37.599998474121094" controlY="-24.0" endX="-25.800018310546875" endY="-1.0" fill="WHITE" layoutX="135.0" layoutY="97.0" startX="-50.99999237060547" startY="-1.0" stroke="WHITE" strokeType="INSIDE" />
+                  <QuadCurve controlX="-37.599998474121094" controlY="24.0" endX="-25.800018310546875" fill="WHITE" layoutX="135.0" layoutY="53.0" startX="-50.99999237060547" startY="1.0" stroke="WHITE" strokeType="INSIDE" />
+               </children>
+            </Pane>
+            <Button fx:id="more_button" layoutX="6.0" layoutY="33.0" minWidth="40.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="40.0">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/option.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="profile_button" layoutX="3.0" layoutY="689.0" minWidth="53.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/utilisateur.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="gestino_des_cong_button" layoutY="367.0" minWidth="53.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/gestion-des-dossiers.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="gestion_des_abondant_button" layoutX="5.0" layoutY="323.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/chef-de-projet.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="57.0" layoutY="1.0" prefHeight="1138.0" prefWidth="1227.0">
+         <children>
+            <Pane fx:id="main_background" layoutX="-3.0" prefHeight="709.0" prefWidth="1271.0">
+               <children>
+                  <TextField fx:id="text_field_rechercher_demande" layoutX="36.0" layoutY="163.0" prefHeight="43.0" prefWidth="346.0" promptText="     Rechercher " />
+                  <Text fill="#1f75ff" layoutX="112.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Académique" wrappingWidth="608.7701416015625">
+                     <font>
+                        <Font name="Calibri Bold" size="59.0" />
+                     </font>
+                  </Text>
+                  <PieChart fx:id="myPieChart" layoutX="771.0" layoutY="3.0" prefHeight="250.0" prefWidth="250.0" />
+                  <Circle fill="#dedede" layoutX="896.0" layoutY="114.0" radius="56.0" stroke="#dedede" strokeType="INSIDE" />
+                  <Button fx:id="button_ajouter_demande" contentDisplay="CENTER" layoutX="486.0" layoutY="163.0" mnemonicParsing="false" onAction="#ajouter_demande" prefHeight="43.0" prefWidth="171.0" text="Ajouter une demande" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                  </Button>
+                  <ImageView fitHeight="27.0" fitWidth="168.0" layoutX="342.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/loupe.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#4b4b4b" layoutX="33.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste Des Abandonment" wrappingWidth="627.170166015625">
+                     <font>
+                        <Font name="Calibri Bold" size="59.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="button_ajouter_demande1" contentDisplay="CENTER" layoutX="786.0" layoutY="163.0" mnemonicParsing="false" onAction="#ajouter_demande" prefHeight="43.0" prefWidth="171.0" text="Upload" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="21.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="table_pan" layoutX="35.0" layoutY="240.0" prefHeight="871.0" prefWidth="1195.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" layoutX="35.0" layoutY="34.0" prefHeight="51.0" prefWidth="1134.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
+                     <children>
+                        <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule" textAlignment="CENTER" wrappingWidth="159.7240982055664">
+                           <font>
+                              <Font name="Arial" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="163.6640625">
+                           <font>
+                              <Font name="Arial" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom" textAlignment="CENTER" wrappingWidth="183.87155151367188">
+                           <font>
+                              <Font name="Arial" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat de traitement" textAlignment="CENTER" wrappingWidth="208.9390869140625">
+                           <font>
+                              <Font name="Arial" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Justiificatife" textAlignment="CENTER" wrappingWidth="229.61849212646484">
+                           <font>
+                              <Font name="Arial" size="21.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Action" textAlignment="CENTER" wrappingWidth="153.0221405029297">
+                           <font>
+                              <Font name="Arial" size="21.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <ScrollPane fx:id="scrollPane" layoutX="34.0" layoutY="84.0" prefHeight="427.0" prefWidth="1136.0" style="-fx-border-color: white;">
+                     <content>
+                        <VBox fx:id="requestsContainer" prefHeight="430.0" prefWidth="1117.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </Pane>
+            <Pane fx:id="main_background1" layoutX="10.0" layoutY="712.0" prefHeight="678.0" prefWidth="1168.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

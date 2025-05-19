@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="500.0" style="-fx-background-color: white; -fx-border-color: #1f75ff; -fx-border-width: 1px;" stylesheets="@style/traiter-une-demande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.TraiterDemandeController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f75ff" height="247.0" layoutX="-1.0" layoutY="-148.0" stroke="#1f75ff" strokeType="INSIDE" style="-fx-rotate: 23.7;" width="599.0" />
+        <CubicCurve fx:id="324shape" controlX1="328.3426818847656" controlX2="392.3426818847656" controlY1="-9.810516357421875" controlY2="188.0" endX="662.0" endY="143.78948974609375" fill="#1f75ff" layoutX="-162.0" layoutY="53.0" startX="136.61849975585938" startY="-89.37428283691406" stroke="#1f75ff" />
+        <CubicCurve fx:id="4234shape" controlX1="318.1999816894531" controlX2="407.63238525390625" controlY1="-22.399993896484375" controlY2="210.63446044921875" endX="299.0000305175781" endY="123.39999389648438" fill="#1f75ff" layoutX="-303.0" layoutY="393.0" startX="292.0000305175781" startY="-235.20001220703125" stroke="#1f75ff" />
+        <Text fill="WHITE" layoutX="149.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traiter Une Demande" textAlignment="CENTER" wrappingWidth="381.7161865234375">
+            <font>
+                <Font name="Arial Bold" size="47.0" />
+            </font>
+        </Text>
+        <Text fill="#4b4b4b" layoutX="35.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule :">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Text>
+        <Text fill="#4b4b4b" layoutX="38.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Text>
+        <Text fill="#4b4b4b" layoutX="282.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Demande n° :">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Text>
+        <Text fill="#4b4b4b" layoutX="38.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de naissance :">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Text>
+        <Text fill="#4b4b4b" layoutX="290.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Groupe id :">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Text>
+        <Text fill="#4b4b4b" layoutX="36.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Text>
+        <TextField fx:id="traiter_idGroupe" editable="false" layoutX="323.0" layoutY="341.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
+        <TextField fx:id="traiter_nom" editable="false" layoutX="62.0" layoutY="201.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
+        <TextField fx:id="traiter_numero_demande" editable="false" layoutX="323.0" layoutY="271.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
+        <TextField fx:id="traiter_matricule_etudiant" editable="false" layoutX="62.0" layoutY="144.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
+        <TextField fx:id="traiter_prenom" editable="false" layoutX="62.0" layoutY="271.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
+        <TextField fx:id="traiter_date_de_nessance" editable="false" layoutX="62.0" layoutY="341.0" prefHeight="25.0" prefWidth="141.0" style="-fx-border-color: gray;" />
+        <Button fx:id="button_accepter" layoutX="299.0" layoutY="462.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" text="Accepter" onAction="#handleAccepter" />
+        <Button fx:id="button_resuser" layoutX="84.0" layoutY="462.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="131.0" text="Refuser" onAction="#handleRefuser"  />
+        <Button fx:id="fermer_button" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font></Button>
+        <Circle fx:id="234shape" fill="#1f75ff" layoutX="255.0" layoutY="574.0" radius="31.0" stroke="#1f75ff" strokeType="INSIDE" />
+        <Circle fx:id="2344shape" fill="#1f75ff" layoutX="279.0" layoutY="529.0" radius="12.0" stroke="#1f75ff" strokeType="INSIDE" />
+      <Button fx:id="button_justification" layoutX="176.0" layoutY="398.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="158.0" text="Voir la justification" />
+    </children>
+</Pane>

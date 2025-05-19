@@ -1,37 +1,28 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
-
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Etudiant {
-
+public class Etudiant implements Serializable {
   private long idEtu;
   private String nom;
   private String prenom;
-  private java.sql.Date dateNaiss;
-  private long idGroupe;
-  private Long idConge;
-  private Long idDemReins;
+  private Date dateNaiss;
+  private String idGroupe;
 
-  public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, long idGroupe, long idConge, long idDemReins) {
+  public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, String idGroupe) {
     this.idEtu = idEtu;
     this.nom = nom;
     this.prenom = prenom;
     this.dateNaiss = dateNaiss;
     this.idGroupe = idGroupe;
-    this.idConge = idConge;
-    this.idDemReins = idDemReins;
   }
 
-  public Etudiant(String nom, String prenom, Date dateNaiss, long idGroupe) {
-    this.nom = nom;
-    this.prenom = prenom;
-    this.dateNaiss = dateNaiss;
-    this.idGroupe = idGroupe;
-    this.idConge = null;
-    this.idDemReins = null;
+  public Etudiant(String nom, String prenom, Date dateNaiss, String idGroupe) {
+    this(0, nom, prenom, dateNaiss, idGroupe);
   }
 
+  // Getters and setters
   public long getIdEtu() {
     return idEtu;
   }
@@ -39,7 +30,6 @@ public class Etudiant {
   public void setIdEtu(long idEtu) {
     this.idEtu = idEtu;
   }
-
 
   public String getNom() {
     return nom;
@@ -49,7 +39,6 @@ public class Etudiant {
     this.nom = nom;
   }
 
-
   public String getPrenom() {
     return prenom;
   }
@@ -58,40 +47,19 @@ public class Etudiant {
     this.prenom = prenom;
   }
 
-
-  public java.sql.Date getDateNaiss() {
+  public Date getDateNaiss() {
     return dateNaiss;
   }
 
-  public void setDateNaiss(java.sql.Date dateNaiss) {
+  public void setDateNaiss(Date dateNaiss) {
     this.dateNaiss = dateNaiss;
   }
 
-
-  public long getIdGroupe() {
+  public String getIdGroupe() {
     return idGroupe;
   }
 
-  public void setIdGroupe(long idGroupe) {
+  public void setIdGroupe(String idGroupe) {
     this.idGroupe = idGroupe;
   }
-
-
-  public long getIdConge() {
-    return idConge;
-  }
-
-  public void setIdConge(long idConge) {
-    this.idConge = idConge;
-  }
-
-
-  public long getIdDemReins() {
-    return idDemReins;
-  }
-
-  public void setIdDemReins(long idDemReins) {
-    this.idDemReins = idDemReins;
-  }
-
 }

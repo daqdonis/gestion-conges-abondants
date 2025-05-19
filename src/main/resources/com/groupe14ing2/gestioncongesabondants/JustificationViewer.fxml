@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.JustificationViewerController"
+      spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+
+    <Label fx:id="fileNameLabel" style="-fx-font-weight: bold;"/>
+    <ImageView fx:id="imageView" fitHeight="500" fitWidth="700" preserveRatio="true"/>
+
+    <Button text="Close" onAction="#handleClose" style="-fx-background-color: #ff1f1f; -fx-text-fill: white;"/>
+</VBox>

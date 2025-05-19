@@ -1,75 +1,96 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 
-public class Conge {
+public class Conge implements Serializable {
 
-  private long idDemande;
-  private java.sql.Date dateDemande;
-  private long duree;
+  private static final long serialVersionUID = 1L;
+
+  private String idDemande;
+  private long idEtu;
+  private Date dateDemande;
+  private int duree;
   private EtatTraitement etat;
-  private InputStream justificatif;
+  private transient File justificatif;
+  private Etudiant etudiant;
+  private byte[] justificatifData;
 
-  public Conge(long idDemande, Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
+
+  public Conge(String idDemande, Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
-    this.justificatif = justificatif;
+    createJustificatifFile(justificatif);
   }
-
-  public Conge(Date dateDemande, long duree, EtatTraitement etat, FileInputStream justificatif) {
+  public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
-    this.justificatif = justificatif;
+    createJustificatifFile(justificatif);
   }
 
-  public long getIdDemande() {
+  public String getIdDemande() {
     return idDemande;
   }
 
-  public void setIdDemande(long idDemande) {
-    this.idDemande = idDemande;
+  public long getIdEtu() {
+    return idEtu;
   }
 
-
-  public java.sql.Date getDateDemande() {
+  public Date getDateDemande() {
     return dateDemande;
   }
 
-  public void setDateDemande(java.sql.Date dateDemande) {
-    this.dateDemande = dateDemande;
-  }
-
-
-  public long getDuree() {
+  public int getDuree() {
     return duree;
   }
 
-  public void setDuree(long duree) {
-    this.duree = duree;
-  }
-
-
   public EtatTraitement getEtat() {
     return etat;
+  }
+
+  public File getJustificatif() {
+    return justificatif;
+  }
+
+  public Etudiant getEtudiant() {
+    return etudiant;
+  }
+
+  // Setters
+  public void setIdDemande(String idDemande) {
+    this.idDemande = idDemande;
+  }
+
+  public void setDateDemande(Date dateDemande) {
+    this.dateDemande = dateDemande;
+  }
+
+  public void setDuree(int duree) {
+    this.duree = duree;
   }
 
   public void setEtat(EtatTraitement etat) {
     this.etat = etat;
   }
 
-
-  public InputStream getJustificatif() {
-    return justificatif;
+  public void setEtudiant(Etudiant etudiant) {
+    this.etudiant = etudiant;
   }
 
-  public void setJustificatif(FileInputStream justificatif) {
-    this.justificatif = justificatif;
+  private void createJustificatifFile(InputStream justificatif) {
+    try {
+      this.justificatif = File.createTempFile("conge", ".pdf");
+      Files.copy(justificatif, this.justificatif.toPath(), StandardCopyOption.REPLACE_EXISTING);
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
   }
-
 }
+

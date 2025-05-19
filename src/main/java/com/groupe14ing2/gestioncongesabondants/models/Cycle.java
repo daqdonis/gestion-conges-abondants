@@ -1,47 +1,41 @@
 package com.groupe14ing2.gestioncongesabondants.models;
 
+import java.io.Serializable;
 
-public class Cycle {
-
-  private long idCycle;
+public class Cycle implements Serializable {
+  private String idCycle;
   private String designCycle;
-  private long idFiliere;
+  private String idFiliere;
 
-  public Cycle(long idCycle, String designCycle, long idFiliere) {
+  public Cycle(String idCycle, String designCycle, String idFiliere) {
     this.idCycle = idCycle;
     this.designCycle = designCycle;
     this.idFiliere = idFiliere;
   }
 
-  public Cycle(String designCycle, long idFiliere) {
-    this.designCycle = designCycle;
-    this.idFiliere = idFiliere;
-  }
-
-  public long getIdCycle() {
+  // Getters and setters
+  public String getIdCycle() {
     return idCycle;
   }
 
-  public void setIdCycle(long idCycle) {
-    this.idCycle = idCycle;
-  }
-
-
   public String getDesignCycle() {
     return designCycle;
+  }
+
+  public String getIdFiliere() {
+    return idFiliere;
+  }
+
+  // Setters
+  public void setIdCycle(String idCycle) {
+    this.idCycle = idCycle;
   }
 
   public void setDesignCycle(String designCycle) {
     this.designCycle = designCycle;
   }
 
-
-  public long getIdFiliere() {
-    return idFiliere;
-  }
-
-  public void setIdFiliere(long idFiliere) {
+  public void setIdFiliere(String idFiliere) {
     this.idFiliere = idFiliere;
   }
-
 }

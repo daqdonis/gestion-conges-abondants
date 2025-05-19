@@ -15,9 +15,9 @@
    <left>
       <AnchorPane fx:id="infoPanel" prefHeight="500.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="26.0" layoutY="226.0" prefHeight="81.0" prefWidth="299.0" text="Service Scolaire" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+            <Label alignment="CENTER" layoutX="29.0" layoutY="207.0" prefHeight="147.0" prefWidth="303.0" text="Service Scolaire" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="Bodoni MT Condensed" size="40.0" />
+                  <Font name="Arial Bold" size="39.0" />
                </font>
             </Label>
             <Hyperlink alignment="CENTER" layoutX="111.0" layoutY="443.0" prefHeight="23.0" prefWidth="139.0" text="USTO MB" textFill="#f5f5f5">
@@ -25,7 +25,7 @@
                   <Font size="19.0" />
                </font>
             </Hyperlink>
-            <ImageView fx:id="ustoLogo" fitHeight="191.0" fitWidth="200.0" layoutX="75.0" layoutY="22.0">
+            <ImageView fx:id="ustoLogo" fitHeight="191.0" fitWidth="200.0" layoutX="75.0" layoutY="38.0">
                <image>
                   <Image url="@img/USTO-MB__logo.png" />
                </image>
@@ -34,24 +34,24 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="391.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="loginPanel" prefHeight="467.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="userIdTextField" layoutX="125.0" layoutY="214.0" promptText="User ID" />
             <PasswordField fx:id="passwordField" layoutX="125.0" layoutY="264.0" promptText="password" />
-            <Button fx:id="loginButton" layoutX="133.0" layoutY="333.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="67.0" text="Log In" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="152.0" layoutY="337.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="67.0" text="Log In" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua" size="12.0" />
                </font>
             </Button>
-            <Hyperlink layoutX="103.0" layoutY="433.0" prefHeight="23.0" prefWidth="145.0" text="Forgot Your Pass Word ?" />
+            <Hyperlink layoutX="113.0" layoutY="434.0" prefHeight="23.0" prefWidth="145.0" text="Forgot Your Pass Word ?" />
             <ImageView fitHeight="105.0" fitWidth="131.0" layoutX="133.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/usersIcon.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="107.0" layoutY="152.0" prefHeight="17.0" prefWidth="119.0" text="User Log In" textAlignment="RIGHT" textFill="#0598ff">
+            <Label alignment="CENTER" layoutX="126.0" layoutY="148.0" prefHeight="17.0" prefWidth="119.0" text="User log in" textAlignment="RIGHT" textFill="#1f75ff">
                <font>
-                  <Font name="Book Antiqua" size="22.0" />
+                  <Font name="Arial" size="22.0" />
                </font>
             </Label>
             <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="73.0" layoutY="213.0">
@@ -64,9 +64,9 @@
                   <Image url="@img/cle.png" />
                </image>
             </ImageView>
-            <Button fx:id="exitButton" layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="X" textFill="#0598ff" wrapText="true">
+            <Button fx:id="exitButton" layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="🗙" textFill="#0598ff" wrapText="true">
                <font>
-                  <Font name="Arial" size="15.0" />
+                  <Font name="Arial" size="14.0" />
                </font></Button>
             <Button fx:id="minimizeButton" layoutX="285.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="26.0" prefWidth="28.0" text="➖" textFill="#0598ff" wrapText="true">
                <font>
