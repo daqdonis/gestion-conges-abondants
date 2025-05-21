@@ -1,0 +1,22 @@
+#mainPanel{
+    -fx-background-radius: 20px;
+}
+
+#loginButton{
+     -fx-background-color: #1f75ff;
+     -fx-background-radius: 20px;
+}
+
+#loginPanel {
+    -fx-background-color: WHITE;
+    -fx-background-radius: 20px;
+}
+
+#exitButton {
+    -fx-background-color: WHITE ;
+}
+
+#exitButton:hover{
+    -fx-background-color : RED ;
+    -fx-text-fill : WHITE ;
+}

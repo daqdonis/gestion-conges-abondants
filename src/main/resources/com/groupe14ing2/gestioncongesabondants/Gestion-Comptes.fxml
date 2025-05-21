@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<?import javafx.geometry.*?>
-
-<?import javafx.scene.control.*?>
-
-<?import javafx.scene.image.*?>
-
-<?import javafx.scene.layout.*?>
-
-<?import javafx.scene.text.*?>
-
-
-
-
-<Pane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1315.0" stylesheets="@style/Gestion-Des-Comptes.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.GestionComptesController">
+<Pane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1315.0" stylesheets="@style/Gestion-Des-Comptes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.GestionComptesController">
 
    <children>
 
-      <Text layoutX="20.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Comptes">
+      <Text layoutX="29.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion Des Comptes" textAlignment="CENTER" wrappingWidth="454.05859375">
 
          <font>
 
-            <Font size="20.0" />
+            <Font size="30.0" />
 
          </font>
 
       </Text>
 
 
-      <Button fx:id="add_Acc_button" layoutX="1070.0" layoutY="105.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="26.0" prefWidth="160.0" text="+ Ajouter un compte" />
+      <Button fx:id="add_Acc_button" layoutX="248.0" layoutY="130.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="26.0" prefWidth="160.0" text="+ Ajouter un compte">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
 
-      <TextField fx:id="filtrer_textField" layoutX="1080.0" layoutY="155.0" promptText="filtrer" />
+      <TextField fx:id="filtrer_textField" layoutX="1021.0" layoutY="130.0" prefHeight="38.0" prefWidth="209.0" promptText="filtrer" />
 
 
-      <Button fx:id="add_students_button" layoutX="20.0" layoutY="155.0" mnemonicParsing="false" onAction="#selectFile" prefHeight="26.0" prefWidth="176.0" text="Ajouter des étudiants" />
+      <Button fx:id="add_students_button" layoutX="20.0" layoutY="130.0" mnemonicParsing="false" onAction="#selectFile" prefHeight="26.0" prefWidth="176.0" text="Ajouter des étudiants">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font></Button>
 
 
 
-      <Pane fx:id="table_pan" layoutY="182.0" prefHeight="869.0" prefWidth="1315.0">
+      <Pane fx:id="table_pan" layoutY="206.0" prefHeight="845.0" prefWidth="1315.0">
 
          <children>
 
@@ -139,7 +143,7 @@
 
                      <children>
 
-                        <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1242.0" style="-fx-background-color: red;">
+                        <HBox alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1300.0" style="-fx-background-color: red;">
 
                            <children>
 
@@ -195,7 +199,7 @@
 
                               </Button>
 
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="85.3333740234375" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="46.3333740234375" />
 
                               <Button fx:id="traiter_jst_button" mnemonicParsing="false" prefHeight="34.0" prefWidth="114.0" text="Supprimer">
 
@@ -205,6 +209,12 @@
 
                                  </font>
 
+                              </Button>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="23.3333740234375" />
+                              <Button fx:id="view_actions" mnemonicParsing="false" prefHeight="43.0" prefWidth="181.0" text="voir les actions">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
                               </Button>
 
                            </children>
@@ -541,7 +551,20 @@
 
       </Pane>
 
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="926.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1230.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/user.png" />
+         </image></ImageView>
+
+      <ImageView fitHeight="38.0" fitWidth="37.0" layoutX="1192.0" layoutY="130.0">
+
+         <image>
+
+            <Image url="@img/loupe.png" />
+
+         </image>
+
+      </ImageView>
 
       <Label fx:id="user_Name_Lable" layoutX="1160.0" layoutY="20.0" prefHeight="17.0" prefWidth="100.0" text="Admin">
 
@@ -552,16 +575,6 @@
          </font>
 
       </Label>
-
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="1040.0" layoutY="153.0">
-
-         <image>
-
-            <Image url="@img/loupe.png" />
-
-         </image>
-
-      </ImageView>
 
    </children>
 

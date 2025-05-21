@@ -1,0 +1,23 @@
+#add_students_button {
+     -fx-background-color: dedede;
+     -fx-background-radius: 20px;
+}
+
+#add_Acc_button {
+     -fx-background-color: dedede;
+     -fx-background-radius: 20px;
+}
+
+#filtrer_textField{
+    -fx-background-radius: 20px;
+}
+
+#add_students_button:hover{
+     -fx-background-color: #21ff3b;
+     -fx-text-fill: WHITE;
+}
+
+#add_Acc_button:hover {
+     -fx-background-color: YELLOW;
+     -fx-text-fill: WHITE;
+}
