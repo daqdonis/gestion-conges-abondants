@@ -37,15 +37,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="profile_button" layoutX="3.0" layoutY="689.0" minWidth="53.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="53.0">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/utilisateur.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
             <Button fx:id="gestino_des_cong_button" layoutY="367.0" minWidth="53.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -60,6 +51,15 @@
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/chef-de-projet.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="gestino_des_cong_button" layoutY="700.0" minWidth="53.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0">
+               <graphic>
+                  <ImageView fx:id="gestion_des_abondant_button" fitHeight="50.0" fitWidth="50.0" onDragDetected="#exit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Exit.jpg" />
                      </image>
                   </ImageView>
                </graphic>
