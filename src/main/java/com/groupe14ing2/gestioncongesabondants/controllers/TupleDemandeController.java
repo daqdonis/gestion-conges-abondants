@@ -1,6 +1,5 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-
 import java.io.IOException;
 
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
@@ -39,6 +38,10 @@ public class TupleDemandeController {
 
     @FXML
     private Button traiter_jst_button;
+
+    @FXML
+    private Button reinscription_button;
+
     private MenuViewController menuController;
 
     public void setData(Conge conge) {
@@ -53,48 +56,66 @@ public class TupleDemandeController {
         }
         statutText.setText(conge.getEtat().toString());
 
+        // Voir Justificatif Button
         voir_jst_button.setOnAction(e -> {
-                //File file = File.createTempFile("conge", ".pdf");
-
-                //Files.copy(conge.getJustificatif(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                System.out.println(conge.getJustificatif());
-                if( Desktop.isDesktopSupported() )
-                {
-                    new Thread(() -> {
-                        try {
-                            Desktop.getDesktop().open(conge.getJustificatif());
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                    }).start();
-                }
+            System.out.println(conge.getJustificatif());
+            if(Desktop.isDesktopSupported()) {
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().open(conge.getJustificatif());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }).start();
+            }
         });
 
-       traiter_jst_button.setOnAction(e -> {
-    System.out.println("Traiter demande " + conge.getIdDemande());
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml"));
-        Parent root = loader.load();
+        // Traiter Demande Button
+        traiter_jst_button.setOnAction(e -> {
+            System.out.println("Traiter demande " + conge.getIdDemande());
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/traiter-une-demande.fxml"));
+                Parent root = loader.load();
 
-      
-        TraiterDemandeController controller = loader.getController();
-        controller.setMenuController(menuController);
-        controller.setConge(conge);
+                TraiterDemandeController controller = loader.getController();
+                controller.setMenuController(menuController);
+                controller.setConge(conge);
 
-       
-        Stage stage = new Stage();
-        stage.setTitle("Traiter une demande");
-        stage.setScene(new Scene(root));
-        stage.show();
+                Stage stage = new Stage();
+                stage.setTitle("Traiter une demande");
+                stage.setScene(new Scene(root));
+                stage.show();
 
-    } catch (IOException ex) {
-        ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        // Reinscription Button
+        reinscription_button.setOnAction(e -> {
+            System.out.println("Reinscription for demande " + conge.getIdDemande());
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/reinscription.fxml"));
+                Parent root = loader.load();
+
+                reinsctiprionController controller = loader.getController();
+                if (conge.getEtudiant() != null) {
+                    controller.setStudentData(conge.getEtudiant());
+                }
+
+                Stage stage = new Stage();
+                stage.setTitle("Reinscription");
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
-});
 
-    }
     public void setMenuController(MenuViewController controller) {
-        System.out.println("the contoller is: " + menuController);
+        System.out.println("the controller is: " + menuController);
         this.menuController = controller;
     }
 }
