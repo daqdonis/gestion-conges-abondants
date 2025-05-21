@@ -36,7 +36,7 @@ public class MenuGestionAbdandenementController {
     @FXML
     private Button gestion_des_abondant_button;
     @FXML
-    private Button gestion_des_conges_button;  // Fixed from gestino_des_cong_button
+    private Button gestion_des_conges_button;
 
 
 
@@ -88,20 +88,19 @@ public class MenuGestionAbdandenementController {
 
             for (Conge request : requests) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleDemande.fxml"));
-                    HBox tupleView = loader.load(); // charger le FXML
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                            "/com/groupe14ing2/gestioncongesabondants/TupleAbandonment.fxml"));
+                    HBox tupleView = loader.load();
 
-                    TupleDemandeController tupleController = loader.getController();
-                    tupleController.setData(request); // injecter les données
+                    TupleDemandeAbandonmentController tupleController = loader.getController();
+                    tupleController.setData(request);
 
-                    requestsContainer.getChildren().add(tupleView); // ajouter au container
+                    requestsContainer.getChildren().add(tupleView);
                 } catch (IOException e) {
-                    System.err.println("Erreur de chargement du TupleDemande.fxml");
                     e.printStackTrace();
                 }
             }
         } catch (SQLException e) {
-            System.err.println("Erreur base de données");
             e.printStackTrace();
         }
     }
