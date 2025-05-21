@@ -131,7 +131,7 @@
                 </Pane>
                 <Pane fx:id="table_pan" layoutX="35.0" layoutY="240.0" prefHeight="871.0" prefWidth="1195.0">
                     <children>
-                        <HBox alignment="CENTER_LEFT" layoutX="35.0" layoutY="34.0" prefHeight="51.0" prefWidth="1160.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
+                        <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="33.0" prefHeight="51.0" prefWidth="1160.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
                             <children>
                                 <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule" textAlignment="CENTER" wrappingWidth="159.7240982055664">
                                     <font>
@@ -165,7 +165,7 @@
                                 </Text>
                             </children>
                         </HBox>
-                        <ScrollPane fx:id="scrollPane" layoutX="34.0" layoutY="84.0" prefHeight="427.0" prefWidth="1160.0" style="-fx-border-color: white;">
+                        <ScrollPane fx:id="scrollPane" layoutX="18.0" layoutY="84.0" prefHeight="427.0" prefWidth="1160.0" style="-fx-border-color: white;">
                             <content>
                                 <VBox fx:id="requestsContainer">
                                     <children>
@@ -186,7 +186,7 @@
                                           <Font name="Arial" size="21.0" />
                                        </font>
                                     </Text>
-                                    <Text fx:id="statutText" fill="#4b4b4b" layoutX="354.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En attante" textAlignment="CENTER" wrappingWidth="209.05741119384766">
+                                    <Text fx:id="statutText" fill="#4b4b4b" layoutX="354.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Accepter" textAlignment="CENTER" wrappingWidth="209.05741119384766">
                                        <font>
                                           <Font name="Arial" size="21.0" />
                                        </font>
@@ -256,7 +256,7 @@
                                        </HBox.margin>
                                     </Button>
                                     <Text layoutX="838.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " />
-                                    <Button fx:id="reinscription_button1" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
+                                    <Button fx:id="reinscription_button1" disable="true" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>
@@ -306,7 +306,7 @@
                                        </HBox.margin>
                                     </Button>
                                     <Text layoutX="838.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " />
-                                    <Button fx:id="reinscription_button2" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
+                                    <Button fx:id="reinscription_button2" disable="true" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>
@@ -356,7 +356,7 @@
                                        </HBox.margin>
                                     </Button>
                                     <Text layoutX="838.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " />
-                                    <Button fx:id="reinscription_button3" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
+                                    <Button fx:id="reinscription_button3" disable="true" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>

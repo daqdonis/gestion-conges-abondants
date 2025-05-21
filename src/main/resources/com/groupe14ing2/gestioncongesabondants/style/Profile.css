@@ -1,0 +1,14 @@
+#Profile_Logout_button{
+    -fx-background-color: RED;
+    -fx-text-fill: WHITE;
+}
+
+#Profile_GestionDesComptButton {
+    -fx-background-color: GREY;
+    -fx-text-fill: WHITE;
+}
+
+#Profile_Logout_button:hover{
+    -fx-background-color: WHITE;
+    -fx-text-fill: RED;
+}

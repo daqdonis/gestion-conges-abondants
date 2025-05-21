@@ -25,5 +25,8 @@ public class ProfileController {
     @FXML
     private Button Profile_GestionDesComptButton;
 
+    @FXML
+    private Button Profile_Logout_button;
+
 
 }
