@@ -32,11 +32,13 @@ public class MenuGestionAbdandenementController {
     @FXML
     private Button button_traiter_demande;
 
-    @FXML
-    private Button gestino_des_cong_button;
 
     @FXML
     private Button gestion_des_abondant_button;
+    @FXML
+    private Button gestion_des_conges_button;  // Fixed from gestino_des_cong_button
+
+
 
     @FXML
     private Pane left_bar_menu;
