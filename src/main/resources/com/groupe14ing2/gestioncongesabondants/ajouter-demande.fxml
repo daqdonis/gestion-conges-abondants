@@ -25,6 +25,7 @@
             <Font name="Calibri" size="19.0" />
          </font></Label>
         <TextField fx:id="AJT_D_matricule" layoutX="209.0" layoutY="199.0" prefHeight="27.0" prefWidth="142.0" />
+        <Button fx:id="fillButton" layoutX="360.0" layoutY="199.0" mnemonicParsing="false" onAction="#handleFillButton" prefHeight="27.0" prefWidth="60.0" text="Fill" />
         <Label alignment="CENTER" layoutX="14.0" layoutY="250.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />

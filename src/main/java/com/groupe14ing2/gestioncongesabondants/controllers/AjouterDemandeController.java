@@ -119,6 +119,35 @@ public class AjouterDemandeController {
             showAlert("Error", "Error adding demand: " + e.getMessage());
         }
     }
+    @FXML
+    private void handleFillButton() {
+        try {
+            if (AJT_D_matricule.getText().isEmpty()) {
+                showAlert("Error", "Please enter a matricule first.");
+                return;
+            }
+
+            long matricule = Long.parseLong(AJT_D_matricule.getText());
+            DatabaseController dbController = new DatabaseController();
+            Etudiant etudiant = dbController.getEtudiant(matricule);
+
+            if (etudiant == null) {
+                showAlert("Error", "No student found with matricule: " + matricule);
+                return;
+            }
+
+            // Fill the fields with student information
+            AJT_D_Nom.setText(etudiant.getNom());
+            AJT_D_PreNom.setText(etudiant.getPrenom());
+            AJT_D_GroupID.setText(String.valueOf(etudiant.getIdGroupe()));
+            AJT_D_Date.setText(etudiant.getDateNaiss().toString());
+
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Invalid matricule format. Please enter a valid number.");
+        } catch (Exception e) {
+            showAlert("Error", "Error retrieving student information: " + e.getMessage());
+        }
+    }
 
     // Méthode pour afficher les alertes
     private void showAlert(String title, String message) {
