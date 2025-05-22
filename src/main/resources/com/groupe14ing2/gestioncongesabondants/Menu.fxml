@@ -133,34 +133,34 @@
                     <children>
                         <HBox alignment="CENTER_LEFT" layoutX="18.0" layoutY="33.0" prefHeight="51.0" prefWidth="1160.0" style="-fx-background-color: #dedede; -fx-background-radius: 15px 15px 0px 0px;">
                             <children>
-                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule" textAlignment="CENTER" wrappingWidth="159.7240982055664">
+                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule" textAlignment="CENTER" wrappingWidth="178.7240982055664">
                                     <font>
-                                        <Font name="Arial" size="21.0" />
+                                        <Font name="Arial" size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="163.6640625">
+                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="131.6640625">
                                     <font>
-                                        <Font name="Arial" size="21.0" />
+                                        <Font name="Arial" size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom" textAlignment="CENTER" wrappingWidth="183.87155151367188">
+                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom" textAlignment="CENTER" wrappingWidth="207.87155151367188">
                                     <font>
-                                        <Font name="Arial" size="21.0" />
+                                        <Font name="Arial" size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat de traitement" textAlignment="CENTER" wrappingWidth="208.9390869140625">
+                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Justiificatife" textAlignment="CENTER" wrappingWidth="167.61849212646484">
                                     <font>
-                                        <Font name="Arial" size="21.0" />
+                                        <Font name="Arial" size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Justiificatife" textAlignment="CENTER" wrappingWidth="229.61849212646484">
+                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat de traitement" textAlignment="CENTER" wrappingWidth="219.9390869140625">
                                     <font>
-                                        <Font name="Arial" size="21.0" />
+                                        <Font name="Arial" size="20.0" />
                                     </font>
                                 </Text>
-                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Action" textAlignment="CENTER" wrappingWidth="153.0221405029297">
+                                <Text fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Action" textAlignment="CENTER" wrappingWidth="224.0221405029297">
                                     <font>
-                                        <Font name="Arial" size="21.0" />
+                                        <Font name="Arial" size="20.0" />
                                     </font>
                                 </Text>
                             </children>

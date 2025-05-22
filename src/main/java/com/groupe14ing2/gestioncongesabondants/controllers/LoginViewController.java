@@ -46,7 +46,7 @@ public class LoginViewController {
     private TextField userIdTextField;
 
     @FXML
-    private Button loginButton;
+    private Button AjouterCompte_button;
 
     @FXML
     private Button minimizeButton;

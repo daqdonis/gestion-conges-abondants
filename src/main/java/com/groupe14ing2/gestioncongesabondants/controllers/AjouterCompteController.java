@@ -7,8 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class AjouterCompteController {
@@ -17,10 +16,7 @@ public class AjouterCompteController {
     private Parent root;
 
     @FXML
-    private AnchorPane loginPanel;
-
-    @FXML
-    private BorderPane mainPanel;
+    private Pane mainPanel;
 
     @FXML
     private PasswordField passwordField;
@@ -29,7 +25,7 @@ public class AjouterCompteController {
     private TextField userIdTextField;
 
     @FXML
-    private Button loginButton;
+    private Button AjouterCompte_button;
 
     @FXML
     private TextField nomTextField;

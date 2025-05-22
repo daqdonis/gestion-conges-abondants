@@ -7,55 +7,59 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style/Ajouter-comptes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.AjouterCompteController">
-   <center>
-      <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+<Pane fx:id="mainPanel" prefHeight="464.0" prefWidth="482.0" stylesheets="@style/Ajouter-comptes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.AjouterCompteController">
+   <children>
+      <Pane prefHeight="464.0" prefWidth="482.0" style="-fx-background-color: dedede;">
          <children>
-            <TextField fx:id="userIdTextField" layoutX="189.0" layoutY="214.0" promptText="E-mail" />
-            <TextField fx:id="nomTextField" layoutX="454.0" layoutY="214.0" promptText="Nom" />
-            <TextField fx:id="prenomTextField" layoutX="454.0" layoutY="264.0" promptText="Prénom" />
-            <PasswordField fx:id="passwordField" layoutX="189.0" layoutY="264.0" promptText="Mot de passe" />
-            <Button fx:id="loginButton" layoutX="289.0" layoutY="398.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="122.0" text="Ajouter" textFill="WHITE">
+            <Pane fx:id="white_background" layoutX="27.0" layoutY="-59.0" prefHeight="436.0" prefWidth="421.0">
+               <children>
+                  <ImageView fitHeight="105.0" fitWidth="131.0" layoutX="158.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/usersIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="-17.0" layoutY="199.0" prefHeight="32.0" prefWidth="456.0" text="Créer un nouveau compte" textAlignment="RIGHT" textFill="#1f75ff">
+                     <font>
+                        <Font name="Arial" size="22.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="128.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :" wrappingWidth="43.279296875">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Text>
+                  <ChoiceBox fx:id="roleChoiceBox" layoutX="183.0" layoutY="366.0" prefHeight="25.0" prefWidth="136.0" />
+               </children>
+            </Pane>
+            <TextField fx:id="userIdTextField" layoutX="84.0" layoutY="206.0" promptText="E-mail" />
+            <TextField fx:id="prenomTextField" layoutX="280.0" layoutY="206.0" promptText="Prénom" />
+            <PasswordField fx:id="passwordField" layoutX="84.0" layoutY="245.0" promptText="Mot de passe" />
+            <Button fx:id="AjouterCompte_button" layoutX="184.0" layoutY="392.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="115.0" text="Ajouter" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="17.0" />
                </font>
             </Button>
-            <ImageView fitHeight="105.0" fitWidth="131.0" layoutX="300.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/usersIcon.png" />
-               </image>
-            </ImageView>
-            <Label alignment="CENTER" layoutX="126.0" layoutY="148.0" prefHeight="32.0" prefWidth="456.0" text="Créer un nouveau compte" textAlignment="RIGHT" textFill="#1f75ff">
-               <font>
-                  <Font name="Arial" size="22.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="145.0" layoutY="212.0">
+            <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="204.0">
                <image>
                   <Image url="@img/user.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="cleIcon" fitHeight="30.0" fitWidth="30.0" layoutX="145.0" layoutY="262.0">
+            <ImageView fx:id="cleIcon" fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="243.0">
                <image>
                   <Image url="@img/cle.png" />
                </image>
             </ImageView>
-            <Button fx:id="exitButton" layoutX="666.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="🗙" textFill="#0598ff" wrapText="true">
+            <TextField fx:id="nomTextField" layoutX="280.0" layoutY="246.0" promptText="Nom" />
+            <Button fx:id="exitButton" layoutX="452.0" mnemonicParsing="false" text="🗙" textFill="#f52d2d">
                <font>
-                  <Font name="Arial" size="14.0" />
-               </font></Button>
-            <ChoiceBox fx:id="roleChoiceBox" layoutX="354.0" layoutY="316.0" prefWidth="150.0" />
-            <Text layoutX="212.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :" wrappingWidth="61.279296875">
-               <font>
-                  <Font size="15.0" />
+                  <Font size="13.0" />
                </font>
-            </Text>
+            </Button>
          </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+      </Pane>
+   </children>
+</Pane>
