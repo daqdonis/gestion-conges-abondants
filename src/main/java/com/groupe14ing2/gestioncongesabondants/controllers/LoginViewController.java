@@ -25,6 +25,7 @@ public class LoginViewController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private Admin admin; // Store the logged-in admin
 
     @FXML
     private AnchorPane loginPanel;
@@ -56,9 +57,7 @@ public class LoginViewController {
     }
 
     @FXML
-
-   private void login(javafx.event.ActionEvent actionEvent) throws IOException {
-
+    private void login(javafx.event.ActionEvent actionEvent) throws IOException {
         String username = userIdTextField.getText();
         String password = passwordField.getText();
 
@@ -66,7 +65,7 @@ public class LoginViewController {
 
         try {
             UserLoginController userLoginController = new UserLoginController();
-            Admin admin = userLoginController.login(username, password);
+            admin = userLoginController.login(username, password); // Store the admin object
 
             if (admin != null) {
                 System.out.println("Login successful for: " + admin.getNom());
@@ -91,8 +90,7 @@ public class LoginViewController {
             e.printStackTrace();
             showAlert("Error", "Login failed: " + e.getMessage());
         }
-
-    } 
+    }
    
     
 
@@ -107,7 +105,13 @@ public class LoginViewController {
 
     @FXML
     private void switchToMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu.fxml"));
+        root = loader.load();
+        
+        // Get the controller and set the admin
+        MenuViewController controller = loader.getController();
+        controller.setAdmin(admin);
+
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
@@ -121,7 +125,13 @@ public class LoginViewController {
 
     @FXML
     private void switchToAbondantMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
+        root = loader.load();
+        
+        // Get the controller and set the admin
+        MenuGestionAbdandenementController controller = loader.getController();
+        // TODO: Add setAdmin method to MenuGestionAbdandenementController if needed
+
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
@@ -135,7 +145,13 @@ public class LoginViewController {
 
     @FXML
     private void switchToComptesMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
+        root = loader.load();
+        
+        // Get the controller and set the admin
+        GestionComptesController controller = loader.getController();
+        // TODO: Add setAdmin method to GestionComptesController if needed
+
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
