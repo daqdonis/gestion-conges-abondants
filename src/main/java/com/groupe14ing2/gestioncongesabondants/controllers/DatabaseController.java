@@ -6,13 +6,11 @@ import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.groupe14ing2.gestioncongesabondants.utils.PasswordUtils;
-import org.mindrot.jbcrypt.BCrypt;
 
 import com.groupe14ing2.gestioncongesabondants.models.Abondant;
 import com.groupe14ing2.gestioncongesabondants.models.ActionAdmin;
@@ -739,5 +737,22 @@ public class DatabaseController extends DatabaseLink {
             }
             return null;
         }
+    }
+
+    public List<Abondant> getAllAbondants() throws SQLException {
+        String sql = "SELECT * FROM Abondant";
+        List<Abondant> abondants = new ArrayList<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            abondants.add(new Abondant(
+                    resultSet.getLong("id_etu"),
+                    resultSet.getString("id_admin"),
+                    resultSet.getDate("date_dec")
+            ));
+        }
+        return abondants;
     }
 }

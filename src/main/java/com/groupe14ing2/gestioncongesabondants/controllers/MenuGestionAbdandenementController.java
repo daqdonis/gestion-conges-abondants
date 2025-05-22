@@ -1,6 +1,6 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
-import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import com.groupe14ing2.gestioncongesabondants.models.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,13 +13,13 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
+import javafx.stage.*;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -60,6 +60,10 @@ public class MenuGestionAbdandenementController {
     @FXML
     private Pane table_pan;
 
+    private File selectedFile;
+
+    private Admin admin;
+
     @FXML
     private TextField text_field_rechercher_demande;
     @FXML
@@ -82,11 +86,11 @@ public class MenuGestionAbdandenementController {
         System.out.println("Refreshing table...");
         try {
             DatabaseController db = new DatabaseController();
-            List<Conge> requests = db.getAllCongesWithStudents();
+            List<Abondant> requests = db.getAllAbondants();
 
             requestsContainer.getChildren().clear();
 
-            for (Conge request : requests) {
+            for (Abondant request : requests) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(
                             "/com/groupe14ing2/gestioncongesabondants/TupleAbandonment.fxml"));
@@ -104,34 +108,6 @@ public class MenuGestionAbdandenementController {
             e.printStackTrace();
         }
     }
-
-    private void loadLeaveRequests() {
-        try {
-            DatabaseController db = new DatabaseController();
-            List<Conge> requests = db.getAllCongesWithStudents();
-
-            requestsContainer.getChildren().clear();
-
-            for (Conge request : requests) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("com/groupe14ing2/gestioncongesabondants/TupleDemande.fxml"));
-                    HBox tupleView = loader.load(); // charge la vue FXML
-
-                    TupleDemandeController tupleController = loader.getController();
-                    tupleController.setData(request); // injecte les données dans la ligne
-
-                    requestsContainer.getChildren().add(tupleView); // ajoute au container
-                } catch (IOException e) {
-                    System.err.println("Erreur de chargement du TupleDemande.fxml pour la demande " + request.getIdDemande());
-                    e.printStackTrace();
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur base de données lors du chargement des demandes");
-            e.printStackTrace();
-        }
-    }
-
 
 
     private void viewJustification(Conge request) {
@@ -191,6 +167,43 @@ public class MenuGestionAbdandenementController {
             System.out.println("Erreur lors du chargement de la fenêtre : " + cheminFXML);
             ex.printStackTrace();
         }
+    }
+
+    @FXML
+    private void selectFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Liste des étudiants");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        selectedFile = fileChooser.showOpenDialog(main_background.getScene().getWindow());
+
+        if (selectedFile != null) {
+            System.out.println("File selected : " + selectedFile.getAbsolutePath());
+            try {
+                DatabaseController db = new DatabaseController();
+                GetAbandonts.getIdsFromFile(selectedFile).forEach(id -> {
+                    System.out.println("student id : " + id);
+                    try {
+                        db.addAbondant(new Abondant(
+                                id,
+                                admin.getIdAdmin(),
+                                Date.valueOf(LocalDate.now())
+                        ));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                });
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            refreshTable();
+        }
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     @FXML

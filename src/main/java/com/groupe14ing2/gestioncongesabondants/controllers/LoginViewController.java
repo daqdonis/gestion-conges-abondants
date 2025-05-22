@@ -125,7 +125,9 @@ public class LoginViewController {
 
     @FXML
     private void switchToAbondantMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
+        root = loader.load();
+        ((MenuGestionAbdandenementController) loader.getController()).setAdmin(admin);
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
