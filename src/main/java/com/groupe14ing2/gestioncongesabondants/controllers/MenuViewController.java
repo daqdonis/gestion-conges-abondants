@@ -22,51 +22,35 @@ import javafx.stage.Window;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 public class MenuViewController {
 
+    @FXML private Button button_ajouter_demande;
+    @FXML private Button button_traiter_demande;
+    @FXML private Button gestino_des_cong_button;
+    @FXML private Button gestion_des_abondant_button;
+    @FXML private Pane left_bar_menu;
+    @FXML private Pane main_background;
+    @FXML private Button more_button;
+    @FXML private PieChart myPieChart;
+    @FXML private Button profile_button;
+    @FXML private Pane switch_chap;
+    @FXML private Pane table_pan;
+    @FXML private TextField text_field_rechercher_demande;
+    @FXML private ScrollPane scrollPane;
+    @FXML private VBox requestsContainer;
 
-    @FXML
-    private Button button_ajouter_demande;
+    private List<Conge> allConges; // Store all conges
+    private Admin currentAdmin; // Store the current admin user
 
-    @FXML
-    private Button button_traiter_demande;
+    public void setAdmin(Admin admin) {
+        this.currentAdmin = admin;
+    }
 
-    @FXML
-    private Button gestino_des_cong_button;
-
-    @FXML
-    private Button gestion_des_abondant_button;
-
-    @FXML
-    private Pane left_bar_menu;
-
-    @FXML
-    private Pane main_background;
-    @FXML
-    private Button more_button;
-
-    @FXML
-    private PieChart myPieChart;
-
-    @FXML
-    private Button profile_button;
-
-    @FXML
-    private Pane switch_chap;
-
-    @FXML
-    private Pane table_pan;
-
-    @FXML
-    private TextField text_field_rechercher_demande;
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox requestsContainer;
-
-    private Admin admin;
+    public Admin getAdmin() {
+        return this.currentAdmin;
+    }
 
     @FXML
     public void initialize() {
@@ -76,44 +60,71 @@ public class MenuViewController {
                 new PieChart.Data("ref", 0)
         );
 
+        // Add listener to search field
+        text_field_rechercher_demande.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterDemands(newValue);
+        });
+
         refreshTable();
+    }
+
+    private void filterDemands(String matricule) {
+        if (allConges == null) return;
+
+        requestsContainer.getChildren().clear();
+
+        // Reset pie chart values
+        myPieChart.getData().forEach(data -> data.setPieValue(0));
+
+        List<Conge> filteredConges;
+        if (matricule == null || matricule.trim().isEmpty()) {
+            filteredConges = allConges; // Show all if no search term
+        } else {
+            // Filter conges by matricule
+            filteredConges = allConges.stream()
+                    .filter(conge -> conge.getEtudiant() != null &&
+                            String.valueOf(conge.getEtudiant().getIdEtu()).contains(matricule))
+                    .collect(Collectors.toList());
+        }
+
+        // Display filtered results
+        for (Conge conge : filteredConges) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleDemande.fxml"));
+                HBox tupleView = loader.load();
+
+                TupleDemandeController tupleController = loader.getController();
+                tupleController.setData(conge);
+
+                requestsContainer.getChildren().add(tupleView);
+
+                // Update pie chart
+                switch (conge.getEtat()) {
+                    case REFUSÉ:
+                        myPieChart.getData().get(0).setPieValue(myPieChart.getData().get(0).getPieValue() + 1);
+                        break;
+                    case ACCEPTÉ:
+                        myPieChart.getData().get(2).setPieValue(myPieChart.getData().get(2).getPieValue() + 1);
+                        break;
+                    case ENATTENTE:
+                        myPieChart.getData().get(1).setPieValue(myPieChart.getData().get(1).getPieValue() + 1);
+                        break;
+                }
+            } catch (IOException e) {
+                System.err.println("Error loading TupleDemande.fxml for demand " + conge.getIdDemande());
+                e.printStackTrace();
+            }
+        }
     }
 
     public void refreshTable() {
         System.out.println("Refreshing table...");
         try {
             DatabaseController db = new DatabaseController();
-            List<Conge> requests = db.getAllCongesWithStudents();
-
-            requestsContainer.getChildren().clear();
-
-            for (Conge request : requests) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleDemande.fxml"));
-                    HBox tupleView = loader.load(); // charger le FXML
-
-                    TupleDemandeController tupleController = loader.getController();
-                    tupleController.setData(request); // injecter les données
-
-                    requestsContainer.getChildren().add(tupleView); // ajouter au container
-                    switch (request.getEtat()) {
-                        case REFUSÉ:
-                            myPieChart.getData().get(0).setPieValue(myPieChart.getData().get(0).getPieValue() + 1);
-                            break;
-                        case ACCEPTÉ:
-                            myPieChart.getData().get(2).setPieValue(myPieChart.getData().get(2).getPieValue() + 1);
-                            break;
-                        case ENATTENTE:
-                            myPieChart.getData().get(1).setPieValue(myPieChart.getData().get(1).getPieValue() + 1);
-                            break;
-                    }
-                } catch (IOException e) {
-                    System.err.println("Erreur de chargement du TupleDemande.fxml");
-                    e.printStackTrace();
-                }
-            }
+            allConges = db.getAllCongesWithStudents(); // Store all conges
+            filterDemands(text_field_rechercher_demande.getText()); // Apply current filter
         } catch (SQLException e) {
-            System.err.println("Erreur base de données");
+            System.err.println("Database error");
             e.printStackTrace();
         }
     }
@@ -144,8 +155,6 @@ public class MenuViewController {
             e.printStackTrace();
         }
     }
-
-
 
     private void viewJustification(Conge request) {
         try {
@@ -220,14 +229,6 @@ public class MenuViewController {
             System.out.println("Erreur lors du chargement de la fenêtre : " + cheminFXML);
             ex.printStackTrace();
         }
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public Admin getAdmin() {
-        return admin;
     }
 
     @FXML
