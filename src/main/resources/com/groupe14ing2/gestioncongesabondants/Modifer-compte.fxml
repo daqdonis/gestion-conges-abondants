@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@style/Ajouter-comptes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <AnchorPane fx:id="MDF_C_loginPanel" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="AJT_C_userIdTextField" layoutX="189.0" layoutY="214.0" promptText="E-mail" />
+            <TextField fx:id="MDF_C_nomTextField" layoutX="454.0" layoutY="214.0" promptText="Nom" />
+            <TextField fx:id="MDF_C_prenomTextField" layoutX="454.0" layoutY="264.0" promptText="Prénom" />
+            <PasswordField fx:id="MDF_C_passwordField" layoutX="189.0" layoutY="264.0" promptText="Mot de passe" />
+            <Button fx:id="MDF_C_modifer_button" layoutX="429.0" layoutY="396.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" style="-fx-background-color: lime; -fx-background-radius: 20;" text="Modifer" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="105.0" fitWidth="131.0" layoutX="302.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/usersIcon.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="126.0" layoutY="148.0" prefHeight="32.0" prefWidth="456.0" text="Modifer Compote" textAlignment="RIGHT" textFill="#1f75ff">
+               <font>
+                  <Font name="Arial" size="22.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="145.0" layoutY="212.0">
+               <image>
+                  <Image url="@img/user.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="cleIcon" fitHeight="30.0" fitWidth="30.0" layoutX="145.0" layoutY="262.0">
+               <image>
+                  <Image url="@img/cle.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="exitButton" layoutX="666.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="🗙" textFill="#0598ff" wrapText="true">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+            </Button>
+            <ChoiceBox fx:id="MDF_C_roleChoiceBox" layoutX="354.0" layoutY="316.0" prefWidth="150.0" />
+            <Text layoutX="212.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :" wrappingWidth="61.279296875">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="MDF_C_Annuler_button" layoutX="175.0" layoutY="396.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="122.0" style="-fx-background-color: Red; -fx-background-radius: 20;" text="Annuler" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

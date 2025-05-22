@@ -30,7 +30,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pre Nom :">
+      <Text layoutX="14.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
          <font>
             <Font size="15.0" />
          </font>

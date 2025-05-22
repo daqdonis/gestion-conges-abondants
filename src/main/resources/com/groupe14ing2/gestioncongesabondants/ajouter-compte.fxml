@@ -16,11 +16,11 @@
    <center>
       <AnchorPane fx:id="loginPanel" prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userIdTextField" layoutX="125.0" layoutY="214.0" promptText="E-mail" />
-            <TextField fx:id="nomTextField" layoutX="300.0" layoutY="214.0" promptText="Nom" />
-            <TextField fx:id="prenomTextField" layoutX="480.0" layoutY="214.0" promptText="Prénom" />
+            <TextField fx:id="userIdTextField" layoutX="189.0" layoutY="214.0" promptText="E-mail" />
+            <TextField fx:id="nomTextField" layoutX="454.0" layoutY="214.0" promptText="Nom" />
+            <TextField fx:id="prenomTextField" layoutX="454.0" layoutY="264.0" promptText="Prénom" />
             <PasswordField fx:id="passwordField" layoutX="189.0" layoutY="264.0" promptText="Mot de passe" />
-            <Button fx:id="loginButton" layoutX="288.0" layoutY="337.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="122.0" text="Ajouter" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="289.0" layoutY="398.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="122.0" text="Ajouter" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Font name="Arial" size="22.0" />
                </font>
             </Label>
-            <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="73.0" layoutY="213.0">
+            <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="145.0" layoutY="212.0">
                <image>
                   <Image url="@img/user.png" />
                </image>
@@ -49,8 +49,8 @@
                <font>
                   <Font name="Arial" size="14.0" />
                </font></Button>
-            <ChoiceBox fx:id="roleChoiceBox" layoutX="480.0" layoutY="264.0" prefWidth="150.0" />
-            <Text layoutX="410.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :" wrappingWidth="61.279296875">
+            <ChoiceBox fx:id="roleChoiceBox" layoutX="354.0" layoutY="316.0" prefWidth="150.0" />
+            <Text layoutX="212.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :" wrappingWidth="61.279296875">
                <font>
                   <Font size="15.0" />
                </font>
