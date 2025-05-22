@@ -1,11 +1,15 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+import com.groupe14ing2.gestioncongesabondants.models.Admin;
+import com.groupe14ing2.gestioncongesabondants.models.Abondant;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+// GetAbandonts is in the same package, no need to import
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -13,57 +17,79 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
-
 
 public class MenuGestionAbdandenementController {
 
+    @FXML private Button button_ajouter_demande;
+    @FXML private Button button_traiter_demande;
+    @FXML private Button gestino_des_cong_button;
+    @FXML private Button gestion_des_abondant_button;
+    @FXML private Pane left_bar_menu;
+    @FXML private Pane main_background;
+    @FXML private Button more_button;
+    @FXML private PieChart myPieChart;
+    @FXML private Button profile_button;
+    @FXML private Pane switch_chap;
+    @FXML private Pane table_pan;
+    @FXML private TextField text_field_rechercher_demande;
+    @FXML private ScrollPane scrollPane;
+    @FXML private VBox requestsContainer;
+    @FXML private Parent mainRoot;
+
+    private Admin admin;
+    private File selectedFile;
 
     @FXML
-    private Button button_ajouter_demande;
+    private void selectFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Liste des étudiants");
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
 
-    @FXML
-    private Button button_traiter_demande;
+        selectedFile = fileChooser.showOpenDialog(main_background.getScene().getWindow());
 
-    @FXML
-    private Button gestino_des_cong_button;
+        if (selectedFile != null) {
+            System.out.println("File selected : " + selectedFile.getAbsolutePath());
+            try {
+                DatabaseController db = new DatabaseController();
+                GetAbandonts.getIdsFromFile(selectedFile).forEach(id -> {
+                    System.out.println("student id : " + id);
+                    try {
+                        db.addAbondant(new Abondant(
+                                id,
+                                admin.getIdAdmin(),
+                                Date.valueOf(LocalDate.now())
+                        ));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
-    @FXML
-    private Button gestion_des_abondant_button;
+            refreshTable();
+        }
+    }
 
-    @FXML
-    private Pane left_bar_menu;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
-    @FXML
-    private Pane main_background;
-    @FXML
-    private Button more_button;
-
-    @FXML
-    private PieChart myPieChart;
-
-    @FXML
-    private Button profile_button;
-
-    @FXML
-    private Pane switch_chap;
-
-    @FXML
-    private Pane table_pan;
-
-    @FXML
-    private TextField text_field_rechercher_demande;
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox requestsContainer;
+    public Admin getAdmin() {
+        return this.admin;
+    }
 
     @FXML
     public void initialize() {
@@ -131,8 +157,6 @@ public class MenuGestionAbdandenementController {
         }
     }
 
-
-
     private void viewJustification(Conge request) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(
@@ -150,9 +174,6 @@ public class MenuGestionAbdandenementController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    private Parent mainRoot;
 
     @FXML
     public void traiter_demande() {
@@ -195,5 +216,13 @@ public class MenuGestionAbdandenementController {
     @FXML
     private void exit(){
         System.exit(0);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -130,7 +130,7 @@ public class LoginViewController {
         
         // Get the controller and set the admin
         MenuGestionAbdandenementController controller = loader.getController();
-        // TODO: Add setAdmin method to MenuGestionAbdandenementController if needed
+        controller.setAdmin(admin);
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
