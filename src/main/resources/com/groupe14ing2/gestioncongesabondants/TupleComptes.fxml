@@ -7,51 +7,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="main_hbox" alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1350.0" stylesheets="@style/TupleComptes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.TupleAdminController">
+<HBox fx:id="main_hbox" alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="962.0" stylesheets="@style/TupleComptes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.TupleAdminController">
    <children>
-      <Text fx:id="nomText" fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Benmoussa" textAlignment="CENTER" wrappingWidth="166.39073181152344">
+      <Text fx:id="nomText" fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="Benmoussa" textAlignment="CENTER" wrappingWidth="144.39073181152344">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="prenomText" fill="#4b4b4b" layoutX="10.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abdallah" textAlignment="CENTER" wrappingWidth="151.72412872314453">
+      <Text fx:id="prenomText" fill="#4b4b4b" layoutX="10.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abdallah" textAlignment="CENTER" wrappingWidth="116.72412872314453">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="emailText" fill="#4b4b4b" layoutX="182.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AAA@gmail.com" textAlignment="CENTER" wrappingWidth="185.0574722290039">
+      <Text fx:id="emailText" fill="#4b4b4b" layoutX="182.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AAA@gmail.com" textAlignment="CENTER" wrappingWidth="167.0574722290039">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="30.33343505859375" />
-      <Text fx:id="roleText" fill="#4b4b4b" layoutX="330.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="admin_conge" textAlignment="CENTER" wrappingWidth="185.0574722290039">
+      <Text fx:id="roleText" fill="#4b4b4b" layoutX="330.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="admin_conge" textAlignment="CENTER" wrappingWidth="128.0574722290039">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Text>
       <Text layoutX="516.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="30.33343505859375" />
-      <Button fx:id="modifer_button" mnemonicParsing="false" prefHeight="36.0" prefWidth="124.0" text="Modifer">
+      <Button fx:id="modifer_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="85.0" text="Modifer">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Button>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="39.3333740234375" />
-      <Button fx:id="supp_button" mnemonicParsing="false" prefHeight="43.0" prefWidth="148.0" text="Supprimer">
+      <AnchorPane layoutX="795.0" layoutY="34.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="15.0" />
+      <Button fx:id="supp_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="106.0" text="Supprimer">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="17.0" />
          </font>
          <HBox.margin>
             <Insets />
          </HBox.margin>
       </Button>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="15.0" />
-      <Text layoutX="691.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="21.3333740234375" />
-      <Button fx:id="view_actions" layoutX="578.0" layoutY="23.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="181.0" text="voir les actions">
+      <Button fx:id="view_actions" layoutX="578.0" layoutY="23.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="143.0" text="voir les actions">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Button>
+      <AnchorPane layoutX="694.0" layoutY="34.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="15.0" />
    </children>
    <padding>
       <Insets top="1.0" />

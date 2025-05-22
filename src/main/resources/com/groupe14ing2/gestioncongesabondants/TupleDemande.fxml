@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<HBox fx:id="main_hbox" alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1160.0" stylesheets="@style/TupleDemande.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.TupleDemandeController">
+<HBox fx:id="main_hbox" alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1160.0" stylesheets="@style/TupleDemande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.TupleDemandeController">
    <children>
       <Text fx:id="matriculeText" fill="#4b4b4b" strokeType="OUTSIDE" strokeWidth="0.0" text="53456436" textAlignment="CENTER" wrappingWidth="166.39073181152344">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="19.0" />
          </font>
       </Text>
       <Text fx:id="nomText" fill="#4b4b4b" layoutX="10.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hicham" textAlignment="CENTER" wrappingWidth="151.72412872314453">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="19.0" />
          </font>
       </Text>
       <Text fx:id="prenomText" fill="#4b4b4b" layoutX="182.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Abdelkadous" textAlignment="CENTER" wrappingWidth="185.0574722290039">
          <font>
-            <Font name="Arial" size="21.0" />
+            <Font name="Arial" size="19.0" />
          </font>
       </Text>
-      <Text fx:id="statutText" fill="#4b4b4b" layoutX="354.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En attente" textAlignment="CENTER" wrappingWidth="209.05741119384766">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="       " wrappingWidth="51.009765625" />
+      <Button fx:id="voir_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="94.0" text="Voir">
          <font>
-            <Font name="Arial" size="21.0" />
-         </font>
-      </Text>
-      <Button fx:id="voir_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Voir">
-         <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Button>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="       " />
-      <Button fx:id="traiter_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="113.0" text="Traiter">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="       " wrappingWidth="67.009765625" />
+      <Text fx:id="statutText" fill="#4b4b4b" layoutX="354.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="En attente" textAlignment="CENTER" wrappingWidth="136.05741119384766">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="       " wrappingWidth="51.009765625" />
+      <Button fx:id="traiter_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="111.0" text="Traiter">
+         <font>
+            <Font name="Arial" size="17.0" />
          </font>
          <HBox.margin>
             <Insets />
          </HBox.margin>
       </Button>
-      <Text layoutX="838.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " />
-      <Button fx:id="reinscription_button" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
+      <Text layoutX="838.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " wrappingWidth="7.009765625" />
+      <Button fx:id="reinscription_button" mnemonicParsing="false" prefHeight="29.0" prefWidth="122.0" text="Reinscription">
          <font>
-            <Font name="Arial" size="20.0" />
+            <Font name="Arial" size="17.0" />
          </font>
       </Button>
    </children>

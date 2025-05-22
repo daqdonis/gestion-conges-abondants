@@ -6,7 +6,7 @@
      -fx-background-color: WHITE;
 }
 #AJT_D_exitButton:hover {
-     -fx-background-color: WHITE;
+     -fx-background-color: transparent;
      -fx-text-fill : RED ;
 }
 
