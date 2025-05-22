@@ -87,3 +87,36 @@
 #scroll_pane{
     -fx-border-color: white;
 }
+
+#main_Panel {
+    -fx-background-color: WHITE;
+}
+
+.reintegration-button {
+    -fx-background-color: #dedede;
+    -fx-text-fill: #4b4b4b;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.reintegration-button-enabled {
+    -fx-background-color: #1f75ff;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.reintegration-button-enabled:hover {
+    -fx-background-color: #4f92ff;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+
+.reintegration-button-disabled {
+    -fx-background-color: #dedede;
+    -fx-text-fill: #9a9a9a;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-opacity: 0.7;
+    -fx-cursor: default;
+}

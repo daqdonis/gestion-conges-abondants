@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+
+<Pane fx:id="main_Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="500.0" stylesheets="@style/ajouter-une-demande.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.ReintegrationController">
+    <children>
+        <CubicCurve controlX1="-340.3999938964844" controlX2="-385.99566650390625" controlY1="-180.59999084472656" controlY2="-238.15562438964844" endX="234.18051147460938" endY="-156.48736572265625" fill="#1f75ff" layoutX="274.0" layoutY="155.0" startX="-292.2898864746094" startY="-12.357986450195312" stroke="#1f75ff" strokeType="INSIDE" strokeWidth="0.0" />
+        <Text fill="WHITE" layoutX="-8.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réintégration" textAlignment="CENTER" wrappingWidth="334.4521484375">
+            <font>
+                <Font name="Arial Bold" size="46.0" />
+            </font>
+        </Text>
+        <Label alignment="CENTER" layoutX="101.0" layoutY="201.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Label>
+        <TextField fx:id="matriculeField" layoutX="209.0" layoutY="199.0" prefHeight="27.0" prefWidth="142.0" />
+        <Label alignment="CENTER" layoutX="14.0" layoutY="250.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Label>
+        <TextField fx:id="nomField" editable="false" layoutX="77.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="23.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="Prénom :" textFill="#4b4b4b">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Label>
+        <TextField fx:id="prenomField" editable="false" layoutX="77.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="273.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="Groupe :" textFill="#4b4b4b">
+            <font>
+                <Font name="Calibri" size="19.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="273.0" layoutY="244.0" prefHeight="35.0" prefWidth="155.0" text="Année Scolaire :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
+            <font>
+                <Font name="Calibri" size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="motifButton" onAction="#handleMotifButton" layoutX="207.0" layoutY="408.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="89.0" text="Motif" />
+        <Button fx:id="confirmerButton" onAction="#handleConfirmerButton" layoutX="185.0" layoutY="473.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
+        <TextField fx:id="anneeScolaireField" editable="false" layoutX="321.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="groupeField" editable="false" layoutX="321.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Button fx:id="fermerButton" layoutX="471.0" layoutY="-1.0" mnemonicParsing="false" onAction="#fermerButtonOnAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
+            <font>
+                <Font name="Arial" size="13.0" />
+            </font>
+        </Button>
+        <Circle fx:id="shape1" fill="#1f75ff" layoutX="487.0" layoutY="143.0" radius="31.0" stroke="#1f75ff" strokeType="INSIDE" />
+        <Circle fx:id="shape2" fill="#1f75ff" layoutX="451.0" layoutY="100.0" radius="12.0" stroke="#1f75ff" strokeType="INSIDE" />
+        <Label fx:id="statusLabel" alignment="CENTER" layoutX="101.0" layoutY="150.0" prefHeight="22.0" prefWidth="300.0" textFill="#4b4b4b">
+            <font>
+                <Font name="Calibri" size="16.0" />
+            </font>
+        </Label>
+    </children>
+</Pane>

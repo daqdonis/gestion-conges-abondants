@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class TraiterDemandeController  {
 
@@ -44,80 +47,102 @@ public class TraiterDemandeController  {
     @FXML
     private TextField traiter_prenom;
 
-      // Référence du contrôleur MenuViewController
-   private MenuViewController menuController;
-
+    // Référence du contrôleur MenuViewController
+    private MenuViewController menuController;
+    private Conge conge;
+    private Runnable onStatusUpdated;
 
     @FXML
     public void fermer_button_onAction() {
         Stage stage = (Stage) fermer_button.getScene().getWindow();
         stage.close();
     }
+
     public void setConge(Conge conge) {
-    if (conge != null && conge.getEtudiant() != null) {
-       traiter_nom.setText(conge.getEtudiant().getNom());
-        traiter_prenom.setText(conge.getEtudiant().getPrenom());
-       traiter_matricule_etudiant.setText(String.valueOf(conge.getEtudiant().getIdEtu()));
-        traiter_idGroupe.setText(String.valueOf(conge.getEtudiant().getIdGroupe()));
-        
-        traiter_numero_demande.setText(String.valueOf(conge.getIdDemande()));
-       traiter_date_de_nessance.setText(String.valueOf(conge.getEtudiant().getDateNaiss()));
-    }
+        if (conge != null && conge.getEtudiant() != null) {
+            traiter_nom.setText(conge.getEtudiant().getNom());
+            traiter_prenom.setText(conge.getEtudiant().getPrenom());
+            traiter_matricule_etudiant.setText(String.valueOf(conge.getEtudiant().getIdEtu()));
+            traiter_idGroupe.setText(String.valueOf(conge.getEtudiant().getIdGroupe()));
 
-}
-@FXML
-private void handleRefuser() {
-    try {
-        String idDemande = traiter_numero_demande.getText();
-
-        DatabaseController dbController = new DatabaseController();
-        
-       
-        dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSÉ);  
-
-        showAlert("Succès", "Demande refusée avec succès.");
-        fermer_button_onAction(); // fermer la fenêtre après refus
-        
-        if (menuController != null) {
-            menuController.refreshTable();  // Cette méthode va rafraîchir la table avec les nouvelles demandes
+            traiter_numero_demande.setText(String.valueOf(conge.getIdDemande()));
+            traiter_date_de_nessance.setText(String.valueOf(conge.getEtudiant().getDateNaiss()));
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        showAlert("Erreur", "Erreur lors du refus : " + e.getMessage());
     }
-}
 
+    public void setOnStatusUpdated(Runnable callback) {
+        this.onStatusUpdated = callback;
+    }
 
-@FXML
-private void handleAccepter() {
-    try {
-        String idDemande = traiter_numero_demande.getText();
+    @FXML
+    private void handleRefuser() {
+        try {
+            String idDemande = traiter_numero_demande.getText();
 
-        DatabaseController dbController = new DatabaseController();
-        dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);
+            DatabaseController dbController = new DatabaseController();
+            dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSÉ);
 
-        showAlert("Succès", "Demande acceptée avec succès.");
-        fermer_button_onAction(); // fermer la fenêtre après acceptation
+            // Call the status update callback first
+            if (onStatusUpdated != null) {
+                javafx.application.Platform.runLater(() -> {
+                    onStatusUpdated.run();
+                });
+            }
 
-        
-        if (menuController != null) {
-            menuController.refreshTable();  // Cette méthode va rafraîchir la table avec les nouvelles demandes
+            // Then refresh the table
+            if (menuController != null) {
+                javafx.application.Platform.runLater(() -> {
+                    menuController.refreshTable();
+                });
+            }
+
+            showAlert("Succès", "Demande refusée avec succès.");
+            fermer_button_onAction(); // fermer la fenêtre après refus
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors du refus : " + e.getMessage());
         }
-    } catch (Exception e) {
-        e.printStackTrace();
-        showAlert("Erreur", "Erreur lors de l'acceptation : " + e.getMessage());
     }
 
-    
-}
+    @FXML
+    private void handleAccepter() {
+        try {
+            String idDemande = traiter_numero_demande.getText();
+            DatabaseController dbController = new DatabaseController();
+            String updateDateSql = "UPDATE Conge SET date_demande = CURRENT_DATE() WHERE id_demande = ?";
+            try (PreparedStatement stmt = dbController.getConnection().prepareStatement(updateDateSql)) {
+                stmt.setString(1, idDemande);
+                stmt.executeUpdate();
+            }
+            dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);
+            if (onStatusUpdated != null) {
+                javafx.application.Platform.runLater(() -> {
+                    onStatusUpdated.run();
+                });
+            }
+            if (menuController != null) {
+                javafx.application.Platform.runLater(() -> {
+                    menuController.refreshTable();
+                });
+            }
+
+            showAlert("Succès", "Demande acceptée avec succès.");
+            fermer_button_onAction(); // fermer la fenêtre après acceptation
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors de l'acceptation : " + e.getMessage());
+        }
+    }
 
     private void showAlert(String title, String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 
     public void setMenuController(MenuViewController menuController) {
         this.menuController = menuController;

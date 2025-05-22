@@ -86,7 +86,7 @@ public class MenuGestionAbdandenementController {
         System.out.println("Refreshing table...");
         try {
             DatabaseController db = new DatabaseController();
-            List<Abondant> requests = db.getAllAbondants();
+            List<Abondant> requests = db.getAbondant();
 
             requestsContainer.getChildren().clear();
 
@@ -151,12 +151,8 @@ public class MenuGestionAbdandenementController {
             stage.initOwner(mainWindow);
             stage.initModality(Modality.WINDOW_MODAL); // rend la fenêtre modale
             stage.centerOnScreen();
-
-            // Appliquer un effet de flou
             GaussianBlur blur = new GaussianBlur(10);
             mainRoot.setEffect(blur);
-
-            // Retirer le flou à la fermeture
             stage.setOnHidden(e -> mainRoot.setEffect(null));
             String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/traiter-une-demande.css").toExternalForm();
             scene.getStylesheets().add(css);

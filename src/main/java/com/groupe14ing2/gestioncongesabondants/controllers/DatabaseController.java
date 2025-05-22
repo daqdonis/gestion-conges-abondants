@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.groupe14ing2.gestioncongesabondants.utils.PasswordUtils;
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.groupe14ing2.gestioncongesabondants.models.Abondant;
 import com.groupe14ing2.gestioncongesabondants.models.ActionAdmin;
@@ -456,6 +458,13 @@ public class DatabaseController extends DatabaseLink {
     }
 
     public void removeConge(String id) throws SQLException {
+        // First delete related action_admin records
+        String deleteActionsSql = "DELETE FROM Action_admin WHERE id_conge = ?";
+        PreparedStatement actionStmt = connection.prepareStatement(deleteActionsSql);
+        actionStmt.setString(1, id);
+        actionStmt.executeUpdate();
+
+        // Then delete the conge record
         String sql = "DELETE FROM Conge WHERE id_demande = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, id);
@@ -678,6 +687,24 @@ public class DatabaseController extends DatabaseLink {
         return null;
     }
 
+    public List<Abondant> getAbondant() throws SQLException {
+        String sql = "SELECT * FROM Abondant ORDER BY date_dec DESC";
+        List<Abondant> abondants = new ArrayList<>();
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                abondants.add(new Abondant(
+                        rs.getLong("id_etu"),
+                        rs.getString("id_admin"),
+                        rs.getDate("date_dec")
+                ));
+            }
+        }
+        return abondants;
+    }
+
     // ActionAdmin methods
     public void addActionAdmin(ActionAdmin actionAdmin) throws SQLException {
         String sql = "INSERT IGNORE INTO Action_admin (id_admin, action, temps_action, id_conge, id_reins, pk_abond) VALUES (?, ?, ?, ?, ?, ?)";
@@ -688,10 +715,7 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setTimestamp(3, actionAdmin.getTempsAction());
         preparedStatement.setString(4, actionAdmin.getIdConge());
         preparedStatement.setString(5, actionAdmin.getIdReins());
-        if (actionAdmin.getPkAbond() < 0)
-            preparedStatement.setNull(6, Types.NULL);
-        else
-            preparedStatement.setLong(6, actionAdmin.getPkAbond());
+        preparedStatement.setLong(6, actionAdmin.getPkAbond());
 
         preparedStatement.executeUpdate();
     }
@@ -739,20 +763,44 @@ public class DatabaseController extends DatabaseLink {
         }
     }
 
-    public List<Abondant> getAllAbondants() throws SQLException {
-        String sql = "SELECT * FROM Abondant";
-        List<Abondant> abondants = new ArrayList<>();
+    public Conge getCongeByEtudiant(long idEtu) throws SQLException {
+        String sql = "SELECT c.*, e.* FROM Conge c " +
+                "JOIN Etudiant e ON c.id_etu = e.id_etu " +
+                "WHERE c.id_etu = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setLong(1, idEtu);
+
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        while (resultSet.next()) {
-            abondants.add(new Abondant(
+        if (resultSet.next()) {
+            Etudiant etudiant = new Etudiant(
                     resultSet.getLong("id_etu"),
-                    resultSet.getString("id_admin"),
-                    resultSet.getDate("date_dec")
-            ));
+                    resultSet.getString("nom"),
+                    resultSet.getString("prenom"),
+                    resultSet.getDate("date_naiss"),
+                    resultSet.getString("id_groupe")
+            );
+
+            String etatStr = resultSet.getString("etat");
+            EtatTraitement etat = EtatTraitement.fromDisplayName(etatStr);
+
+            Conge conge = new Conge(
+                    resultSet.getString("id_demande"),
+                    resultSet.getDate("date_demande"),
+                    resultSet.getInt("duree"),
+                    etat,
+                    resultSet.getBinaryStream("justificatif")
+            );
+            conge.setEtudiant(etudiant);
+
+            return conge;
         }
-        return abondants;
+
+        return null;
+    }
+
+    public java.sql.Connection getConnection() {
+        return connection;
     }
 }
