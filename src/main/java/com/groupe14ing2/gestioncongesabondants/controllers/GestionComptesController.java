@@ -212,4 +212,15 @@ public class GestionComptesController {
 
         }
     }
+
+    @FXML
+    private void exit(){
+        System.exit(0);
+    }
+
+    @FXML
+    private void fermer_button_onAction() {
+        Stage stage = (Stage) table_pan.getScene().getWindow();
+        stage.close();
+    }
 }

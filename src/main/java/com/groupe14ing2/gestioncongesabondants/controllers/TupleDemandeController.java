@@ -68,16 +68,7 @@ public class TupleDemandeController {
         }
 
         voir_jst_button.setOnAction(e -> {
-            System.out.println(conge.getJustificatif());
-            if (Desktop.isDesktopSupported()) {
-                new Thread(() -> {
-                    try {
-                        Desktop.getDesktop().open(conge.getJustificatif());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }).start();
-            }
+            viewJustification();
         });
 
         traiter_jst_button.setOnAction(e -> {
@@ -94,6 +85,8 @@ public class TupleDemandeController {
                         menuController.refreshTable();
                     }
                 });
+
+                controller.setButton_justificationAction(event -> viewJustification());
 
                 Stage stage = new Stage();
                 stage.setTitle("Traiter une demande");
@@ -163,5 +156,18 @@ public class TupleDemandeController {
 
     public void setMenuController(MenuViewController menuController) {
         this.menuController = menuController;
+    }
+
+    private void viewJustification() {
+        System.out.println(conge.getJustificatif());
+        if (Desktop.isDesktopSupported()) {
+            new Thread(() -> {
+                try {
+                    Desktop.getDesktop().open(conge.getJustificatif());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }).start();
+        }
     }
 }

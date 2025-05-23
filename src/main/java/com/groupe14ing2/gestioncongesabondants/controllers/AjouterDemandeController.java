@@ -6,14 +6,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.groupe14ing2.gestioncongesabondants.models.ActionAdmin;
-import com.groupe14ing2.gestioncongesabondants.models.Conge;
-import com.groupe14ing2.gestioncongesabondants.models.EtatTraitement;
-import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
+import com.groupe14ing2.gestioncongesabondants.models.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -30,6 +28,7 @@ public class AjouterDemandeController {
     @FXML private TextField AJT_D_matricule;
     @FXML private Button fermer_button;
     @FXML private Pane main_Panel;
+    @FXML private ChoiceBox<TypeConge> typeChoiceBox;
 
     private File selectedFile;
     private MenuViewController menuController;  // Référence du contrôleur MenuViewController
@@ -38,6 +37,8 @@ public class AjouterDemandeController {
     @FXML
     public void initialize() {
         AJT_D_Date.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        typeChoiceBox.getItems().addAll(TypeConge.values());
     }
 
     // Gérer le bouton de sélection du fichier de justification

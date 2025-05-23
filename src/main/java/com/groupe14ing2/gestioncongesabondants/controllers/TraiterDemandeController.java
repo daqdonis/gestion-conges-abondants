@@ -12,6 +12,9 @@ import javafx.scene.control.Alert;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 public class TraiterDemandeController  {
 
     @FXML
@@ -146,6 +149,10 @@ public class TraiterDemandeController  {
 
     public void setMenuController(MenuViewController menuController) {
         this.menuController = menuController;
+    }
+
+    public void setButton_justificationAction(Consumer<Void> f) {
+        button_justification.setOnAction(e -> f.accept(null));
     }
 }
 

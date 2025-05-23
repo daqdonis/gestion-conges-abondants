@@ -2,6 +2,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,6 +25,7 @@ import javafx.application.Platform;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class MenuViewController {
@@ -57,6 +59,7 @@ public class MenuViewController {
 
     @FXML
     public void initialize() {
+        myPieChart.setLabelsVisible(false);
         updatePieChart(0, 0, 0);
         text_field_rechercher_demande.textProperty().addListener((observable, oldValue, newValue) -> {
             filterDemands(newValue);
@@ -222,5 +225,10 @@ public class MenuViewController {
     @FXML
     private void exit() {
         System.exit(0);
+    }
+
+    @FXML
+    public void setSwitchAction(Consumer<ActionEvent> f) {
+        gestino_des_cong_button.setOnAction(e -> f.accept(e));
     }
 }

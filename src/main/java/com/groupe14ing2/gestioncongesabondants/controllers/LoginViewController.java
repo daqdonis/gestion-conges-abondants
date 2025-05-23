@@ -2,6 +2,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 
@@ -71,11 +72,8 @@ public class LoginViewController {
                 System.out.println("Login successful for: " + admin.getNom());
 
                 switch (admin.getRoles()) {
-                    case ADMINCONGE:
+                    case ADMINCONGEABANDONT:
                         switchToMenu(actionEvent);
-                        break;
-                    case ADMINABONDANT:
-                        switchToAbondantMenu(actionEvent);
                         break;
                     case ADMINCOMPTES:
                         switchToComptesMenu(actionEvent);
@@ -112,6 +110,20 @@ public class LoginViewController {
         MenuViewController controller = loader.getController();
         controller.setAdmin(admin);
 
+
+        Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
+            @Override
+            public void accept(javafx.event.ActionEvent actionEvent) {
+                try {
+                    switchToAbondantMenu(actionEvent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        controller.setSwitchAction(switchMenu);
+
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
@@ -131,6 +143,19 @@ public class LoginViewController {
         // Get the controller and set the admin
         MenuGestionAbdandenementController controller = loader.getController();
         // TODO: Add setAdmin method to MenuGestionAbdandenementController if needed
+
+        Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
+            @Override
+            public void accept(javafx.event.ActionEvent actionEvent) {
+                try {
+                    switchToMenu(actionEvent);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        controller.setSwitchAction(switchMenu);
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);

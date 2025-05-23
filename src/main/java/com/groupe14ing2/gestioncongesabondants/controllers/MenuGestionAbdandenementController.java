@@ -1,6 +1,7 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 public class MenuGestionAbdandenementController {
@@ -205,5 +207,10 @@ public class MenuGestionAbdandenementController {
     @FXML
     private void exit(){
         System.exit(0);
+    }
+
+    @FXML
+    public void setSwitchAction(Consumer<ActionEvent> f) {
+        gestion_des_abondant_button.setOnAction(e -> f.accept(e));
     }
 }

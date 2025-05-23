@@ -44,11 +44,8 @@ public class DatabaseController extends DatabaseLink {
             case ADMINCOMPTES:
                 idPrefix = "AC";
                 break;
-            case ADMINABONDANT:
+            case ADMINCONGEABANDONT:
                 idPrefix = "AA";
-                break;
-            case ADMINCONGE:
-                idPrefix = "AG";
                 break;
             default:
                 throw new SQLException("Invalid role");
@@ -124,7 +121,7 @@ public class DatabaseController extends DatabaseLink {
                             rs.getString("id_admin"),
                             rs.getString("nom"),
                             rs.getString("prenom"),
-                            RoleAdmin.valueOf(rs.getString("roles").toUpperCase().replace("ADMIN_", "ADMIN")),
+                            RoleAdmin.valueOf(rs.getString("roles").toUpperCase().replaceAll("_", "")),
                             rs.getString("email"),
                             null
                     )
