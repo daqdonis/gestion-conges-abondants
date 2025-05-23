@@ -50,6 +50,9 @@ public class TraiterDemandeController  {
     @FXML
     private TextField traiter_prenom;
 
+    @FXML
+    private TextField traiter_type_conge;
+
     // Référence du contrôleur MenuViewController
     private MenuViewController menuController;
     private Conge conge;
@@ -67,9 +70,9 @@ public class TraiterDemandeController  {
             traiter_prenom.setText(conge.getEtudiant().getPrenom());
             traiter_matricule_etudiant.setText(String.valueOf(conge.getEtudiant().getIdEtu()));
             traiter_idGroupe.setText(String.valueOf(conge.getEtudiant().getIdGroupe()));
-
             traiter_numero_demande.setText(String.valueOf(conge.getIdDemande()));
             traiter_date_de_nessance.setText(String.valueOf(conge.getEtudiant().getDateNaiss()));
+            traiter_type_conge.setText(String.valueOf(conge.getType()));
         }
     }
 

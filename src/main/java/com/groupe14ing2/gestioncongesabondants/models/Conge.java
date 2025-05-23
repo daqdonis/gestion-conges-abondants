@@ -15,6 +15,7 @@ public class Conge implements Serializable {
   private Date dateDemande;
   private int duree;
   private EtatTraitement etat;
+  private TypeConge type;
   private transient File justificatif;
   private Etudiant etudiant;
   private byte[] justificatifData;
@@ -54,6 +55,10 @@ public class Conge implements Serializable {
     return etat;
   }
 
+  public TypeConge getType() {
+    return type;
+  }
+
   public File getJustificatif() {
     return justificatif;
   }
@@ -77,6 +82,10 @@ public class Conge implements Serializable {
 
   public void setEtat(EtatTraitement etat) {
     this.etat = etat;
+  }
+
+  public void setType(TypeConge type) {
+    this.type = type;
   }
 
   public void setEtudiant(Etudiant etudiant) {

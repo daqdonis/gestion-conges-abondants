@@ -226,10 +226,8 @@ public class ReintegrationController {
             // Check time limit again
             LocalDate leaveDate = currentConge.getDateDemande().toLocalDate();
             LocalDate currentDate = LocalDate.now();
-            int leaveYear = getAcademicYear(leaveDate);
-            int currentYear = getAcademicYear(currentDate);
 
-            if (currentYear - leaveYear > 1) {
+            if (!isWithinSameOrNextAcademicYear(leaveDate, currentDate)) {
                 showAlert("Error", "Time limit exceeded (more than 1 year)");
                 return;
             }
@@ -249,23 +247,32 @@ public class ReintegrationController {
                 // Add reintegration request
                 db.addDemReins(demReins, 'C'); // 'C' for Conge type
 
-                // Remove the student from Conge table
+                // Mark student as reintegrated before removing the congé record
+                db.addReintegratedStudent(currentConge.getEtudiant().getIdEtu(), currentConge.getIdDemande());
+
+                // Remove the congé record
                 db.removeConge(currentConge.getIdDemande());
 
-                showAlert("Success", "Reintegration request submitted successfully!");
+                // Show success message
+                showAlert("Success", "Reintegration request submitted successfully.");
 
-                // Refresh the main view if available
-                Platform.runLater(() -> {
-                    if (menuController != null) {
-                        menuController.refreshTable();
-                    }
-                });
+                // Clear the form
+                clearFields();
+                selectedFile = null;
+                motifButton.setText("Choisir un fichier");
+                confirmerButton.setDisable(true);
+
+                // Update the menu view if available
+                if (menuController != null) {
+                    menuController.refreshTable();
+                }
 
                 // Close the window
-                fermerButtonOnAction();
+                Stage stage = (Stage) confirmerButton.getScene().getWindow();
+                stage.close();
 
             } catch (SQLException e) {
-                showAlert("Error", "Database operation failed: " + e.getMessage());
+                showAlert("Error", "Error submitting reintegration request: " + e.getMessage());
                 e.printStackTrace();
             }
 

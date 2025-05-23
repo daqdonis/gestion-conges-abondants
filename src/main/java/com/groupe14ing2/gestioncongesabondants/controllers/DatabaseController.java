@@ -27,6 +27,7 @@ import com.groupe14ing2.gestioncongesabondants.models.Groupe;
 import com.groupe14ing2.gestioncongesabondants.models.RoleAdmin;
 import com.groupe14ing2.gestioncongesabondants.models.Section;
 import com.groupe14ing2.gestioncongesabondants.models.Semestre;
+import com.groupe14ing2.gestioncongesabondants.models.TypeConge;
 
 public class DatabaseController extends DatabaseLink {
 
@@ -421,6 +422,11 @@ public class DatabaseController extends DatabaseLink {
             throw new SQLException("Cannot add conge without student reference");
         }
 
+        // Check if student is already reintegrated
+        if (isStudentReintegrated(conge.getEtudiant().getIdEtu())) {
+            throw new SQLException("Student has already been reintegrated and cannot submit new requests");
+        }
+
         // Generate conge ID (X-AA-00000000 format)
         String idPrefix = "C" + (conge.getDateDemande().getYear() - 100) + conge.getEtudiant().getIdEtu();
         String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
@@ -507,13 +513,24 @@ public class DatabaseController extends DatabaseLink {
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return new Conge(
+            Conge conge = new Conge(
                     resultSet.getString("id_demande"),
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
                     EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
-                    (FileInputStream) resultSet.getBlob("justificatif")
+                    resultSet.getBlob("justificatif") != null ?
+                            resultSet.getBlob("justificatif").getBinaryStream() : null
             );
+            String typeStr = resultSet.getString("type");
+            if (typeStr != null) {
+                for (TypeConge type : TypeConge.values()) {
+                    if (type.toString().equals(typeStr)) {
+                        conge.setType(type);
+                        break;
+                    }
+                }
+            }
+            return conge;
         }
         return null;
     }
@@ -563,6 +580,15 @@ public class DatabaseController extends DatabaseLink {
                                 rs.getBlob("c.justificatif").getBinaryStream() : null
                 );
                 conge.setEtudiant(etudiant);
+                String typeStr = rs.getString("c.type");
+                if (typeStr != null) {
+                    for (TypeConge type : TypeConge.values()) {
+                        if (type.toString().equals(typeStr)) {
+                            conge.setType(type);
+                            break;
+                        }
+                    }
+                }
                 conges.add(conge);
             }
         }
@@ -763,7 +789,9 @@ public class DatabaseController extends DatabaseLink {
     public Conge getCongeByEtudiant(long idEtu) throws SQLException {
         String sql = "SELECT c.*, e.* FROM Conge c " +
                 "JOIN Etudiant e ON c.id_etu = e.id_etu " +
-                "WHERE c.id_etu = ?";
+                "WHERE c.id_etu = ? " +
+                "ORDER BY c.date_demande DESC " +
+                "LIMIT 1";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setLong(1, idEtu);
@@ -790,11 +818,44 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getBinaryStream("justificatif")
             );
             conge.setEtudiant(etudiant);
+            
+            String typeStr = resultSet.getString("type");
+            if (typeStr != null) {
+                for (TypeConge type : TypeConge.values()) {
+                    if (type.toString().equals(typeStr)) {
+                        conge.setType(type);
+                        break;
+                    }
+                }
+            }
 
             return conge;
         }
 
         return null;
+    }
+
+    // Methods for handling reintegrated students
+    public void addReintegratedStudent(long idEtu, String originalCongeId) throws SQLException {
+        String sql = "INSERT INTO Reintegrated_Students (id_etu, reintegration_date, original_conge_id) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idEtu);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(3, originalCongeId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public boolean isStudentReintegrated(long idEtu) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Reintegrated_Students WHERE id_etu = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idEtu);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
     }
 
     public java.sql.Connection getConnection() {
