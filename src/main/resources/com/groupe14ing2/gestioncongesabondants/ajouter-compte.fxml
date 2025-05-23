@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -33,28 +32,28 @@
                      </font>
                   </Text>
                   <ChoiceBox fx:id="roleChoiceBox" layoutX="183.0" layoutY="366.0" prefHeight="25.0" prefWidth="136.0" />
+                  <TextField fx:id="passwordFieldC" layoutX="57.0" layoutY="305.0" prefHeight="25.0" prefWidth="149.0" promptText="Mote de passe" />
+                  <TextField fx:id="userIdTextFieldC" layoutX="58.0" layoutY="264.0" promptText="Email" />
+                  <TextField fx:id="prenomTextField" layoutX="248.0" layoutY="304.0" promptText="Prénom" />
+                  <TextField fx:id="nomTextField" layoutX="248.0" layoutY="263.0" promptText="Nom" />
                </children>
             </Pane>
-            <TextField fx:id="userIdTextField" layoutX="84.0" layoutY="206.0" promptText="E-mail" />
-            <TextField fx:id="prenomTextField" layoutX="280.0" layoutY="206.0" promptText="Prénom" />
-            <PasswordField fx:id="passwordField" layoutX="84.0" layoutY="245.0" promptText="Mot de passe" />
             <Button fx:id="AjouterCompte_button" layoutX="184.0" layoutY="392.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="115.0" text="Ajouter" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="17.0" />
                </font>
             </Button>
-            <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="204.0">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="204.0">
                <image>
                   <Image url="@img/user.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="cleIcon" fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="243.0">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="46.0" layoutY="243.0">
                <image>
                   <Image url="@img/cle.png" />
                </image>
             </ImageView>
-            <TextField fx:id="nomTextField" layoutX="280.0" layoutY="246.0" promptText="Nom" />
-            <Button fx:id="exitButton" layoutX="452.0" mnemonicParsing="false" text="🗙" textFill="#f52d2d">
+            <Button fx:id="exitButton" layoutX="452.0" mnemonicParsing="false" onAction="#exit" text="🗙" textFill="#f52d2d">
                <font>
                   <Font size="13.0" />
                </font>

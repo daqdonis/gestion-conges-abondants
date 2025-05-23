@@ -100,23 +100,14 @@
 }
 
 .reintegration-button-enabled {
-    -fx-background-color: #1f75ff;
+    -fx-background-color: #2f8a47;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
 }
 
 .reintegration-button-enabled:hover {
-    -fx-background-color: #4f92ff;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+    -fx-background-color: #006609;
+    -fx-text-fill: white;
 }
-
 .reintegration-button-disabled {
-    -fx-background-color: #dedede;
-    -fx-text-fill: #9a9a9a;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-opacity: 0.7;
-    -fx-cursor: default;
+    -fx-opacity: 0.45;
 }

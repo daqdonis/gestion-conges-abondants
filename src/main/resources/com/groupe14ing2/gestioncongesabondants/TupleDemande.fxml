@@ -33,22 +33,20 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="109.33343505859375" />
-      <Label fx:id="etatLabel" alignment="CENTER" prefHeight="30.0" prefWidth="77.0" text="etat">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="86.33343505859375" />
+      <Label fx:id="etatLabel" alignment="CENTER" prefHeight="30.0" prefWidth="113.0" text="etat">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="68.3333740234375" />
-      <Button fx:id="reintegrationButton" mnemonicParsing="false" onAction="#handleReintegrationButton" prefHeight="35.0" prefWidth="109.0" styleClass="reintegration-button" text="Réintégrer">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="34.3333740234375" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.3333740234375" />
+      <Button fx:id="reintegrationButton" mnemonicParsing="false" onAction="#handleReintegrationButton" prefHeight="35.0" prefWidth="134.0" text="Reintegration">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
-         <HBox.margin>
-            <Insets left="20.0" />
-         </HBox.margin>
       </Button>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.3333740234375" />
+      <Text layoutX="840.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="7.3333740234375" />
       <Button fx:id="traiter_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Traiter">
          <font>
             <Font name="Arial" size="18.0" />

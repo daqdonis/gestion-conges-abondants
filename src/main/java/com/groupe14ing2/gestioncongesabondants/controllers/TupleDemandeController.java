@@ -144,6 +144,7 @@ public class TupleDemandeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/reintegration.fxml"));
             Parent root = loader.load();
+            updateReintegrationButton();
 
             ReintegrationController controller = loader.getController();
             controller.setMenuController(menuController);

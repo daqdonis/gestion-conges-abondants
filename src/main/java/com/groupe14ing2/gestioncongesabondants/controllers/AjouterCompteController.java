@@ -10,34 +10,42 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
+
 public class AjouterCompteController {
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     @FXML
-    private Pane mainPanel;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextField userIdTextField;
-
-    @FXML
     private Button AjouterCompte_button;
+
+    @FXML
+    private ImageView cleIcon;
+
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    private Pane mainPanel;
 
     @FXML
     private TextField nomTextField;
 
     @FXML
+    private TextField passwordFieldC;
+
+    @FXML
     private TextField prenomTextField;
 
     @FXML
-    private ChoiceBox<RoleAdmin> roleChoiceBox;
+    private TextField userIdTextFieldC;
 
     @FXML
-    private Button exitButton;
+    private Pane white_background;
+
+    @FXML
+    private ChoiceBox<RoleAdmin> roleChoiceBox;
 
     private GestionComptesController gestionComptesController;
 
@@ -59,8 +67,8 @@ public class AjouterCompteController {
                     nomTextField.getText(),
                     prenomTextField.getText(),
                     roleChoiceBox.getValue(),
-                    userIdTextField.getText(),
-                    passwordField.getText()
+                    userIdTextFieldC.getText(),
+                    passwordFieldC.getText()
             ));
             gestionComptesController.refreshTable();
             exit();

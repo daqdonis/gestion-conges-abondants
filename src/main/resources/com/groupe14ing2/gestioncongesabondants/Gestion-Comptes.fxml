@@ -144,6 +144,11 @@
          </children>
 
       </Pane>
+      <Button fx:id="fermer_button" layoutX="1014.0" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="27.0" prefWidth="34.0" text="🗙" textFill="#9a1818">
+         <font>
+            <Font name="Arial" size="13.0" />
+         </font>
+      </Button>
 
    </children>
 

@@ -17,17 +17,17 @@
     -fx-background-radius: 20px;
 }
 #voir_jst_button:hover{
-    -fx-background-color: #1ea0fc;
-    -fx-text-fill: #dedede;
+    -fx-background-color: #0249a1;
+    -fx-text-fill: white;
     -fx-background-radius: 20px;
 }
 #traiter_jst_button:hover{
-    -fx-background-color: #f7ba00;
-    -fx-text-fill: #dedede;
+    -fx-background-color: #f7980a;
+    -fx-text-fill: white;
     -fx-background-radius: 20px;
 }
 #reintegrationButton:hover{
     -fx-background-color: #006609;
-    -fx-text-fill: #dedede;
+    -fx-text-fill: white;
     -fx-background-radius: 20px;
 }
