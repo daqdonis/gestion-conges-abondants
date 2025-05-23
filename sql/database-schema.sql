@@ -81,7 +81,7 @@ CREATE TABLE Admin(
                       id_admin VARCHAR(10) PRIMARY KEY,
                       nom VARCHAR(255) NOT NULL,
                       prenom VARCHAR(255) NOT NULL,
-                      roles SET('admin_conge','admin_abondant','admin_comptes') NOT NULL,
+                      roles SET('admin_conge_abandont','admin_comptes') NOT NULL,
                       email VARCHAR(63) UNIQUE NOT NULL,
                       mot_passe VARCHAR(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

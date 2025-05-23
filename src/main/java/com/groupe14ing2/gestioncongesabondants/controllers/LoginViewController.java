@@ -142,7 +142,8 @@ public class LoginViewController {
 
         // Get the controller and set the admin
         MenuGestionAbdandenementController controller = loader.getController();
-        // TODO: Add setAdmin method to MenuGestionAbdandenementController if needed
+
+        controller.setAdmin(admin);
 
         Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
             @Override

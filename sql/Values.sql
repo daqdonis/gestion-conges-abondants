@@ -38,13 +38,13 @@ INSERT INTO Etudiant VALUES
 
 -- Admin (X-X-000)
 INSERT INTO Admin VALUES
-('TC001', 'Ahmed', 'Mohsin', 'admin_abondant', 'a', '$2a$10$coOsPNKaVhCYniC41qlw1uuuZThJHwSDWMxtzaZHLPRtHZRMFR.Bm'),
+('TC001', 'Ahmed', 'Mohsin', 'admin_conge_abandont', 'a', '$2a$10$coOsPNKaVhCYniC41qlw1uuuZThJHwSDWMxtzaZHLPRtHZRMFR.Bm'),
 ('RC001', 'Mhamed', 'Yasser', 'admin_comptes', 'b', '$2a$10$nQvz9t0wrhgUH7wPSr7tI.C/ErCuZ4hRmstKwBXCJkH0vYh5Bgdly'),
-('TA001', 'za', 'za', 'admin_conge', 'c', '$2a$10$RGPyNRVeQxXv3IwCwdQt4eo/3O5vkC99XgMzMjuzrXdhRzIkuXtXK');
+('TA001', 'za', 'za', 'admin_conge_abandont', 'c', '$2a$10$RGPyNRVeQxXv3IwCwdQt4eo/3O5vkC99XgMzMjuzrXdhRzIkuXtXK');
 
 -- Conge (TYPE-ANNEE-MATRICULE)
 INSERT INTO Conge VALUES
-('C-25-32011001', 32011001, '2025-01-10', 30, 'Accepté', 'Justificatif1');
+('C-25-32011001', 32011001, '2025-01-10', 'Maladie longue durée', 30, 'Accepté', 'Justificatif1');
 
 -- Abondant
 INSERT INTO Abondant VALUES
