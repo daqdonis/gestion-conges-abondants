@@ -30,6 +30,9 @@
 }#more_button{
     -fx-background-color: transparent;
 }
+#close_button{
+    -fx-background-color: transparent;
+}
 #gestino_des_cong_button:hover {
     -fx-background-color: dedede;
     -fx-background-radius: 20px;
@@ -38,6 +41,10 @@
      -fx-background-color: dedede;
      -fx-background-radius: 20px;
  }
+#close_button:hover{
+    -fx-background-color: dedede;
+    -fx-background-radius: 20px;
+}
 #profile_button :hover{
     -fx-background-color: dedede;
     -fx-background-radius: 20px;

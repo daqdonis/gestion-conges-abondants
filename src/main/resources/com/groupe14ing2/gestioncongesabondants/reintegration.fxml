@@ -57,7 +57,7 @@
         </Button>
         <Circle fx:id="shape1" fill="#1f75ff" layoutX="492.0" layoutY="152.0" radius="31.0" stroke="#1f75ff" strokeType="INSIDE" />
         <Circle fx:id="shape2" fill="#1f75ff" layoutX="464.0" layoutY="105.0" radius="12.0" stroke="#1f75ff" strokeType="INSIDE" />
-        <Label fx:id="statusLabel" alignment="CENTER" layoutX="101.0" layoutY="150.0" prefHeight="22.0" prefWidth="300.0" textFill="#4b4b4b">
+        <Label fx:id="statusLabel" alignment="CENTER" layoutX="100.0" layoutY="117.0" prefHeight="22.0" prefWidth="300.0" textFill="#4b4b4b">
             <font>
                 <Font name="Calibri" size="16.0" />
             </font>
