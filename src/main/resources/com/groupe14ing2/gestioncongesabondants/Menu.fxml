@@ -56,11 +56,11 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <Button fx:id="close_button" layoutX="2.0" layoutY="697.0" minWidth="53.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="53.0">
+            <Button fx:id="close_button" layoutX="2.0" layoutY="697.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" onDragDetected="#exit" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="50.0" fitWidth="50.0">
                      <image>
-                        <Image url="@img/Exit.jpg" />
+                        <Image url="@img/Exit.png" />
                      </image>
                   </ImageView>
                </graphic>

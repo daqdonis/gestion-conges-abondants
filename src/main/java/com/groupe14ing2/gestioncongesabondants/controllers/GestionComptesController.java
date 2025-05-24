@@ -82,7 +82,26 @@ public class GestionComptesController {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Ajouter une demande");
+            stage.setTitle("Ajouter un compte");
+
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void modifer_compte() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Modifer-compte.fxml"));
+            Parent root = loader.load();
+
+            AjouterCompteController compteController = loader.getController();
+            compteController.setGestionComptesController(this);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modifer un compte");
 
             stage.show();
         } catch (IOException ex) {
