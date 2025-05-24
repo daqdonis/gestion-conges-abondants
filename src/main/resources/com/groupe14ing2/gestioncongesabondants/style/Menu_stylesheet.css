@@ -43,7 +43,7 @@
  }
 #close_button:hover{
     -fx-background-color: dedede;
-    -fx-background-radius: 20px;
+    -fx-background-radius: 200px;
 }
 #profile_button :hover{
     -fx-background-color: dedede;

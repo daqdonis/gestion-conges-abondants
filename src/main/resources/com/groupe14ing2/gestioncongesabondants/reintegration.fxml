@@ -18,38 +18,38 @@
                 <Font name="Arial Bold" size="46.0" />
             </font>
         </Text>
-        <Label alignment="CENTER" layoutX="101.0" layoutY="167.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
+        <Label alignment="CENTER" layoutX="101.0" layoutY="163.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
             <font>
                 <Font name="Calibri" size="19.0" />
             </font>
         </Label>
-        <TextField fx:id="matriculeField" layoutX="209.0" layoutY="165.0" prefHeight="27.0" prefWidth="142.0" />
-        <Label alignment="CENTER" layoutX="14.0" layoutY="216.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
+        <TextField fx:id="matriculeField" layoutX="209.0" layoutY="161.0" prefHeight="27.0" prefWidth="142.0" />
+        <Label alignment="CENTER" layoutX="14.0" layoutY="212.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
             <font>
                 <Font name="Calibri" size="19.0" />
             </font>
         </Label>
-        <TextField fx:id="nomField" editable="false" layoutX="77.0" layoutY="245.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <Label alignment="CENTER" layoutX="23.0" layoutY="286.0" prefHeight="17.0" prefWidth="78.0" text="Prénom :" textFill="#4b4b4b">
+        <TextField fx:id="nomField" editable="false" layoutX="77.0" layoutY="241.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="23.0" layoutY="282.0" prefHeight="17.0" prefWidth="78.0" text="Prénom :" textFill="#4b4b4b">
             <font>
                 <Font name="Calibri" size="19.0" />
             </font>
         </Label>
-        <TextField fx:id="prenomField" editable="false" layoutX="77.0" layoutY="322.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <Label alignment="CENTER" layoutX="273.0" layoutY="286.0" prefHeight="17.0" prefWidth="78.0" text="Groupe :" textFill="#4b4b4b">
+        <TextField fx:id="prenomField" editable="false" layoutX="77.0" layoutY="318.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="273.0" layoutY="282.0" prefHeight="17.0" prefWidth="78.0" text="Groupe :" textFill="#4b4b4b">
             <font>
                 <Font name="Calibri" size="19.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="273.0" layoutY="210.0" prefHeight="35.0" prefWidth="155.0" text="Année Scolaire :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
+        <Label alignment="CENTER" layoutX="273.0" layoutY="206.0" prefHeight="35.0" prefWidth="155.0" text="Année Scolaire :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
             <font>
                 <Font name="Calibri" size="18.0" />
             </font>
         </Label>
         <Button fx:id="motifButton" layoutX="207.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleMotifButton" prefHeight="43.0" prefWidth="89.0" text="Motif" />
         <Button fx:id="confirmerButton" layoutX="185.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleConfirmerButton" prefHeight="43.0" prefWidth="132.0" stylesheets="@style/reintegration.css" text="Confirmer" textFill="#3cd14e" />
-        <TextField fx:id="anneeScolaireField" editable="false" layoutX="321.0" layoutY="245.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <TextField fx:id="groupeField" editable="false" layoutX="321.0" layoutY="322.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="anneeScolaireField" editable="false" layoutX="321.0" layoutY="241.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="groupeField" editable="false" layoutX="321.0" layoutY="318.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
         <Button fx:id="fermerButton" layoutX="471.0" layoutY="-1.0" mnemonicParsing="false" onAction="#fermerButtonOnAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
             <font>
                 <Font name="Arial Bold" size="13.0" />

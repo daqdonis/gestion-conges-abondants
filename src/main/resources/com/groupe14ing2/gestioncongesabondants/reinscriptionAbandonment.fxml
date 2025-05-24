@@ -24,37 +24,37 @@
                   <Font name="Arial Bold" size="40.0" />
                </font>
             </Text>
-            <Label alignment="CENTER" layoutX="101.0" layoutY="201.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
+            <Label alignment="CENTER" layoutX="101.0" layoutY="194.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="reinsctiprion_matricule" layoutX="209.0" layoutY="199.0" prefHeight="27.0" prefWidth="142.0" />
-            <Label alignment="CENTER" layoutX="14.0" layoutY="250.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
+            <TextField fx:id="reinsctiprion_matricule" layoutX="209.0" layoutY="192.0" prefHeight="27.0" prefWidth="142.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="238.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="reinsctiprion_Nom" layoutX="77.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-            <Label alignment="CENTER" layoutX="23.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
+            <TextField fx:id="reinsctiprion_Nom" layoutX="77.0" layoutY="267.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <Label alignment="CENTER" layoutX="23.0" layoutY="308.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
             </Label>
-            <TextField fx:id="reinsctiprion_PreNom" layoutX="77.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-            <Label alignment="CENTER" layoutX="273.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
+            <TextField fx:id="reinsctiprion_PreNom" layoutX="77.0" layoutY="344.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <Label alignment="CENTER" layoutX="273.0" layoutY="308.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="273.0" layoutY="244.0" prefHeight="35.0" prefWidth="155.0" text="Date De Naissence :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
+            <Label alignment="CENTER" layoutX="273.0" layoutY="232.0" prefHeight="35.0" prefWidth="155.0" text="Date De Naissence :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>
             </Label>
             <Button fx:id="AJT_D_ConfirmerButton" layoutX="266.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleConfirmerButton" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
-            <TextField fx:id="reinsctiprion_Date" layoutX="321.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-            <TextField fx:id="reinsctiprion_GroupID" layoutX="321.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <TextField fx:id="reinsctiprion_Date" layoutX="321.0" layoutY="267.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <TextField fx:id="reinsctiprion_GroupID" layoutX="321.0" layoutY="344.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
             <Button fx:id="fermer_button" layoutX="471.0" layoutY="-1.0" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
                <font>
                   <Font name="Arial" size="13.0" />
@@ -62,12 +62,12 @@
             </Button>
             <Circle fx:id="234shape" fill="#1f75ff" layoutX="487.0" layoutY="143.0" radius="31.0" stroke="#1f75ff" strokeType="INSIDE" />
             <Circle fx:id="2344shape" fill="#1f75ff" layoutX="451.0" layoutY="100.0" radius="12.0" stroke="#1f75ff" strokeType="INSIDE" />
-            <Label alignment="CENTER" layoutX="147.0" layoutY="398.0" prefHeight="22.0" prefWidth="206.0" text="Date De Labendonment :" textFill="#4b4b4b">
+            <Label alignment="CENTER" layoutX="147.0" layoutY="394.0" prefHeight="22.0" prefWidth="206.0" text="Date De Labendonment :" textFill="#4b4b4b">
                <font>
                   <Font name="Calibri" size="19.0" />
                </font>
             </Label>
-            <DatePicker layoutX="161.0" layoutY="428.0" style="-fx-border-color: Black;" />
+            <DatePicker layoutX="161.0" layoutY="424.0" style="-fx-border-color: Black;" />
             <Button fx:id="AJT_D_RefuserButton" layoutX="112.0" layoutY="479.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Refuser" textFill="#3cd14e" />
          </children>
       </Pane>

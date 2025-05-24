@@ -54,14 +54,14 @@
       </Label>
 
 
-      <Button fx:id="add_Acc_button" layoutX="634.0" layoutY="145.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="38.0" prefWidth="160.0" text="+ Ajouter un compte" textFill="#1f75ff">
+      <Button fx:id="add_Acc_button" layoutX="371.0" layoutY="145.0" mnemonicParsing="false" onAction="#ajouter_compte" prefHeight="38.0" prefWidth="160.0" text="+ Ajouter un compte" textFill="#1f75ff">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
 
 
-      <Button fx:id="add_students_button" layoutX="809.0" layoutY="146.0" mnemonicParsing="false" onAction="#selectFile" prefHeight="38.0" prefWidth="175.0" text="Ajouter des étudiants" textFill="#1f75ff">
+      <Button fx:id="add_students_button" layoutX="546.0" layoutY="146.0" mnemonicParsing="false" onAction="#selectFile" prefHeight="38.0" prefWidth="175.0" text="Ajouter des étudiants" textFill="#1f75ff">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
@@ -149,6 +149,11 @@
             <Font name="Arial" size="13.0" />
          </font>
       </Button>
+      <ImageView fitHeight="263.0" fitWidth="263.0" layoutX="748.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/Timeline_1_00057600.png" />
+         </image>
+      </ImageView>
 
    </children>
 

@@ -49,7 +49,11 @@ public class MenuViewController {
     @FXML private VBox requestsContainer;
     @FXML private Parent mainRoot;
     @FXML
+    private Button return_button;
+    @FXML
     private VBox slid_sbox;
+    @FXML
+    private Pane mainRoot_profile;
 
     private List<Conge> allConges;
     private Admin currentAdmin;
@@ -256,6 +260,7 @@ public class MenuViewController {
         slide2.setToY(0);
         slide2.play();
     }
+
     @FXML
     public void switchScene1 () {
         TranslateTransition slide = new TranslateTransition(Duration.seconds(0.3), slid_sbox);
@@ -264,5 +269,17 @@ public class MenuViewController {
         TranslateTransition slide2 = new TranslateTransition(Duration.seconds(0.3), switch_chap);
         slide2.setToY(51);
         slide2.play();
+    }
+    @FXML
+    public void Profile_button () {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.2), mainRoot_profile);
+        slide.setToX(255);
+        slide.play();
+    }
+    @FXML
+    public void Return_button () {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.2), mainRoot_profile);
+        slide.setToX(0);
+        slide.play();
     }
 }

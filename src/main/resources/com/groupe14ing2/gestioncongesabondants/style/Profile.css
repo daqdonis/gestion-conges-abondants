@@ -1,6 +1,7 @@
 #Profile_Logout_button{
     -fx-background-color: RED;
     -fx-text-fill: WHITE;
+    -fx-background-radius: 20px;
 }
 
 #Profile_GestionDesComptButton {
@@ -11,4 +12,31 @@
 #Profile_Logout_button:hover{
     -fx-background-color: WHITE;
     -fx-text-fill: RED;
+    -fx-background-radius: 20px;
+}
+
+    #Profile_GestionDesComptButton:hover{
+        -fx-background-color: #0249a1;
+        -fx-text-fill: white;
+        -fx-background-radius: 200px;
+        -fx-font-size: 14px;
+        -fx-font-weight: 900;
+        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2); /* X=0, Y=5 */
+    }
+    #Profile_GestionDesComptButton{
+        -fx-background-color: #4f92ff;
+        -fx-text-fill: white;
+        -fx-background-radius: 200px;
+        -fx-font-size: 14px;
+        -fx-font-weight: 900;
+    }
+#return_button{
+    -fx-background-color: transparent;
+}
+#return_button:hover{
+    -fx-background-color: transparent;
+    -fx-text-fill: #4f92ff;
+}
+#mainRoot_profile{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2); /* X=0, Y=5 */
 }
