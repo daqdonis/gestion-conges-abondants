@@ -122,7 +122,6 @@ public class LoginViewController {
             }
         };
 
-        controller.setSwitchAction(switchMenu);
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);

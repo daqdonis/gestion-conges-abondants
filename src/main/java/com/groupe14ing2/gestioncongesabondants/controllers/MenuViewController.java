@@ -2,6 +2,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.application.Platform;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -45,6 +48,8 @@ public class MenuViewController {
     @FXML private ScrollPane scrollPane;
     @FXML private VBox requestsContainer;
     @FXML private Parent mainRoot;
+    @FXML
+    private VBox slid_sbox;
 
     private List<Conge> allConges;
     private Admin currentAdmin;
@@ -64,6 +69,18 @@ public class MenuViewController {
         text_field_rechercher_demande.textProperty().addListener((observable, oldValue, newValue) -> {
             filterDemands(newValue);
         });
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
+
+                Pane a = fxmlLoader.load();
+                MenuGestionAbdandenementController tupleController = fxmlLoader.getController();
+                tupleController.setMenuController(this);
+                slid_sbox.getChildren().add(a);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         refreshTable();
     }
 
@@ -227,8 +244,23 @@ public class MenuViewController {
         System.exit(0);
     }
 
+
     @FXML
-    public void setSwitchAction(Consumer<ActionEvent> f) {
-        gestino_des_cong_button.setOnAction(e -> f.accept(e));
+    public void switchScene2 () {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.3), slid_sbox);
+        slide.setToY(0);
+        slide.play();
+        TranslateTransition slide2 = new TranslateTransition(Duration.seconds(0.3), switch_chap);
+        slide2.setToY(0);
+        slide2.play();
+    }
+    @FXML
+    public void switchScene1 () {
+        TranslateTransition slide = new TranslateTransition(Duration.seconds(0.3), slid_sbox);
+        slide.setToY(-750);
+        slide.play();
+        TranslateTransition slide2 = new TranslateTransition(Duration.seconds(0.3), switch_chap);
+        slide2.setToY(51);
+        slide2.play();
     }
 }

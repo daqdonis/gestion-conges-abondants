@@ -72,15 +72,10 @@ public class MenuGestionAbdandenementController {
     private ScrollPane scrollPane;
     @FXML
     private VBox requestsContainer;
+    private MenuViewController menuController;
 
     @FXML
     public void initialize() {
-        myPieChart.getData().addAll(
-                new PieChart.Data("", 20),
-                new PieChart.Data("", 40),
-                new PieChart.Data("", 12)
-        );
-
         refreshTable();
     }
 
@@ -213,4 +208,8 @@ public class MenuGestionAbdandenementController {
     public void setSwitchAction(Consumer<ActionEvent> f) {
         gestion_des_abondant_button.setOnAction(e -> f.accept(e));
     }
+    public void setMenuController(MenuViewController menuController) {
+        this.menuController = menuController;
+    }
+
 }
