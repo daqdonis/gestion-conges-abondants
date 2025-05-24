@@ -861,4 +861,12 @@ public class DatabaseController extends DatabaseLink {
     public java.sql.Connection getConnection() {
         return connection;
     }
+
+    public void deleteAbandonment(long idEtu) throws SQLException {
+        String sql = "DELETE FROM Abondant WHERE id_etu = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idEtu);
+            stmt.executeUpdate();
+        }
+    }
 }

@@ -94,6 +94,7 @@ public class MenuGestionAbdandenementController {
                     HBox tupleView = loader.load();
 
                     TupleDemandeAbandonmentController tupleController = loader.getController();
+                    tupleController.setMenuController(this);
                     tupleController.setData(request);
 
                     requestsContainer.getChildren().add(tupleView);
