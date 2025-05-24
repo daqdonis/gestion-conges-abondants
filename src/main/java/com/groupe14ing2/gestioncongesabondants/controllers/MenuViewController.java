@@ -54,14 +54,6 @@ public class MenuViewController {
     private List<Conge> allConges;
     private Admin currentAdmin;
 
-    public void setAdmin(Admin admin) {
-        this.currentAdmin = admin;
-    }
-
-    public Admin getAdmin() {
-        return this.currentAdmin;
-    }
-
     @FXML
     public void initialize() {
         myPieChart.setLabelsVisible(false);
@@ -69,19 +61,29 @@ public class MenuViewController {
         text_field_rechercher_demande.textProperty().addListener((observable, oldValue, newValue) -> {
             filterDemands(newValue);
         });
+        refreshTable();
+    }
+
+    public void setAdmin(Admin admin) {
+        this.currentAdmin = admin;
+        // Load the abandonment management view after admin is set
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Menu-Gestion-Abandonment.fxml"));
 
-                Pane a = fxmlLoader.load();
-                MenuGestionAbdandenementController tupleController = fxmlLoader.getController();
-                tupleController.setMenuController(this);
-                slid_sbox.getChildren().add(a);
+            Pane a = fxmlLoader.load();
+            MenuGestionAbdandenementController tupleController = fxmlLoader.getController();
+            tupleController.setMenuController(this);
+            tupleController.setAdmin(this.currentAdmin);
+            slid_sbox.getChildren().add(a);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshTable();
+    }
+
+    public Admin getAdmin() {
+        return this.currentAdmin;
     }
 
     private void updatePieChart(int accepteCount, int enAttenteCount, int refuseCount) {
