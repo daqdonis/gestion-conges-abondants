@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
@@ -75,8 +76,32 @@ public class MenuGestionAbdandenementController {
     private MenuViewController menuController;
 
     @FXML
+    private Label Totalstudent;
+
+    @FXML
+    private Label Totalabondant;
+
+    @FXML
     public void initialize() {
         refreshTable();
+        updateCounters();
+    }
+
+    private void updateCounters() {
+        try {
+            DatabaseController db = new DatabaseController();
+            int totalStudents = db.getTotalStudents();
+            int totalAbondants = db.getTotalAbondants();
+            
+            Totalstudent.setText("Nombre total d'étudiants: " + totalStudents);
+            Totalabondant.setText("Nombre d'abandons: " + totalAbondants);
+            
+            // Style the labels
+            Totalstudent.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1f75ff;");
+            Totalabondant.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #ff4444;");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshTable() {
@@ -102,6 +127,9 @@ public class MenuGestionAbdandenementController {
                     e.printStackTrace();
                 }
             }
+            
+            // Update counters after refreshing the table
+            updateCounters();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -869,4 +869,26 @@ public class DatabaseController extends DatabaseLink {
             stmt.executeUpdate();
         }
     }
+
+    public int getTotalStudents() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Etudiant";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    public int getTotalAbondants() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Abondant";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
 }
