@@ -240,12 +240,12 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="100.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hgfdhgdfhdfghfgh">
+                  <Text fx:id="prenom" layoutX="100.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hgfdhgdfhdfghfgh">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="99.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tgfhshgfshgfshfsghfgext">
+                  <Text fx:id="email" layoutX="100.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tgfhshgfshgfshfsgfhgext">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>

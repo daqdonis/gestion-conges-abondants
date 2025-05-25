@@ -66,9 +66,18 @@ public class GestionComptesController {
 
     File selectedFile;
 
+    private Admin currentAdmin;
+
     @FXML
     public void initialize() {
         refreshTable();
+    }
+
+    public void setAdmin(Admin admin) {
+        this.currentAdmin = admin;
+        if (user_Name_Lable != null) {
+            user_Name_Lable.setText(admin.getNom() + " " + admin.getPrenom());
+        }
     }
 
     @FXML

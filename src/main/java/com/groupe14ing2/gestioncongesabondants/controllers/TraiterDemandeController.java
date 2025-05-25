@@ -73,6 +73,7 @@ public class TraiterDemandeController  {
     }
 
     public void setConge(Conge conge) {
+        this.conge = conge; // Store the Conge object
         if (conge != null && conge.getEtudiant() != null) {
             traiter_nom.setText(conge.getEtudiant().getNom());
             traiter_prenom.setText(conge.getEtudiant().getPrenom());
@@ -91,25 +92,34 @@ public class TraiterDemandeController  {
     @FXML
     private void handleRefuser() {
         try {
-            String m = "Bonjour "+ traiter_nom.getText()+ " " + traiter_prenom.getText() +"\n" +
+            if (conge == null) {
+                showAlert("Erreur", "Données de congé non disponibles");
+                return;
+            }
+
+            Etudiant etudiant = conge.getEtudiant();
+            if (etudiant == null) {
+                showAlert("Erreur", "Données de l'étudiant non disponibles");
+                return;
+            }
+
+            String m = "Bonjour "+ etudiant.getNom() + " " + etudiant.getPrenom() +"\n" +
                     "\n" +
                     "Nous vous informons que votre demande de congé a été refusée.\n" +
                     "\n" +
                     "Détails de la demande :\n" +
-                    "- Congé numero : '"+traiter_numero_demande.getText()+"\n" +
+                    "- Congé numero : '"+ conge.getIdDemande() +"\n" +
                     "- Durée : 1 ans \n" +
-                    "- Type de congé : Académique\n" +
+                    "- Type de congé : " + conge.getType() + "\n" +
                     "\n" +
                     "Pour toute question ou pour obtenir des précisions sur les raisons du refus, veuillez nous contacter.\n" +
                     "\n" +
                     "Cordialement,\n" +
                     "L'équipe de gestion des congés";
-            String idDemande = traiter_numero_demande.getText();
-            int idE = stringToInt(traiter_matricule_etudiant.getText());
-            DatabaseController dbController = new DatabaseController();
-            Etudiant etudiant = dbController.getEtudiant(idE);
-            dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSÉ);
 
+            String idDemande = conge.getIdDemande();
+            DatabaseController dbController = new DatabaseController();
+            dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSÉ);
 
             // Call the status update callback first
             if (onStatusUpdated != null) {
@@ -126,7 +136,13 @@ public class TraiterDemandeController  {
             }
 
             showAlert("Succès", "Demande refusée avec succès.");
-            sendEmail(etudiant.getemail_etu(),m);
+            
+            if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
+                sendEmail(etudiant.getemail_etu(), m);
+            } else {
+                System.out.println("Warning: Student email not available, skipping email notification");
+            }
+            
             fermer_button_onAction(); // fermer la fenêtre après refus
 
         } catch (Exception e) {
@@ -138,34 +154,48 @@ public class TraiterDemandeController  {
     @FXML
     private void handleAccepter() {
         try {
-            String m = "Bonjour "+ traiter_nom.getText()+ " " + traiter_prenom.getText() +
+            if (conge == null) {
+                showAlert("Erreur", "Données de congé non disponibles");
+                return;
+            }
+
+            Etudiant etudiant = conge.getEtudiant();
+            if (etudiant == null) {
+                showAlert("Erreur", "Données de l'étudiant non disponibles");
+                return;
+            }
+
+            String m = "Bonjour "+ etudiant.getNom() + " " + etudiant.getPrenom() +
                     "\n" +
                     "Nous avons le plaisir de vous informer que votre demande de congé a été acceptée.\n" +
                     "\n" +
                     "Détails de la demande :\n" +
-                    "- Congé numero : '"+traiter_numero_demande.getText()+"\n" +
+                    "- Congé numero : '"+ conge.getIdDemande() +"\n" +
                     "- Durée : 1 ans \n" +
-                    "- Type de congé : Académique\n" +
+                    "- Type de congé : " + conge.getType() + "\n" +
                     "\n" +
                     "Veuillez nous contacter si vous avez des questions ou besoin de précisions supplémentaires.\n" +
                     "\n" +
                     "Cordialement,\n" +
                     "L'équipe de gestion des congés\n";
 
-            String idDemande = traiter_numero_demande.getText();
+            String idDemande = conge.getIdDemande();
             DatabaseController dbController = new DatabaseController();
-            Etudiant etudiant = dbController.getEtudiant(conge.getIdEtu());
+            
             String updateDateSql = "UPDATE Conge SET date_demande = CURRENT_DATE() WHERE id_demande = ?";
             try (PreparedStatement stmt = dbController.getConnection().prepareStatement(updateDateSql)) {
                 stmt.setString(1, idDemande);
                 stmt.executeUpdate();
             }
+            
             dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);
+            
             if (onStatusUpdated != null) {
                 javafx.application.Platform.runLater(() -> {
                     onStatusUpdated.run();
                 });
             }
+            
             if (menuController != null) {
                 javafx.application.Platform.runLater(() -> {
                     menuController.refreshTable();
@@ -173,7 +203,13 @@ public class TraiterDemandeController  {
             }
 
             showAlert("Succès", "Demande acceptée avec succès.");
-            sendEmail(etudiant.getemail_etu(),m);
+            
+            if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
+                sendEmail(etudiant.getemail_etu(), m);
+            } else {
+                System.out.println("Warning: Student email not available, skipping email notification");
+            }
+            
             fermer_button_onAction(); // fermer la fenêtre après acceptation
 
         } catch (Exception e) {
@@ -198,52 +234,45 @@ public class TraiterDemandeController  {
         button_justification.setOnAction(e -> f.accept(null));
     }
 
-    private void sendEmail(String recipientMail,String mess) throws MessagingException {
-        Properties properties = new Properties() ;
-
-        properties.put("mail.smtp.auth","true");
-        properties.put("mail.smtp.starttls.enable","true");
-        properties.put("mail.smtp.host","smtp.gmail.com");
-        properties.put("mail.smtp.port","587");
-
-        String myEmail = "Abdallahbenmoussa488@gmail.com" ;
-        String passWord = "sulj xqma ewsn lsbw";
-
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myEmail,passWord);
-            }
-        });
-
-        Message message = prepareMesage(session,myEmail,recipientMail,mess);
-
-        Transport.send(message);
-        if(message != null){
-            new Alert(Alert.AlertType.CONFIRMATION,"send EmailController succefuly").show();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Erreur try Againe").show();
+    private void sendEmail(String to, String msg) {
+        if (to == null || to.trim().isEmpty()) {
+            System.out.println("❌ Email non envoyé: adresse email manquante");
+            return;
         }
-    }
 
-    private Message prepareMesage(Session session, String myEmail, String recipientMail, String msg) {
+        String from = "gestioncongesabondants@gmail.com";
+        Properties properties = new Properties();
+        
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
         try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myEmail));
-            message.setRecipients(Message.RecipientType.TO,
-                    new InternetAddress[]{
-                            new InternetAddress(recipientMail)
-                    });
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("abdallahbenmoussa488@gmail.com", "sulj xqma ewsn lsbw");
+                }
+            });
 
-            message.setSubject("Mise à jour de votre demande de congé");
-            message.setText(msg);
-
-            return message;
-        }catch (Exception e){
-            Logger.getLogger(TraiterDemandeController.class.getName()).log(Level.SEVERE,null,e);
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Réponse à votre demande de congé", "UTF-8");
+            message.setText(msg, "UTF-8");
+            Transport.send(message);
+            
+            System.out.println("✅ Email envoyé avec succès à: " + to);
+            
+        } catch (MessagingException mex) {
+            System.out.println("❌ Échec de l'envoi de l'email à: " + to);
+            mex.printStackTrace();
+            showAlert("Erreur d'envoi", "L'email n'a pas pu être envoyé: " + mex.getMessage());
         }
-        return null;
     }
+
     public int stringToInt(String str) {
         try {
             return Integer.parseInt(str);

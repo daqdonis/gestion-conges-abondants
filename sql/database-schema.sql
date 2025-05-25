@@ -51,7 +51,7 @@ CREATE TABLE Etudiant(
                          prenom VARCHAR(255) NOT NULL,
                          date_naiss DATE NOT NULL,
                          id_groupe VARCHAR(15) NOT NULL,
-                        email_etu VARCHAR(35) NOT NULL,
+                         email_etu VARCHAR(35) NOT NULL,
                          FOREIGN KEY (id_groupe) REFERENCES Groupe(id_groupe)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -111,7 +111,6 @@ CREATE TABLE Action_admin(
                              FOREIGN KEY (pk_abond) REFERENCES Abondant(id_etu)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Reintegrated students (to prevent them from submitting new requests)
 CREATE TABLE Reintegrated_Students(
     id_etu BIGINT PRIMARY KEY,
     reintegration_date DATE NOT NULL,

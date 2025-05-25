@@ -8,9 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
@@ -18,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -48,12 +51,15 @@ public class MenuViewController {
     @FXML private ScrollPane scrollPane;
     @FXML private VBox requestsContainer;
     @FXML private Parent mainRoot;
-    @FXML
-    private Button return_button;
-    @FXML
-    private VBox slid_sbox;
-    @FXML
-    private Pane mainRoot_profile;
+    @FXML private Button return_button;
+    @FXML private VBox slid_sbox;
+    @FXML private Pane mainRoot_profile;
+    @FXML private Button Profile_GestionDesComptButton;
+    @FXML private Button Profile_Logout_button;
+    @FXML private Label PROFILE_userName_Lable;
+    @FXML private Text nom;
+    @FXML private Text prenom;
+    @FXML private Text email;
 
     private List<Conge> allConges;
     private Admin currentAdmin;
@@ -66,6 +72,42 @@ public class MenuViewController {
             filterDemands(newValue);
         });
         refreshTable();
+        
+        // Add event handler for Gestion Des Comptes button
+        Profile_GestionDesComptButton.setOnAction(event -> {
+            try {
+                switchToComptesMenu(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to switch to Gestion Des Comptes view");
+            }
+        });
+        
+        // Add event handler for Logout button
+        Profile_Logout_button.setOnAction(event -> {
+            try {
+                logout(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Error", "Failed to logout");
+            }
+        });
+
+        // Set profile information if admin is already set
+        if (currentAdmin != null) {
+            if (PROFILE_userName_Lable != null) {
+                PROFILE_userName_Lable.setText(currentAdmin.getNom() + " " + currentAdmin.getPrenom());
+            }
+            if (nom != null) {
+                nom.setText(currentAdmin.getNom());
+            }
+            if (prenom != null) {
+                prenom.setText(currentAdmin.getPrenom());
+            }
+            if (email != null) {
+                email.setText(currentAdmin.getEmail());
+            }
+        }
     }
 
     public void setAdmin(Admin admin) {
@@ -80,6 +122,20 @@ public class MenuViewController {
             tupleController.setMenuController(this);
             tupleController.setAdmin(this.currentAdmin);
             slid_sbox.getChildren().add(a);
+
+            // Update profile information
+            if (PROFILE_userName_Lable != null) {
+                PROFILE_userName_Lable.setText(admin.getNom() + " " + admin.getPrenom());
+            }
+            if (nom != null) {
+                nom.setText(admin.getNom());
+            }
+            if (prenom != null) {
+                prenom.setText(admin.getPrenom());
+            }
+            if (email != null) {
+                email.setText(admin.getEmail());
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -281,5 +337,39 @@ public class MenuViewController {
         TranslateTransition slide = new TranslateTransition(Duration.seconds(0.2), mainRoot_profile);
         slide.setToX(0);
         slide.play();
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/login-view.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    @FXML
+    private void switchToComptesMenu(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller and set the admin
+        GestionComptesController controller = loader.getController();
+        if (controller != null && currentAdmin != null) {
+            controller.setAdmin(currentAdmin);
+        }
+
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        
+        String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 }

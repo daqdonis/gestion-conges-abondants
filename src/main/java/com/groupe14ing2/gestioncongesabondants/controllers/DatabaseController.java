@@ -572,7 +572,8 @@ public class DatabaseController extends DatabaseLink {
                         rs.getString("e.nom"),
                         rs.getString("e.prenom"),
                         rs.getDate("e.date_naiss"),
-                        rs.getString("e.id_groupe")
+                        rs.getString("e.id_groupe"),
+                        rs.getString("e.email_etu")
                 );
 
                 Conge conge = new Conge(
