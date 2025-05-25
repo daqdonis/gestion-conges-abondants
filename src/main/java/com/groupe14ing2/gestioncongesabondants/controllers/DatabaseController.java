@@ -80,12 +80,27 @@ public class DatabaseController extends DatabaseLink {
     public void updateAdmin(Admin admin) throws SQLException {
         String sql = "UPDATE Admin SET nom = ?, prenom = ?, roles = ?, email = ?, mot_passe = ? WHERE id_admin = ?";
 
+        // Get the current admin to check if password has changed
+        Admin currentAdmin = getAdmin(admin.getIdAdmin());
+        String passwordToUse;
+        
+        if (admin.getMotPasse() == null || admin.getMotPasse().isEmpty()) {
+            // If no new password provided, keep the existing password
+            passwordToUse = currentAdmin.getMotPasse();
+        } else if (admin.getMotPasse().equals(currentAdmin.getMotPasse())) {
+            // If the passwords match (already hashed), use as is
+            passwordToUse = admin.getMotPasse();
+        } else {
+            // If a new password is provided, hash it
+            passwordToUse = PasswordUtils.hashPassword(admin.getMotPasse());
+        }
+
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, admin.getNom());
         preparedStatement.setString(2, admin.getPrenom());
         preparedStatement.setString(3, admin.getRoles().toString().toLowerCase());
         preparedStatement.setString(4, admin.getEmail());
-        preparedStatement.setString(5, PasswordUtils.hashPassword(admin.getMotPasse()));
+        preparedStatement.setString(5, passwordToUse);
         preparedStatement.setString(6, admin.getIdAdmin());
 
         preparedStatement.executeUpdate();
@@ -102,9 +117,9 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("id_admin"),
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
-                    RoleAdmin.valueOf(resultSet.getString("roles").toUpperCase().replace("ADMIN_", "ADMIN")),
+                    RoleAdmin.fromDatabaseValue(resultSet.getString("roles")),
                     resultSet.getString("email"),
-                    null
+                    resultSet.getString("mot_passe")
             );
         }
         return null;
@@ -122,7 +137,7 @@ public class DatabaseController extends DatabaseLink {
                             rs.getString("id_admin"),
                             rs.getString("nom"),
                             rs.getString("prenom"),
-                            RoleAdmin.valueOf(rs.getString("roles").toUpperCase().replaceAll("_", "")),
+                            RoleAdmin.fromDatabaseValue(rs.getString("roles")),
                             rs.getString("email"),
                             null
                     )
@@ -781,7 +796,7 @@ public class DatabaseController extends DatabaseLink {
                         rs.getString("id_admin"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        RoleAdmin.valueOf(rs.getString("roles").toUpperCase().replace("ADMIN_", "ADMIN")),
+                        RoleAdmin.fromDatabaseValue(rs.getString("roles")),
                         rs.getString("email"),
                         null
                 );

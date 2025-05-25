@@ -360,23 +360,39 @@ public class MenuViewController {
 
     @FXML
     private void switchToComptesMenu(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
-        Parent root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
+            Parent root = loader.load();
 
-        // Get the controller and set the admin
-        GestionComptesController controller = loader.getController();
-        if (controller != null && currentAdmin != null) {
-            controller.setAdmin(currentAdmin);
+            // Get the controller and set the admin BEFORE showing the view
+            GestionComptesController controller = loader.getController();
+            if (controller != null && currentAdmin != null) {
+                controller.setAdmin(currentAdmin);
+            } else {
+                System.err.println("Error: Controller or Admin is null");
+                return;
+            }
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+
+            Window mainWindow = mainRoot.getScene().getWindow();
+            stage.initOwner(mainWindow);
+            stage.initModality(Modality.WINDOW_MODAL);
+
+            GaussianBlur blur = new GaussianBlur(10);
+            mainRoot.setEffect(blur);
+            stage.setOnHidden(e -> mainRoot.setEffect(null));
+
+            String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
+            scene.getStylesheets().add(css);
+
+            stage.centerOnScreen();
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to open Gestion des Comptes view");
         }
-
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        
-        String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
     }
 }

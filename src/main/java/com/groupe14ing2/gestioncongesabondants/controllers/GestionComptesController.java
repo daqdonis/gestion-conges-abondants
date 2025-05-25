@@ -67,10 +67,14 @@ public class GestionComptesController {
     File selectedFile;
 
     private Admin currentAdmin;
+    private List<Admin> allAdmins = new ArrayList<>();
 
     @FXML
     public void initialize() {
-        refreshTable();
+        // Add listener to search field
+        filtrer_textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterAdmins(newValue);
+        });
     }
 
     public void setAdmin(Admin admin) {
@@ -78,6 +82,43 @@ public class GestionComptesController {
         if (user_Name_Lable != null) {
             user_Name_Lable.setText(admin.getNom() + " " + admin.getPrenom());
         }
+        refreshTable();
+    }
+
+    private void filterAdmins(String searchText) {
+        requestsContainer.getChildren().clear();
+        try {
+            DatabaseController db = new DatabaseController();
+            List<Admin> admins = db.getAllAdmins();
+            
+            for (Admin admin : admins) {
+                if (admin.getRoles() == RoleAdmin.ADMINCONGEABANDONT && 
+                    !admin.getEmail().equals(currentAdmin.getEmail()) &&
+                    (searchText == null || searchText.isEmpty() || 
+                     admin.getNom().toLowerCase().contains(searchText.toLowerCase()))) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleComptes.fxml"));
+                        HBox tupleView = loader.load();
+
+                        TupleAdminController tupleController = loader.getController();
+                        tupleController.setData(admin);
+                        tupleController.setGestionComptesController(this);
+
+                        requestsContainer.getChildren().add(tupleView);
+                    } catch (IOException e) {
+                        System.err.println("Erreur de chargement du TupleAdmin.fxml");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur base de données");
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshTable() {
+        filterAdmins(filtrer_textField.getText());
     }
 
     @FXML
@@ -115,37 +156,6 @@ public class GestionComptesController {
             stage.show();
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-    }
-
-    public void refreshTable() {
-        System.out.println("Refreshing table...");
-        try {
-            DatabaseController db = new DatabaseController();
-            List<Admin> admins = db.getAllAdmins();
-
-            requestsContainer.getChildren().clear();
-
-            for (Admin admin : admins) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleComptes.fxml"));
-                    HBox tupleView = loader.load(); // charger le FXML
-
-                    TupleAdminController tupleController = loader.getController();
-
-                    tupleController.setData(admin); // injecter les données
-                    tupleController.setGestionComptesController(this); // injecter le contrôleur MenuViewController
-
-
-                    requestsContainer.getChildren().add(tupleView); // ajouter au container
-                } catch (IOException e) {
-                    System.err.println("Erreur de chargement du TupleAdmin.fxml");
-                    e.printStackTrace();
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur base de données");
-            e.printStackTrace();
         }
     }
 

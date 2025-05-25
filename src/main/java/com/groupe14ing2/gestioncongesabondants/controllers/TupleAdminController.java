@@ -33,18 +33,20 @@ public class TupleAdminController {
     private Button view_actions;
 
     @FXML
-    private Button modifier_button;
+    private Button modifer_button;
 
     @FXML
     private Button supp_button;
 
     private GestionComptesController gestionComptesController;
+    private Admin currentAdmin;
 
     public void setGestionComptesController(GestionComptesController gestionComptesController) {
         this.gestionComptesController = gestionComptesController;
     }
 
     public void setData(Admin admin) {
+        this.currentAdmin = admin;
         nomText.setText(admin.getNom());
         prenomText.setText(admin.getPrenom());
         emailText.setText(admin.getEmail());
@@ -57,6 +59,25 @@ public class TupleAdminController {
                 gestionComptesController.refreshTable();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
+            }
+        });
+
+        modifer_button.setOnAction(e -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Modifer-compte.fxml"));
+                Parent root = loader.load();
+
+                ModifierCompteController controller = loader.getController();
+                controller.setGestionComptesController(gestionComptesController);
+                controller.setAdminToModify(admin);
+
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.setTitle("Modifier un compte");
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
 
