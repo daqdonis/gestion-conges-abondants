@@ -86,21 +86,23 @@ public class AjouterDemandeController {
             // Créer l'objet Conge avec les données
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
-                    Date.valueOf(AJT_D_Date.getText()),
+                    new Date(LocalDate.now().toEpochDay()),
                     2, // Durée par défaut
                     EtatTraitement.ENATTENTE,
-                    fileInputStream
+                    fileInputStream,
+                    typeChoiceBox.getSelectionModel().getSelectedItem()
             );
             conge.setEtudiant(etudiant);
-
+            conge.setType(typeChoiceBox.getSelectionModel().getSelectedItem());
             // Ajouter à la base de données
             dbController.addConge(conge);
             System.out.println(conge.getIdDemande());
             System.out.println(menuController.getAdmin().getNom());
+            System.out.println("C" + (LocalDate.now().getYear() - 100) + etudiant.getIdEtu());
             dbController.addActionAdmin(new ActionAdmin(
                     menuController.getAdmin().getIdAdmin(),
                     "nouveau congé pour " + etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom(),
-                    "C" + (Date.valueOf(AJT_D_Date.getText()).getYear() - 100) + etudiant.getIdEtu(),
+                    "C" + (LocalDate.now().getYear() - 100) + etudiant.getIdEtu(),
                     'C'
             ));
 

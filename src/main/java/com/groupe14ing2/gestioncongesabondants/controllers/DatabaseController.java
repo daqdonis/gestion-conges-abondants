@@ -454,7 +454,7 @@ public class DatabaseController extends DatabaseLink {
         rs.next();
         String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);
 
-        String sql = "INSERT IGNORE INTO Conge (id_demande, id_etu, date_demande, duree, etat, justificatif) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT IGNORE INTO Conge (id_demande, id_etu, date_demande, duree, etat,justificatif, type) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, id);
@@ -462,6 +462,7 @@ public class DatabaseController extends DatabaseLink {
             stmt.setDate(3, conge.getDateDemande());
             stmt.setInt(4, (int)conge.getDuree());
             stmt.setString(5, conge.getEtat().toString());
+            stmt.setString(7, conge.getType().toString());
 
             if (conge.getJustificatif() != null) {
                 try {
@@ -537,7 +538,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getInt("duree"),
                     EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
                     resultSet.getBlob("justificatif") != null ?
-                            resultSet.getBlob("justificatif").getBinaryStream() : null
+                            resultSet.getBlob("justificatif").getBinaryStream() : null,
+                    TypeConge.valueOf(resultSet.getString("type").toUpperCase().replaceAll(" ", ""))
             );
             String typeStr = resultSet.getString("type");
             if (typeStr != null) {
@@ -566,7 +568,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
                     EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
-                    (FileInputStream) resultSet.getBlob("justificatif")
+                    (FileInputStream) resultSet.getBlob("justificatif"),
+                    TypeConge.valueOf(resultSet.getString("type").toUpperCase().replaceAll(" ", ""))
             ));
         }
 
@@ -596,7 +599,8 @@ public class DatabaseController extends DatabaseLink {
                         rs.getInt("c.duree"),
                         EtatTraitement.valueOf(rs.getString("c.etat").replaceAll(" ", "").toUpperCase()),
                         rs.getBlob("c.justificatif") != null ?
-                                rs.getBlob("c.justificatif").getBinaryStream() : null
+                                rs.getBlob("c.justificatif").getBinaryStream() : null,
+                        TypeConge.valueOf(rs.getString("type").toUpperCase().replaceAll(" ", ""))
                 );
                 conge.setEtudiant(etudiant);
                 String typeStr = rs.getString("c.type");
@@ -835,7 +839,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
                     etat,
-                    resultSet.getBinaryStream("justificatif")
+                    resultSet.getBinaryStream("justificatif"),
+                    TypeConge.valueOf(resultSet.getString("type").toUpperCase().replaceAll(" ", ""))
             );
             conge.setEtudiant(etudiant);
             

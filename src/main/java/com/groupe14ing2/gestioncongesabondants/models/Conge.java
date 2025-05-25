@@ -21,17 +21,20 @@ public class Conge implements Serializable {
   private byte[] justificatifData;
 
 
-  public Conge(String idDemande, Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
+  public Conge(String idDemande, Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif, TypeConge type) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
+    System.out.println(type);
+    this.type = type;
     createJustificatifFile(justificatif);
   }
-  public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
+  public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif, TypeConge type) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
+    this.type = type;
     createJustificatifFile(justificatif);
   }
 
