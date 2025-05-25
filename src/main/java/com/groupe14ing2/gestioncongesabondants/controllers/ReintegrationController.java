@@ -25,6 +25,14 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class ReintegrationController {
 
@@ -124,12 +132,6 @@ public class ReintegrationController {
                 return;
             }
 
-            // Debug information
-            System.out.println("Checking student status for matricule: " + matricule);
-            System.out.println("Conge ID: " + conge.getIdDemande());
-            System.out.println("Conge State: " + conge.getEtat());
-            System.out.println("Conge Date: " + conge.getDateDemande());
-
             currentConge = conge;
             Etudiant etudiant = conge.getEtudiant();
 
@@ -137,9 +139,6 @@ public class ReintegrationController {
             nomField.setText(etudiant.getNom());
             prenomField.setText(etudiant.getPrenom());
             groupeField.setText(etudiant.getIdGroupe());
-
-            // Keep the current academic year
-            // Do NOT update anneeScolaireField here as it should show current academic year
 
             // Check if the student's leave request is accepted
             if (conge.getEtat() != EtatTraitement.ACCEPTÉ) {
@@ -153,12 +152,7 @@ public class ReintegrationController {
             LocalDate leaveDate = conge.getDateDemande().toLocalDate();
             LocalDate currentDate = LocalDate.now();
 
-            // Debug information
-            System.out.println("\nTime Check Details:");
-            System.out.println("Current Academic Year: " + getCurrentAcademicYear());
-
             boolean isEligible = isWithinSameOrNextAcademicYear(leaveDate, currentDate);
-            System.out.println("Is Eligible: " + isEligible);
 
             if (!isEligible) {
                 statusLabel.setText("Time limit exceeded (more than 1 year)");
@@ -240,7 +234,7 @@ public class ReintegrationController {
                     currentConge.getEtudiant().getIdEtu(),
                     Date.valueOf(LocalDate.now()),
                     fileInputStream,
-                    EtatTraitement.ENATTENTE
+                    EtatTraitement.ACCEPTÉ
             );
 
             try {
@@ -253,8 +247,23 @@ public class ReintegrationController {
                 // Remove the congé record
                 db.removeConge(currentConge.getIdDemande());
 
+                // Send email notification
+                if (currentConge.getEtudiant() != null && currentConge.getEtudiant().getemail_etu() != null) {
+                    String emailMessage = "Bonjour " + currentConge.getEtudiant().getNom() + " " + currentConge.getEtudiant().getPrenom() + ",\n\n" +
+                            "Nous avons le plaisir de vous informer que votre demande de réintégration a été acceptée.\n\n" +
+                            "Détails de la demande :\n" +
+                            "- Matricule : " + currentConge.getEtudiant().getIdEtu() + "\n" +
+                            "- Date de soumission : " + LocalDate.now() + "\n" +
+                            "- Groupe : " + currentConge.getEtudiant().getIdGroupe() + "\n\n" +
+                            "Vous pouvez maintenant reprendre vos études.\n\n" +
+                            "Cordialement,\n" +
+                            "L'équipe de gestion des congés";
+                    
+                    sendEmail(currentConge.getEtudiant().getemail_etu(), emailMessage);
+                }
+
                 // Show success message
-                showAlert("Success", "Reintegration request submitted successfully.");
+                showAlert("Success", "Reintegration request accepted successfully.");
 
                 // Clear the form
                 clearFields();
@@ -279,6 +288,85 @@ public class ReintegrationController {
         } catch (Exception e) {
             showAlert("Error", "Error processing reintegration: " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleRefuserButton() {
+        try {
+            if (currentConge == null) {
+                showAlert("Error", "No valid leave request found.");
+                return;
+            }
+
+            Etudiant etudiant = currentConge.getEtudiant();
+            if (etudiant == null) {
+                showAlert("Error", "Student data not available.");
+                return;
+            }
+
+            // Send email notification
+            if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
+                String emailMessage = "Bonjour " + etudiant.getNom() + " " + etudiant.getPrenom() + ",\n\n" +
+                        "Nous regrettons de vous informer que votre demande de réintégration a été refusée.\n\n" +
+                        "Détails de la demande :\n" +
+                        "- Matricule : " + etudiant.getIdEtu() + "\n" +
+                        "- Date de soumission : " + LocalDate.now() + "\n" +
+                        "- Groupe : " + etudiant.getIdGroupe() + "\n\n" +
+                        "Pour toute question concernant cette décision, veuillez nous contacter.\n\n" +
+                        "Cordialement,\n" +
+                        "L'équipe de gestion des congés";
+                
+                sendEmail(etudiant.getemail_etu(), emailMessage);
+            }
+
+            // Show message and close window
+            showAlert("Information", "La demande de réintégration a été refusée.");
+            Stage stage = (Stage) fermerButton.getScene().getWindow();
+            stage.close();
+
+        } catch (Exception e) {
+            showAlert("Error", "Error processing refusal: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void sendEmail(String to, String msg) {
+        if (to == null || to.trim().isEmpty()) {
+            System.out.println("❌ Email non envoyé: adresse email manquante");
+            return;
+        }
+
+        String from = "gestioncongesabondants@gmail.com";
+        Properties properties = new Properties();
+        
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+        try {
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("abdallahbenmoussa488@gmail.com", "sulj xqma ewsn lsbw");
+                }
+            });
+
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Confirmation de demande de réintégration", "UTF-8");
+            message.setText(msg, "UTF-8");
+            Transport.send(message);
+            
+            System.out.println("✅ Email envoyé avec succès à: " + to);
+            
+        } catch (MessagingException mex) {
+            System.out.println("❌ Échec de l'envoi de l'email à: " + to);
+            mex.printStackTrace();
+            showAlert("Erreur d'envoi", "L'email n'a pas pu être envoyé: " + mex.getMessage());
         }
     }
 

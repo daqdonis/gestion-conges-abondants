@@ -131,7 +131,6 @@ public class DatabaseController extends DatabaseLink {
         return admins;
     }
 
-    // Etudiant methods
     public void addEtudiant(Etudiant etudiant) throws SQLException {
         String sql = "INSERT IGNORE INTO Etudiant (id_etu, nom, prenom, date_naiss, id_groupe, email_etu) VALUES(?, ?, ?, ?, ?, ?)";
 
@@ -809,7 +808,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     resultSet.getDate("date_naiss"),
-                    resultSet.getString("id_groupe")
+                    resultSet.getString("id_groupe"),
+                    resultSet.getString("email_etu")
             );
 
             String etatStr = resultSet.getString("etat");

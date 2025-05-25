@@ -33,6 +33,9 @@ INSERT INTO Groupe VALUES
 -- Etudiant (8-digit)
 INSERT INTO Etudiant VALUES
 (32011001, 'Dupont', 'Jean', '2000-05-15', 'LIC-S1-G1','yassermhamedi333@gmail.com'),
+(32011004, 'Eggy1', 'Eggy', '2000-05-15', 'LIC-S1-G1','yassermhamedi333@gmail.com'),
+(32011005, 'Eggy2', 'Jean', '2000-05-15', 'LIC-S1-G1','yassermhamedi333@gmail.com'),
+(32011006, 'Eggy3', 'Jean', '2000-05-15', 'LIC-S1-G1','yassermhamedi333@gmail.com'),
 (32011002, 'Martin', 'Sophie', '2001-08-22', 'LIC-S1-G1','hichamhichamhichamou@gmail.com'),
 (32011003, 'Bernard', 'Pierre', '2000-11-30', 'LIC-S1-G2','hichamhichamhichamou@gmail.com');
 
@@ -48,6 +51,9 @@ INSERT INTO Conge VALUES
 
 -- Abondant
 INSERT INTO Abondant VALUES
+(32011001, 'TA001', '2025-03-01'),
+(32011004, 'TA001', '2025-03-01'),
+(32011005, 'TA001', '2025-03-01'),
 (32011003, 'TA001', '2025-03-01');
 
 -- Action_admin
