@@ -234,7 +234,8 @@ public class GestionComptesController {
                                         etudiant.get("nom"),
                                         etudiant.get("prénom"),
                                         Date.valueOf(etudiant.get("date de naissance")),
-                                        groupe.getIdGroupe()
+                                        groupe.getIdGroupe(),
+                                        etudiant.get("code") + "@etu.univ-usto.dz"
                                 ));
                             } catch (SQLException e1) {
                                e1.printStackTrace();
