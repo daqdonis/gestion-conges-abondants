@@ -70,15 +70,8 @@ public class LoginViewController {
 
             if (admin != null) {
                 System.out.println("Login successful for: " + admin.getNom());
-
-                switch (admin.getRoles()) {
-                    case ADMINCONGEABANDONT:
-                        switchToMenu(actionEvent);
-                        break;
-                    case ADMINCOMPTES:
-                        switchToComptesMenu(actionEvent);
-                }
-
+                // Direct all admin roles to the Menu view
+                switchToMenu(actionEvent);
             } else {
                 System.out.println("Login failed - invalid credentials");
                 showAlert("Login Failed", "Invalid username or password");
@@ -89,9 +82,6 @@ public class LoginViewController {
             showAlert("Error", "Login failed: " + e.getMessage());
         }
     }
-
-
-
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -110,7 +100,6 @@ public class LoginViewController {
         MenuViewController controller = loader.getController();
         controller.setAdmin(admin);
 
-
         Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
             @Override
             public void accept(javafx.event.ActionEvent actionEvent) {
@@ -121,7 +110,6 @@ public class LoginViewController {
                 }
             }
         };
-
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -141,7 +129,6 @@ public class LoginViewController {
 
         // Get the controller and set the admin
         MenuGestionAbdandenementController controller = loader.getController();
-
         controller.setAdmin(admin);
 
         Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
@@ -156,26 +143,6 @@ public class LoginViewController {
         };
 
         controller.setSwitchAction(switchMenu);
-
-        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-
-        String css = getClass().getResource("/com/groupe14ing2/gestioncongesabondants/style/Menu_stylesheet.css").toExternalForm();
-        scene.getStylesheets().add(css);
-
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.show();
-    }
-
-    @FXML
-    private void switchToComptesMenu(javafx.event.ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Gestion-Comptes.fxml"));
-        root = loader.load();
-
-        // Get the controller and set the admin
-        GestionComptesController controller = loader.getController();
-        // TODO: Add setAdmin method to GestionComptesController if needed
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -2,6 +2,7 @@ package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
+import com.groupe14ing2.gestioncongesabondants.models.RoleAdmin;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -135,6 +136,12 @@ public class MenuViewController {
             }
             if (email != null) {
                 email.setText(admin.getEmail());
+            }
+
+            // Set visibility of Gestion Des Comptes button based on admin role
+            if (Profile_GestionDesComptButton != null) {
+                Profile_GestionDesComptButton.setVisible(admin.getRoles() == RoleAdmin.ADMINCOMPTES);
+                Profile_GestionDesComptButton.setManaged(admin.getRoles() == RoleAdmin.ADMINCOMPTES);
             }
 
         } catch (IOException e) {
