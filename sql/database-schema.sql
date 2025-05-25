@@ -51,6 +51,7 @@ CREATE TABLE Etudiant(
                          prenom VARCHAR(255) NOT NULL,
                          date_naiss DATE NOT NULL,
                          id_groupe VARCHAR(15) NOT NULL,
+                        email_etu VARCHAR(35) NOT NULL,
                          FOREIGN KEY (id_groupe) REFERENCES Groupe(id_groupe)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

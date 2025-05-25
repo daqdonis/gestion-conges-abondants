@@ -31,22 +31,22 @@
    <center>
       <AnchorPane fx:id="loginPanel" prefHeight="467.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="userIdTextField" layoutX="125.0" layoutY="220.0" promptText="User ID" />
-            <PasswordField fx:id="passwordField" layoutX="125.0" layoutY="270.0" promptText="password" />
+            <TextField fx:id="userIdTextField" layoutX="123.0" layoutY="220.0" promptText="User ID" />
+            <PasswordField fx:id="passwordField" layoutX="123.0" layoutY="270.0" promptText="password" />
             <Button fx:id="AjouterCompte_button" layoutX="153.0" layoutY="347.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="67.0" text="Log In" textFill="WHITE">
                <font>
                   <Font name="Franklin Gothic Medium" size="14.0" />
                </font>
             </Button>
             <Hyperlink layoutX="120.0" layoutY="430.0" prefHeight="23.0" prefWidth="135.0" text="Forgot Your Password ?" />
-            <ImageView fx:id="userIcon" fitHeight="25.0" fitWidth="25.0" layoutX="85.0" layoutY="224.0">
+            <ImageView fx:id="userIcon" fitHeight="25.0" fitWidth="25.0" layoutX="89.0" layoutY="224.0">
                <image>
                   <Image url="@img/user.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="cleIcon" fitHeight="30.0" fitWidth="30.0" layoutX="82.0" layoutY="271.0">
+            <ImageView fx:id="cleIcon" fitHeight="25.0" fitWidth="25.0" layoutX="89.0" layoutY="272.0">
                <image>
-                  <Image url="@img/cadenas.png" />
+                  <Image url="@img/cle.png" />
                </image>
             </ImageView>
             <Button fx:id="exitButton" layoutX="319.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="28.0" text="🗙" textFill="#0598ff" wrapText="true">

@@ -9,6 +9,7 @@ public class Etudiant implements Serializable {
   private String prenom;
   private Date dateNaiss;
   private String idGroupe;
+  private String email_etu;
 
   public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, String idGroupe) {
     this.idEtu = idEtu;
@@ -16,6 +17,14 @@ public class Etudiant implements Serializable {
     this.prenom = prenom;
     this.dateNaiss = dateNaiss;
     this.idGroupe = idGroupe;
+  }
+  public Etudiant(long idEtu, String nom, String prenom, Date dateNaiss, String idGroupe, String email_etu) {
+    this.idEtu = idEtu;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.dateNaiss = dateNaiss;
+    this.idGroupe = idGroupe;
+    this.email_etu = email_etu;
   }
 
   public Etudiant(String nom, String prenom, Date dateNaiss, String idGroupe) {
@@ -57,6 +66,14 @@ public class Etudiant implements Serializable {
 
   public String getIdGroupe() {
     return idGroupe;
+  }
+
+  public String getemail_etu() {
+    return email_etu;
+  }
+
+  public void setemail_etu(String email_etu) {
+    this.email_etu = email_etu;
   }
 
   public void setIdGroupe(String idGroupe) {

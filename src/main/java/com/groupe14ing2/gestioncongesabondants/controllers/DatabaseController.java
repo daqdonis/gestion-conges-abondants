@@ -133,7 +133,7 @@ public class DatabaseController extends DatabaseLink {
 
     // Etudiant methods
     public void addEtudiant(Etudiant etudiant) throws SQLException {
-        String sql = "INSERT IGNORE INTO Etudiant (id_etu, nom, prenom, date_naiss, id_groupe) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT IGNORE INTO Etudiant (id_etu, nom, prenom, date_naiss, id_groupe, email_etu) VALUES(?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setLong(1, etudiant.getIdEtu());
@@ -141,6 +141,7 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setString(3, etudiant.getPrenom());
         preparedStatement.setDate(4, etudiant.getDateNaiss());
         preparedStatement.setString(5, etudiant.getIdGroupe());
+        preparedStatement.setString(6, etudiant.getemail_etu());
 
         preparedStatement.executeUpdate();
     }
@@ -153,7 +154,7 @@ public class DatabaseController extends DatabaseLink {
     }
 
     public void updateEtudiant(Etudiant etudiant) throws SQLException {
-        String sql = "UPDATE Etudiant SET nom = ?, prenom = ?, date_naiss = ?, id_groupe = ? WHERE id_etu = ?";
+        String sql = "UPDATE Etudiant SET nom = ?, prenom = ?, date_naiss = ?, id_groupe = ?, email_etu = ? WHERE id_etu = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, etudiant.getNom());
@@ -161,6 +162,8 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setDate(3, etudiant.getDateNaiss());
         preparedStatement.setString(4, etudiant.getIdGroupe());
         preparedStatement.setLong(5, etudiant.getIdEtu());
+        preparedStatement.setString(6, etudiant.getIdGroupe());
+
 
         preparedStatement.executeUpdate();
     }
@@ -177,7 +180,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     resultSet.getDate("date_naiss"),
-                    resultSet.getString("id_groupe")
+                    resultSet.getString("id_groupe"),
+                    resultSet.getString("email_etu")
             );
         }
         return null;

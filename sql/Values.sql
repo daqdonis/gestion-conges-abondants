@@ -32,9 +32,9 @@ INSERT INTO Groupe VALUES
 
 -- Etudiant (8-digit)
 INSERT INTO Etudiant VALUES
-(32011001, 'Dupont', 'Jean', '2000-05-15', 'LIC-S1-G1'),
-(32011002, 'Martin', 'Sophie', '2001-08-22', 'LIC-S1-G1'),
-(32011003, 'Bernard', 'Pierre', '2000-11-30', 'LIC-S1-G2');
+(32011001, 'Dupont', 'Jean', '2000-05-15', 'LIC-S1-G1', 'hichamhichamhichamou@gmail.com'),
+(32011002, 'Martin', 'Sophie', '2001-08-22', 'LIC-S1-G1', 'LIC-S1-G1', 'hichamhichamhichamou@gmail.com'),
+(32011003, 'Bernard', 'Pierre', '2000-11-30', 'LIC-S1-G2', 'LIC-S1-G1', 'hichamhichamhichamou@gmail.com');
 
 -- Admin (X-X-000)
 INSERT INTO Admin VALUES
