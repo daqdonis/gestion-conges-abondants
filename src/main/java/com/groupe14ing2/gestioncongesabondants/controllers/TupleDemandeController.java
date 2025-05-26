@@ -13,12 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import com.groupe14ing2.gestioncongesabondants.controllers.MenuViewController.*;
 
 import java.awt.*;
 import java.io.*;
 
-public class TupleDemandeController {
+public class TupleDemandeController extends MenuViewController {
 
     @FXML
     private Label matriculeLabel;
@@ -91,6 +94,10 @@ public class TupleDemandeController {
                 Stage stage = new Stage();
                 stage.setTitle("Traiter une demande");
                 stage.setScene(new Scene(root));
+
+
+
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.show();
 
             } catch (IOException ex) {
@@ -148,6 +155,10 @@ public class TupleDemandeController {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Réintégration");
+
+
+            stage.initStyle(StageStyle.UNDECORATED);
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

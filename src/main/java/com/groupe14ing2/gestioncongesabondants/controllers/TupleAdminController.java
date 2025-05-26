@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.io.IOException;
@@ -75,6 +76,8 @@ public class TupleAdminController {
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.setTitle("Modifier un compte");
+                stage.initStyle(StageStyle.UNDECORATED);
+
                 stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -90,6 +93,7 @@ public class TupleAdminController {
                 controller.initializeData(); // Call explicitly AFTER setAdmin()
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.initStyle(StageStyle.UNDECORATED);
                 stage.show();
             } catch (IOException ex) {
                 ex.printStackTrace();

@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.sql.SQLException;
 
@@ -72,6 +73,7 @@ public class TupleDemandeAbandonmentController {
                     Stage stage = new Stage();
                     stage.setScene(new Scene(root));
                     stage.setTitle("Reinscription Abandonment");
+                    stage.initStyle(StageStyle.UNDECORATED);
                     stage.show();
                 } catch (IOException ex) {
                     ex.printStackTrace();

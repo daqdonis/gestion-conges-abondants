@@ -4,10 +4,19 @@ import com.groupe14ing2.gestioncongesabondants.models.ActionAdmin;
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 import com.groupe14ing2.gestioncongesabondants.models.Conge;
 import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
+;
 
 public class AddActionAdmin {
+    @FXML
+    private Button exitButton;
+
     private static void addAction(Admin admin, String action, String idActionFait, char actionType) {
         try {
             DatabaseController db = new DatabaseController();
@@ -65,5 +74,10 @@ public class AddActionAdmin {
                 conge.getIdDemande(),
                 'C'
         );
+    }
+    @FXML
+    private void exit(){
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 }

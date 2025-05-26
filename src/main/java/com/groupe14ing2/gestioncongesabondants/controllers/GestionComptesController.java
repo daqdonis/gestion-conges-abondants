@@ -9,11 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -133,6 +135,13 @@ public class GestionComptesController {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Ajouter un compte");
+
+            GaussianBlur blur = new GaussianBlur(10);
+            parentPane.setEffect(blur);
+            stage.setOnHidden(e -> parentPane.setEffect(null));
+
+
+            stage.initStyle(StageStyle.UNDECORATED);
 
             stage.show();
         } catch (IOException ex) {

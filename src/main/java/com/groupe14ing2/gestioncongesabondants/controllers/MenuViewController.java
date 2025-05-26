@@ -51,7 +51,7 @@ public class MenuViewController {
     @FXML private TextField text_field_rechercher_demande;
     @FXML private ScrollPane scrollPane;
     @FXML private VBox requestsContainer;
-    @FXML private Parent mainRoot;
+    @FXML public Parent mainRoot;
     @FXML private Button return_button;
     @FXML private VBox slid_sbox;
     @FXML private Pane mainRoot_profile;
@@ -274,6 +274,13 @@ public class MenuViewController {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Ajouter une demande");
+
+            GaussianBlur blur = new GaussianBlur(10);
+            mainRoot.setEffect(blur);
+            stage.setOnHidden(e -> mainRoot.setEffect(null));
+
+            stage.initStyle(StageStyle.UNDECORATED);
+
             stage.show();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -395,4 +402,6 @@ public class MenuViewController {
             showAlert("Error", "Failed to open Gestion des Comptes view");
         }
     }
+
+
 }
