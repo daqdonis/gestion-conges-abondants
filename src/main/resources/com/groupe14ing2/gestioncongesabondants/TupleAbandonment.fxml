@@ -30,6 +30,8 @@
          </font>
       </Text>
       <Text layoutX="900.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " wrappingWidth="24.009765625" />
+      <Text layoutX="575.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="       " wrappingWidth="27.009765625" />
+      <Text layoutX="836.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="                           " wrappingWidth="42.20983934402466" />
       <Button fx:id="reinscription_button" mnemonicParsing="false" prefHeight="36.0" prefWidth="162.0" text="Reinscription">
          <font>
             <Font name="Arial" size="20.0" />

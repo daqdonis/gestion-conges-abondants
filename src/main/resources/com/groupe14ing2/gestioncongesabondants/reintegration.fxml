@@ -12,7 +12,7 @@
 
 <Pane fx:id="main_Panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.ReintegrationController">
     <children>
-        <CubicCurve controlX1="-340.3999938964844" controlX2="325.6649169921875" controlY1="-332.0" controlY2="-332.0" endX="277.3350830078125" endY="-12.35797119140625" fill="#1f75ff" layoutX="257.0" layoutY="99.0" startX="-292.2898864746094" startY="-12.357986450195312" stroke="#1f75ff" strokeType="INSIDE" strokeWidth="0.0" />
+      <CubicCurve controlX1="-136.73153686523438" controlX2="-292.28985595703125" controlY1="-369.0894775390625" controlY2="-250.64117431640625" endX="355.5101318359375" endY="-76.0571060180664" fill="#1f75ff" layoutX="257.0" layoutY="105.0" startX="-387.91015625" startY="73.627197265625" stroke="#1f75ff" strokeType="INSIDE" strokeWidth="0.0" />
         <Text fill="WHITE" layoutX="-8.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réintégration" textAlignment="CENTER" wrappingWidth="334.4521484375">
             <font>
                 <Font name="Arial Bold" size="46.0" />
@@ -46,7 +46,7 @@
                 <Font name="Calibri" size="18.0" />
             </font>
         </Label>
-        <Button fx:id="motifButton" layoutX="207.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleMotifButton" prefHeight="43.0" prefWidth="89.0" text="Motif" />
+        <Button fx:id="motifButton" layoutX="195.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleMotifButton" prefHeight="43.0" prefWidth="111.0" text="Motif" />
         <Button fx:id="confirmerButton" layoutX="185.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleConfirmerButton" prefHeight="43.0" prefWidth="132.0" stylesheets="@style/reintegration.css" text="Confirmer" textFill="#3cd14e" />
         <TextField fx:id="anneeScolaireField" editable="false" layoutX="321.0" layoutY="241.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
         <TextField fx:id="groupeField" editable="false" layoutX="321.0" layoutY="318.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />

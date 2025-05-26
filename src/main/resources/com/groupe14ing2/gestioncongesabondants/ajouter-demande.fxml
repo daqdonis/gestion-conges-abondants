@@ -45,7 +45,7 @@
          <font>
             <Font name="Calibri" size="18.0" />
          </font></Label>
-        <Button fx:id="AJT_D_MotifButton" layoutX="206.0" layoutY="432.0" mnemonicParsing="false" onAction="#handleMotifButton" prefHeight="43.0" prefWidth="89.0" text="Motif" />
+        <Button fx:id="AJT_D_MotifButton" layoutX="195.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleMotifButton" prefHeight="43.0" prefWidth="101.0" text="Motif" />
         <Button fx:id="AJT_D_ConfirmerButton" layoutX="182.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleConfirmerButton" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
         <TextField fx:id="AJT_D_Date" layoutX="321.0" layoutY="258.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
         <TextField fx:id="AJT_D_GroupID" layoutX="321.0" layoutY="335.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
