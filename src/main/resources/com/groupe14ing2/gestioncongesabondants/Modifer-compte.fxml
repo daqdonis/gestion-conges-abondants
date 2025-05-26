@@ -1,36 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@style/Menu_stylesheet.css"
-            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.ModifierCompteController">
-    <VBox spacing="20" alignment="CENTER" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
-          AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20">
-        <Label text="Modifier un compte" styleClass="title-label"/>
+<AnchorPane fx:id="mainPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@style/Menu_stylesheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.ModifierCompteController">
+    <VBox alignment="CENTER" spacing="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+        <Label styleClass="title-label" text="Modifier un compte" textFill="#1f75ff">
+         <font>
+            <Font name="Arial Bold" size="48.0" />
+         </font></Label>
         
-        <GridPane vgap="15" hgap="10">
-            <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-            <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <GridPane hgap="10" vgap="15">
+            <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <font>
+               <Font size="19.0" />
+            </font></Label>
+            <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             
-            <Label text="Prénom:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-            <TextField fx:id="prenomField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+            <Label text="Prénom:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <font>
+               <Font size="19.0" />
+            </font></Label>
+            <TextField fx:id="prenomField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             
-            <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <font>
+               <Font size="19.0" />
+            </font></Label>
+            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             
-            <Label text="Nouveau mot de passe:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <Label text="Nouveau mot de passe:" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <font>
+               <Font size="19.0" />
+            </font></Label>
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             
-            <Label text="(Laissez vide pour garder l'ancien)" GridPane.columnIndex="1" GridPane.rowIndex="4"
-                   styleClass="helper-text"/>
+            <Label styleClass="helper-text" text="(Laissez vide pour garder l'ancien)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
         
-        <HBox spacing="20" alignment="CENTER">
-            <Button fx:id="modifierButton" text="Modifier" styleClass="button-primary"/>
-            <Button fx:id="annulerButton" text="Annuler" styleClass="button-secondary"/>
+        <HBox alignment="CENTER" spacing="20">
+            <Button fx:id="modifierButton" styleClass="button-primary" text="Modifier">
+            <font>
+               <Font size="13.0" />
+            </font></Button>
+            <Button fx:id="annulerButton" styleClass="button-secondary" text="Annuler">
+            <font>
+               <Font size="13.0" />
+            </font></Button>
         </HBox>
     </VBox>
 </AnchorPane>

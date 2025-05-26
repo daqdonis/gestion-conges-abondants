@@ -195,9 +195,6 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="Profile_Nom_Lable" layoutX="86.0" layoutY="236.0" />
-            <Label fx:id="Profile_PreNom_Lable" layoutX="100.0" layoutY="335.0" />
-            <Label fx:id="Profile_Email_Lable" layoutX="72.0" layoutY="436.0" />
             <Text layoutX="90.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome ,">
                <font>
                   <Font size="15.0" />
@@ -220,34 +217,34 @@
             </Button>
             <Pane layoutX="-49.0" layoutY="325.0" prefHeight="262.0" prefWidth="282.0" style="-fx-border-color: #4f92ff; -fx-background-color: white; -fx-border-width: 2px; -fx-background-radius: 20px; -fx-border-radius: 20px;">
                <children>
-                  <Text fill="#0249a1" layoutX="66.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Nom :">
+                  <Text fill="#0249a1" layoutX="60.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Nom :">
                      <font>
                         <Font name="Arial" size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="#0249a1" layoutX="68.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
+                  <Text fill="#0249a1" layoutX="62.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
                      <font>
                         <Font name="Arial" size="19.0" />
                      </font>
                   </Text>
-                  <Text fill="#0249a1" layoutX="67.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
+                  <Text fill="#0249a1" layoutX="61.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
                      <font>
                         <Font name="Arial" size="19.0" />
                      </font>
                   </Text>
-                  <Text fx:id="nom" layoutX="100.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="bfuyhdisbvihcn">
+                  <Text fx:id="nom" layoutX="78.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="abdelkadous" wrappingWidth="200.0">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial" size="15.0" />
                      </font>
                   </Text>
-                  <Text fx:id="prenom" layoutX="100.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hgfdhgdfhdfghfgh">
+                  <Text fx:id="prenom" layoutX="78.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hicham" wrappingWidth="200.0">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial" size="15.0" />
                      </font>
                   </Text>
-                  <Text fx:id="email" layoutX="100.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tgfhshgfshgfshfsgfhgext">
+                  <Text fx:id="email" layoutX="78.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hichamhichamhichamou@gmail.com" textAlignment="CENTER" wrappingWidth="178.7240982055664">
                      <font>
-                        <Font name="Arial" size="14.0" />
+                        <Font name="Arial" size="15.0" />
                      </font>
                   </Text>
                </children>
