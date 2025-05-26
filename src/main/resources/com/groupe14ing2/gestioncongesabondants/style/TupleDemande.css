@@ -11,13 +11,23 @@
     -fx-text-fill: white;
     -fx-background-radius: 20px;
 }
+#reintegrationButton {
+    -fx-background-color: #2f8a47;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}
 #voir_jst_button:hover{
-    -fx-background-color: #dedede;
-    -fx-text-fill: #1f75ff;
+    -fx-background-color: #0249a1;
+    -fx-text-fill: white;
     -fx-background-radius: 20px;
 }
 #traiter_jst_button:hover{
-    -fx-background-color: #dedede;
-    -fx-text-fill: #dfa300;
+    -fx-background-color: #f7980a;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}
+#reintegrationButton:hover{
+    -fx-background-color: #006609;
+    -fx-text-fill: white;
     -fx-background-radius: 20px;
 }

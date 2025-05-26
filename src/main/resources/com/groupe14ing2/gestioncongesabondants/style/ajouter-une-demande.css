@@ -6,7 +6,7 @@
      -fx-background-color: WHITE;
 }
 #AJT_D_exitButton:hover {
-     -fx-background-color: WHITE;
+     -fx-background-color: transparent;
      -fx-text-fill : RED ;
 }
 
@@ -17,8 +17,23 @@
     -fx-font-size: 14px;
     -fx-font-weight: 900;
 }
+#AJT_D_RefuserButton{
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
 #AJT_D_ConfirmerButton:hover{
     -fx-background-color: GREEN;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+#AJT_D_RefuserButton:hover{
+    -fx-background-color: RED;
     -fx-text-fill: white;
     -fx-background-radius: 200px;
     -fx-font-size: 14px;
@@ -68,4 +83,6 @@
     -fx-font-size: 12px;
     -fx-font-weight: 900;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+
 }
+

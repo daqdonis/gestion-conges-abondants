@@ -1,0 +1,38 @@
+#add_students_button {
+     -fx-background-color: dedede;
+     -fx-background-radius: 20px;
+}
+
+#add_Acc_button {
+     -fx-background-color: dedede;
+     -fx-background-radius: 20px;
+}
+
+#filtrer_textField{
+    -fx-background-radius: 20px;
+}
+
+#add_students_button:hover{
+     -fx-background-color: #4f92ff;
+     -fx-text-fill: white;
+     -fx-background-radius: 200px;
+     -fx-font-size: 14px;
+     -fx-font-weight: 900;
+     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+
+#add_Acc_button:hover {
+     -fx-background-color: #4f92ff;
+     -fx-text-fill: white;
+     -fx-background-radius: 200px;
+     -fx-font-size: 14px;
+     -fx-font-weight: 900;
+     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+#fermer_button{
+     -fx-background-color: transparent;
+}
+#fermer_button:hover{
+     -fx-background-color: red;
+     -fx-text-fill: white;
+}

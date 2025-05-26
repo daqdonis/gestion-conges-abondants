@@ -27,6 +27,7 @@ import com.groupe14ing2.gestioncongesabondants.models.Groupe;
 import com.groupe14ing2.gestioncongesabondants.models.RoleAdmin;
 import com.groupe14ing2.gestioncongesabondants.models.Section;
 import com.groupe14ing2.gestioncongesabondants.models.Semestre;
+import com.groupe14ing2.gestioncongesabondants.models.TypeConge;
 
 public class DatabaseController extends DatabaseLink {
 
@@ -44,11 +45,8 @@ public class DatabaseController extends DatabaseLink {
             case ADMINCOMPTES:
                 idPrefix = "AC";
                 break;
-            case ADMINABONDANT:
+            case ADMINCONGEABANDONT:
                 idPrefix = "AA";
-                break;
-            case ADMINCONGE:
-                idPrefix = "AG";
                 break;
             default:
                 throw new SQLException("Invalid role");
@@ -82,12 +80,27 @@ public class DatabaseController extends DatabaseLink {
     public void updateAdmin(Admin admin) throws SQLException {
         String sql = "UPDATE Admin SET nom = ?, prenom = ?, roles = ?, email = ?, mot_passe = ? WHERE id_admin = ?";
 
+        // Get the current admin to check if password has changed
+        Admin currentAdmin = getAdmin(admin.getIdAdmin());
+        String passwordToUse;
+        
+        if (admin.getMotPasse() == null || admin.getMotPasse().isEmpty()) {
+            // If no new password provided, keep the existing password
+            passwordToUse = currentAdmin.getMotPasse();
+        } else if (admin.getMotPasse().equals(currentAdmin.getMotPasse())) {
+            // If the passwords match (already hashed), use as is
+            passwordToUse = admin.getMotPasse();
+        } else {
+            // If a new password is provided, hash it
+            passwordToUse = PasswordUtils.hashPassword(admin.getMotPasse());
+        }
+
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, admin.getNom());
         preparedStatement.setString(2, admin.getPrenom());
         preparedStatement.setString(3, admin.getRoles().toString().toLowerCase());
         preparedStatement.setString(4, admin.getEmail());
-        preparedStatement.setString(5, PasswordUtils.hashPassword(admin.getMotPasse()));
+        preparedStatement.setString(5, passwordToUse);
         preparedStatement.setString(6, admin.getIdAdmin());
 
         preparedStatement.executeUpdate();
@@ -104,9 +117,9 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("id_admin"),
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
-                    RoleAdmin.valueOf(resultSet.getString("roles").toUpperCase().replace("ADMIN_", "ADMIN")),
+                    RoleAdmin.fromDatabaseValue(resultSet.getString("roles")),
                     resultSet.getString("email"),
-                    null
+                    resultSet.getString("mot_passe")
             );
         }
         return null;
@@ -124,7 +137,7 @@ public class DatabaseController extends DatabaseLink {
                             rs.getString("id_admin"),
                             rs.getString("nom"),
                             rs.getString("prenom"),
-                            RoleAdmin.valueOf(rs.getString("roles").toUpperCase().replace("ADMIN_", "ADMIN")),
+                            RoleAdmin.fromDatabaseValue(rs.getString("roles")),
                             rs.getString("email"),
                             null
                     )
@@ -133,9 +146,8 @@ public class DatabaseController extends DatabaseLink {
         return admins;
     }
 
-    // Etudiant methods
     public void addEtudiant(Etudiant etudiant) throws SQLException {
-        String sql = "INSERT IGNORE INTO Etudiant (id_etu, nom, prenom, date_naiss, id_groupe) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT IGNORE INTO Etudiant (id_etu, nom, prenom, date_naiss, id_groupe, email_etu) VALUES(?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setLong(1, etudiant.getIdEtu());
@@ -143,6 +155,7 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setString(3, etudiant.getPrenom());
         preparedStatement.setDate(4, etudiant.getDateNaiss());
         preparedStatement.setString(5, etudiant.getIdGroupe());
+        preparedStatement.setString(6, etudiant.getemail_etu());
 
         preparedStatement.executeUpdate();
     }
@@ -155,7 +168,7 @@ public class DatabaseController extends DatabaseLink {
     }
 
     public void updateEtudiant(Etudiant etudiant) throws SQLException {
-        String sql = "UPDATE Etudiant SET nom = ?, prenom = ?, date_naiss = ?, id_groupe = ? WHERE id_etu = ?";
+        String sql = "UPDATE Etudiant SET nom = ?, prenom = ?, date_naiss = ?, id_groupe = ?, email_etu = ? WHERE id_etu = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, etudiant.getNom());
@@ -163,6 +176,8 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setDate(3, etudiant.getDateNaiss());
         preparedStatement.setString(4, etudiant.getIdGroupe());
         preparedStatement.setLong(5, etudiant.getIdEtu());
+        preparedStatement.setString(6, etudiant.getIdGroupe());
+
 
         preparedStatement.executeUpdate();
     }
@@ -179,7 +194,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     resultSet.getDate("date_naiss"),
-                    resultSet.getString("id_groupe")
+                    resultSet.getString("id_groupe"),
+                    resultSet.getString("email_etu")
             );
         }
         return null;
@@ -424,23 +440,29 @@ public class DatabaseController extends DatabaseLink {
             throw new SQLException("Cannot add conge without student reference");
         }
 
+        // Check if student is already reintegrated
+        if (isStudentReintegrated(conge.getEtudiant().getIdEtu())) {
+            throw new SQLException("Student has already been reintegrated and cannot submit new requests");
+        }
+
         // Generate conge ID (X-AA-00000000 format)
         String idPrefix = "C" + (conge.getDateDemande().getYear() - 100) + conge.getEtudiant().getIdEtu();
-        String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
+        /*String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
         PreparedStatement ps = connection.prepareStatement(sqlCount);
         ps.setString(1, idPrefix + "%");
         ResultSet rs = ps.executeQuery();
         rs.next();
-        String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);
+        String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);*/
 
-        String sql = "INSERT IGNORE INTO Conge (id_demande, id_etu, date_demande, duree, etat, justificatif) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT IGNORE INTO Conge (id_demande, id_etu, date_demande, duree, etat,justificatif, type) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, id);
+            stmt.setString(1, idPrefix);
             stmt.setLong(2, conge.getEtudiant().getIdEtu());
             stmt.setDate(3, conge.getDateDemande());
             stmt.setInt(4, (int)conge.getDuree());
             stmt.setString(5, conge.getEtat().toString());
+            stmt.setString(7, conge.getType().toString());
 
             if (conge.getJustificatif() != null) {
                 try {
@@ -453,7 +475,7 @@ public class DatabaseController extends DatabaseLink {
             }
 
             stmt.executeUpdate();
-            conge.setIdDemande(id);
+            //conge.setIdDemande(id);
         }
     }
 
@@ -510,13 +532,25 @@ public class DatabaseController extends DatabaseLink {
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return new Conge(
+            Conge conge = new Conge(
                     resultSet.getString("id_demande"),
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
                     EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
-                    (FileInputStream) resultSet.getBlob("justificatif")
+                    resultSet.getBlob("justificatif") != null ?
+                            resultSet.getBlob("justificatif").getBinaryStream() : null,
+                    TypeConge.valueOf(resultSet.getString("type").toUpperCase().replaceAll(" ", ""))
             );
+            String typeStr = resultSet.getString("type");
+            if (typeStr != null) {
+                for (TypeConge type : TypeConge.values()) {
+                    if (type.toString().equals(typeStr)) {
+                        conge.setType(type);
+                        break;
+                    }
+                }
+            }
+            return conge;
         }
         return null;
     }
@@ -534,7 +568,8 @@ public class DatabaseController extends DatabaseLink {
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
                     EtatTraitement.valueOf(resultSet.getString("etat").replaceAll(" ", "").toUpperCase()),
-                    (FileInputStream) resultSet.getBlob("justificatif")
+                    (FileInputStream) resultSet.getBlob("justificatif"),
+                    TypeConge.valueOf(resultSet.getString("type").toUpperCase().replaceAll(" ", ""))
             ));
         }
 
@@ -554,7 +589,8 @@ public class DatabaseController extends DatabaseLink {
                         rs.getString("e.nom"),
                         rs.getString("e.prenom"),
                         rs.getDate("e.date_naiss"),
-                        rs.getString("e.id_groupe")
+                        rs.getString("e.id_groupe"),
+                        rs.getString("e.email_etu")
                 );
 
                 Conge conge = new Conge(
@@ -563,9 +599,19 @@ public class DatabaseController extends DatabaseLink {
                         rs.getInt("c.duree"),
                         EtatTraitement.valueOf(rs.getString("c.etat").replaceAll(" ", "").toUpperCase()),
                         rs.getBlob("c.justificatif") != null ?
-                                rs.getBlob("c.justificatif").getBinaryStream() : null
+                                rs.getBlob("c.justificatif").getBinaryStream() : null,
+                        TypeConge.valueOf(rs.getString("type").toUpperCase().replaceAll(" ", ""))
                 );
                 conge.setEtudiant(etudiant);
+                String typeStr = rs.getString("c.type");
+                if (typeStr != null) {
+                    for (TypeConge type : TypeConge.values()) {
+                        if (type.toString().equals(typeStr)) {
+                            conge.setType(type);
+                            break;
+                        }
+                    }
+                }
                 conges.add(conge);
             }
         }
@@ -696,9 +742,10 @@ public class DatabaseController extends DatabaseLink {
 
             while (rs.next()) {
                 abondants.add(new Abondant(
-                    rs.getLong("id_etu"),
-                    rs.getString("id_admin"),
-                    rs.getDate("date_dec")
+
+                        rs.getLong("id_etu"),
+                        rs.getString("id_admin"),
+                        rs.getDate("date_dec")
                 ));
             }
         }
@@ -707,15 +754,18 @@ public class DatabaseController extends DatabaseLink {
 
     // ActionAdmin methods
     public void addActionAdmin(ActionAdmin actionAdmin) throws SQLException {
-        String sql = "INSERT IGNORE INTO Action_admin (id_admin, action, temps_action, id_conge, id_reins, pk_abond) VALUES (?, ?, ?, ?, ?, ?)";
-
+        String sql = "INSERT INTO Action_admin (id_admin, action, temps_action, id_conge, id_reins, pk_abond) VALUES (?, ?, ?, ?, ?, ?)";
+        System.out.println("pkAbond: " + actionAdmin.getPkAbond());
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, actionAdmin.getIdAdmin());
         preparedStatement.setString(2, actionAdmin.getAction());
         preparedStatement.setTimestamp(3, actionAdmin.getTempsAction());
         preparedStatement.setString(4, actionAdmin.getIdConge());
         preparedStatement.setString(5, actionAdmin.getIdReins());
-        preparedStatement.setLong(6, actionAdmin.getPkAbond());
+        if (actionAdmin.getPkAbond() > 0)
+            preparedStatement.setLong(6, actionAdmin.getPkAbond());
+        else
+            preparedStatement.setNull(6, Types.BIGINT);
 
         preparedStatement.executeUpdate();
     }
@@ -754,7 +804,7 @@ public class DatabaseController extends DatabaseLink {
                         rs.getString("id_admin"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        RoleAdmin.valueOf(rs.getString("roles").toUpperCase().replace("ADMIN_", "ADMIN")),
+                        RoleAdmin.fromDatabaseValue(rs.getString("roles")),
                         rs.getString("email"),
                         null
                 );
@@ -765,42 +815,113 @@ public class DatabaseController extends DatabaseLink {
 
     public Conge getCongeByEtudiant(long idEtu) throws SQLException {
         String sql = "SELECT c.*, e.* FROM Conge c " +
-                    "JOIN Etudiant e ON c.id_etu = e.id_etu " +
-                    "WHERE c.id_etu = ?";
+
+                "JOIN Etudiant e ON c.id_etu = e.id_etu " +
+                "WHERE c.id_etu = ? " +
+                "ORDER BY c.date_demande DESC " +
+                "LIMIT 1";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setLong(1, idEtu);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        
+
+
         if (resultSet.next()) {
             Etudiant etudiant = new Etudiant(
-                resultSet.getLong("id_etu"),
-                resultSet.getString("nom"),
-                resultSet.getString("prenom"),
-                resultSet.getDate("date_naiss"),
-                resultSet.getString("id_groupe")
+                    resultSet.getLong("id_etu"),
+                    resultSet.getString("nom"),
+                    resultSet.getString("prenom"),
+                    resultSet.getDate("date_naiss"),
+                    resultSet.getString("id_groupe"),
+                    resultSet.getString("email_etu")
             );
 
             String etatStr = resultSet.getString("etat");
             EtatTraitement etat = EtatTraitement.fromDisplayName(etatStr);
 
             Conge conge = new Conge(
-                resultSet.getString("id_demande"),
-                resultSet.getDate("date_demande"),
-                resultSet.getInt("duree"),
-                etat,
-                resultSet.getBinaryStream("justificatif")
+
+                    resultSet.getString("id_demande"),
+                    resultSet.getDate("date_demande"),
+                    resultSet.getInt("duree"),
+                    etat,
+                    resultSet.getBinaryStream("justificatif"),
+                    TypeConge.valueOf(resultSet.getString("type").toUpperCase().replaceAll(" ", ""))
             );
             conge.setEtudiant(etudiant);
             
+            String typeStr = resultSet.getString("type");
+            if (typeStr != null) {
+                for (TypeConge type : TypeConge.values()) {
+                    if (type.toString().equals(typeStr)) {
+                        conge.setType(type);
+                        break;
+                    }
+                }
+            }
+
             return conge;
         }
-        
+
         return null;
+    }
+
+    // Methods for handling reintegrated students
+    public void addReintegratedStudent(long idEtu, String originalCongeId) throws SQLException {
+        String sql = "INSERT INTO Reintegrated_Students (id_etu, reintegration_date, original_conge_id) VALUES (?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idEtu);
+            stmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+            stmt.setString(3, originalCongeId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public boolean isStudentReintegrated(long idEtu) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Reintegrated_Students WHERE id_etu = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idEtu);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
     }
 
     public java.sql.Connection getConnection() {
         return connection;
     }
+
+    public void deleteAbandonment(long idEtu) throws SQLException {
+        String sql = "DELETE FROM Abondant WHERE id_etu = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idEtu);
+            stmt.executeUpdate();
+        }
+    }
+
+    public int getTotalStudents() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Etudiant";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
+    public int getTotalAbondants() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Abondant";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
+
 }

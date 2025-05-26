@@ -15,22 +15,26 @@ public class Conge implements Serializable {
   private Date dateDemande;
   private int duree;
   private EtatTraitement etat;
+  private TypeConge type;
   private transient File justificatif;
   private Etudiant etudiant;
   private byte[] justificatifData;
 
 
-  public Conge(String idDemande, Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
+  public Conge(String idDemande, Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif, TypeConge type) {
     this.idDemande = idDemande;
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
+    System.out.println(type);
+    this.type = type;
     createJustificatifFile(justificatif);
   }
-  public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif) {
+  public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif, TypeConge type) {
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;
+    this.type = type;
     createJustificatifFile(justificatif);
   }
 
@@ -52,6 +56,10 @@ public class Conge implements Serializable {
 
   public EtatTraitement getEtat() {
     return etat;
+  }
+
+  public TypeConge getType() {
+    return type;
   }
 
   public File getJustificatif() {
@@ -77,6 +85,10 @@ public class Conge implements Serializable {
 
   public void setEtat(EtatTraitement etat) {
     this.etat = etat;
+  }
+
+  public void setType(TypeConge type) {
+    this.type = type;
   }
 
   public void setEtudiant(Etudiant etudiant) {

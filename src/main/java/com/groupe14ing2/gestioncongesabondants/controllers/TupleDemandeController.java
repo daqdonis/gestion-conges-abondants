@@ -13,12 +13,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import javafx.scene.effect.GaussianBlur;
+
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import com.groupe14ing2.gestioncongesabondants.controllers.MenuViewController.*;
 
 import java.awt.*;
 import java.io.*;
 
-public class TupleDemandeController {
+public class TupleDemandeController extends MenuViewController {
 
     @FXML
     private Label matriculeLabel;
@@ -42,45 +47,38 @@ public class TupleDemandeController {
 
     @FXML
     public void initialize() {
-        // Initialize if needed
+
     }
 
     public void setData(Conge conge) {
         this.conge = conge;
-        
+
         if (conge.getEtudiant() != null) {
             matriculeLabel.setText(String.valueOf(conge.getEtudiant().getIdEtu()));
             nomLabel.setText(conge.getEtudiant().getNom());
             prenomLabel.setText(conge.getEtudiant().getPrenom());
+
         } else {
             matriculeLabel.setText("N/A");
             nomLabel.setText("N/A");
             prenomLabel.setText("N/A");
         }
         etatLabel.setText(conge.getEtat().toString());
-
-        // Enable reintegration button only for accepted students
         if (conge.getEtat() == EtatTraitement.ACCEPTÉ) {
             reintegrationButton.setDisable(false);
             reintegrationButton.getStyleClass().remove("reintegration-button-disabled");
             reintegrationButton.getStyleClass().add("reintegration-button-enabled");
         } else {
+
             reintegrationButton.setDisable(true);
             reintegrationButton.getStyleClass().remove("reintegration-button-enabled");
             reintegrationButton.getStyleClass().add("reintegration-button-disabled");
         }
 
         voir_jst_button.setOnAction(e -> {
-            System.out.println(conge.getJustificatif());
-            if (Desktop.isDesktopSupported()) {
-                new Thread(() -> {
-                    try {
-                        Desktop.getDesktop().open(conge.getJustificatif());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }).start();
-            }
+
+            viewJustification();
+
         });
 
         traiter_jst_button.setOnAction(e -> {
@@ -93,21 +91,30 @@ public class TupleDemandeController {
                 controller.setMenuController(menuController);
                 controller.setConge(conge);
                 controller.setOnStatusUpdated(() -> {
-                    // Refresh the table when status is updated
+
                     if (menuController != null) {
                         menuController.refreshTable();
                     }
                 });
 
+
+                controller.setButton_justificationAction(event -> viewJustification());
+
                 Stage stage = new Stage();
                 stage.setTitle("Traiter une demande");
                 stage.setScene(new Scene(root));
+
+
+
+                stage.initStyle(StageStyle.UNDECORATED);
+
                 stage.show();
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
+
     }
 
     private void updateReintegrationButton() {
@@ -115,23 +122,20 @@ public class TupleDemandeController {
             // Check time limit
             LocalDate leaveDate = conge.getDateDemande().toLocalDate();
             LocalDate currentDate = LocalDate.now();
-            
+
             int leaveYear = getAcademicYear(leaveDate);
             int currentYear = getAcademicYear(currentDate);
-            
+
             if (currentYear - leaveYear <= 1) {
-                // Enable button
                 reintegrationButton.setDisable(false);
                 reintegrationButton.getStyleClass().remove("reintegration-button-disabled");
                 reintegrationButton.getStyleClass().add("reintegration-button-enabled");
             } else {
-                // Disable button - time limit exceeded
                 reintegrationButton.setDisable(true);
                 reintegrationButton.getStyleClass().remove("reintegration-button-enabled");
                 reintegrationButton.getStyleClass().add("reintegration-button-disabled");
             }
         } else {
-            // Disable button - not accepted
             reintegrationButton.setDisable(true);
             reintegrationButton.getStyleClass().remove("reintegration-button-enabled");
             reintegrationButton.getStyleClass().add("reintegration-button-disabled");
@@ -139,7 +143,6 @@ public class TupleDemandeController {
     }
 
     private int getAcademicYear(LocalDate date) {
-        // Academic year starts in September
         if (date.getMonth().getValue() >= Month.SEPTEMBER.getValue()) {
             return date.getYear();
         } else {
@@ -152,16 +155,21 @@ public class TupleDemandeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/reintegration.fxml"));
             Parent root = loader.load();
+            updateReintegrationButton();
 
             ReintegrationController controller = loader.getController();
             controller.setMenuController(menuController);
-            
+
             // Pre-fill the form with student data
             controller.setCongeData(conge);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Réintégration");
+
+
+            stage.initStyle(StageStyle.UNDECORATED);
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,5 +178,19 @@ public class TupleDemandeController {
 
     public void setMenuController(MenuViewController menuController) {
         this.menuController = menuController;
+    }
+
+    private void viewJustification() {
+        System.out.println(conge.getJustificatif());
+        if (Desktop.isDesktopSupported()) {
+            new Thread(() -> {
+                try {
+                    Desktop.getDesktop().open(conge.getJustificatif());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }).start();
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -20,34 +21,35 @@
                 <Font name="Arial Bold" size="46.0" />
             </font>
         </Text>
-        <Label alignment="CENTER" layoutX="101.0" layoutY="201.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
+        <Label alignment="CENTER" layoutX="101.0" layoutY="187.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />
          </font></Label>
-        <TextField fx:id="AJT_D_matricule" layoutX="209.0" layoutY="199.0" prefHeight="27.0" prefWidth="142.0" />
-        <Button fx:id="fillButton" layoutX="360.0" layoutY="199.0" mnemonicParsing="false" onAction="#handleFillButton" prefHeight="27.0" prefWidth="60.0" text="Fill" />
-        <Label alignment="CENTER" layoutX="14.0" layoutY="250.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
+
+        <TextField fx:id="AJT_D_matricule" layoutX="209.0" layoutY="185.0" prefHeight="27.0" prefWidth="142.0" />
+        <Button fx:id="fillButton" layoutX="360.0" layoutY="185.0" mnemonicParsing="false" onAction="#handleFillButton" prefHeight="27.0" prefWidth="60.0" text="Fill" />
+        <Label alignment="CENTER" layoutX="14.0" layoutY="229.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />
          </font></Label>
-        <TextField fx:id="AJT_D_Nom" layoutX="77.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <Label alignment="CENTER" layoutX="23.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
+        <TextField fx:id="AJT_D_Nom" layoutX="77.0" layoutY="258.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="23.0" layoutY="299.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />
          </font></Label>
-        <TextField fx:id="AJT_D_PreNom" layoutX="77.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <Label alignment="CENTER" layoutX="273.0" layoutY="320.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
+        <TextField fx:id="AJT_D_PreNom" layoutX="77.0" layoutY="335.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Label alignment="CENTER" layoutX="273.0" layoutY="299.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
          <font>
             <Font name="Calibri" size="19.0" />
          </font></Label>
-        <Label alignment="CENTER" layoutX="273.0" layoutY="244.0" prefHeight="35.0" prefWidth="155.0" text="Date De Naissence :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
+        <Label alignment="CENTER" layoutX="273.0" layoutY="223.0" prefHeight="35.0" prefWidth="155.0" text="Date De Naissence :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
          <font>
             <Font name="Calibri" size="18.0" />
          </font></Label>
-        <Button fx:id="AJT_D_MotifButton" onAction="#handleMotifButton" layoutX="207.0" layoutY="408.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="89.0" text="Motif" />
-        <Button fx:id="AJT_D_ConfirmerButton" onAction="#handleConfirmerButton" layoutX="185.0" layoutY="473.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
-        <TextField fx:id="AJT_D_Date" layoutX="321.0" layoutY="279.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
-        <TextField fx:id="AJT_D_GroupID" layoutX="321.0" layoutY="356.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <Button fx:id="AJT_D_MotifButton" layoutX="195.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleMotifButton" prefHeight="43.0" prefWidth="101.0" text="Motif" />
+        <Button fx:id="AJT_D_ConfirmerButton" layoutX="182.0" layoutY="489.0" mnemonicParsing="false" onAction="#handleConfirmerButton" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
+        <TextField fx:id="AJT_D_Date" layoutX="321.0" layoutY="258.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+        <TextField fx:id="AJT_D_GroupID" layoutX="321.0" layoutY="335.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
       <Button fx:id="fermer_button" layoutX="471.0" layoutY="-1.0" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="31.0" prefWidth="31.0" text="🗙" textFill="#9a1818">
          <font>
             <Font name="Arial" size="13.0" />
@@ -55,5 +57,11 @@
       </Button>
       <Circle fx:id="234shape" fill="#1f75ff" layoutX="487.0" layoutY="143.0" radius="31.0" stroke="#1f75ff" strokeType="INSIDE" />
       <Circle fx:id="2344shape" fill="#1f75ff" layoutX="451.0" layoutY="100.0" radius="12.0" stroke="#1f75ff" strokeType="INSIDE" />
+      <ChoiceBox fx:id="typeChoiceBox" layoutX="220.0" layoutY="382.0" prefWidth="150.0" />
+      <Label alignment="CENTER" layoutX="152.0" layoutY="383.0" prefHeight="22.0" prefWidth="70.0" text="Type :" textFill="#4b4b4b">
+         <font>
+            <Font name="Calibri" size="19.0" />
+         </font>
+      </Label>
     </children>
 </Pane>

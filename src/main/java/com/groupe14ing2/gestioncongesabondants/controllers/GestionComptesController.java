@@ -9,11 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -66,9 +68,59 @@ public class GestionComptesController {
 
     File selectedFile;
 
+    private Admin currentAdmin;
+    private List<Admin> allAdmins = new ArrayList<>();
+
     @FXML
     public void initialize() {
+        // Add listener to search field
+        filtrer_textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterAdmins(newValue);
+        });
+    }
+
+    public void setAdmin(Admin admin) {
+        this.currentAdmin = admin;
+        if (user_Name_Lable != null) {
+            user_Name_Lable.setText(admin.getNom() + " " + admin.getPrenom());
+        }
         refreshTable();
+    }
+
+    private void filterAdmins(String searchText) {
+        requestsContainer.getChildren().clear();
+        try {
+            DatabaseController db = new DatabaseController();
+            List<Admin> admins = db.getAllAdmins();
+            
+            for (Admin admin : admins) {
+                if (admin.getRoles() == RoleAdmin.ADMINCONGEABANDONT && 
+                    !admin.getEmail().equals(currentAdmin.getEmail()) &&
+                    (searchText == null || searchText.isEmpty() || 
+                     admin.getNom().toLowerCase().contains(searchText.toLowerCase()))) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleComptes.fxml"));
+                        HBox tupleView = loader.load();
+
+                        TupleAdminController tupleController = loader.getController();
+                        tupleController.setData(admin);
+                        tupleController.setGestionComptesController(this);
+
+                        requestsContainer.getChildren().add(tupleView);
+                    } catch (IOException e) {
+                        System.err.println("Erreur de chargement du TupleAdmin.fxml");
+                        e.printStackTrace();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur base de données");
+            e.printStackTrace();
+        }
+    }
+
+    public void refreshTable() {
+        filterAdmins(filtrer_textField.getText());
     }
 
     @FXML
@@ -82,7 +134,14 @@ public class GestionComptesController {
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Ajouter une demande");
+            stage.setTitle("Ajouter un compte");
+
+            GaussianBlur blur = new GaussianBlur(10);
+            parentPane.setEffect(blur);
+            stage.setOnHidden(e -> parentPane.setEffect(null));
+
+
+            stage.initStyle(StageStyle.UNDECORATED);
 
             stage.show();
         } catch (IOException ex) {
@@ -90,34 +149,22 @@ public class GestionComptesController {
         }
     }
 
-    public void refreshTable() {
-        System.out.println("Refreshing table...");
+    @FXML
+    public void modifer_compte() {
         try {
-            DatabaseController db = new DatabaseController();
-            List<Admin> admins = db.getAllAdmins();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/Modifer-compte.fxml"));
+            Parent root = loader.load();
 
-            requestsContainer.getChildren().clear();
+            AjouterCompteController compteController = loader.getController();
+            compteController.setGestionComptesController(this);
 
-            for (Admin admin : admins) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/groupe14ing2/gestioncongesabondants/TupleComptes.fxml"));
-                    HBox tupleView = loader.load(); // charger le FXML
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modifer un compte");
 
-                    TupleAdminController tupleController = loader.getController();
-
-                    tupleController.setData(admin); // injecter les données
-                    tupleController.setGestionComptesController(this); // injecter le contrôleur MenuViewController
-
-
-                    requestsContainer.getChildren().add(tupleView); // ajouter au container
-                } catch (IOException e) {
-                    System.err.println("Erreur de chargement du TupleAdmin.fxml");
-                    e.printStackTrace();
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur base de données");
-            e.printStackTrace();
+            stage.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -188,16 +235,24 @@ public class GestionComptesController {
                                         semestrePair.getIdSemestre(),
                                         semestreImpair.getIdSemestre()
                                 );
-
+                                // the if-else block is to check if the student is already in the database
+                                // and to update his group accordingly
+                                long idEtu = Long.parseLong(etudiant.get("code"));
                                 db.addGroupe(groupe);
-
-                                db.addEtudiant(new Etudiant(
-                                        Long.parseLong(etudiant.get("code")),
-                                        etudiant.get("nom"),
-                                        etudiant.get("prénom"),
-                                        Date.valueOf(etudiant.get("date de naissance")),
-                                        groupe.getIdGroupe()
-                                ));
+                                Etudiant tempEtu = db.getEtudiant(idEtu);
+                                if (tempEtu != null) {
+                                    tempEtu.setIdGroupe(groupe.getIdGroupe());
+                                    db.updateEtudiant(tempEtu);
+                                }
+                                else
+                                    db.addEtudiant(new Etudiant(
+                                            idEtu,
+                                            etudiant.get("nom"),
+                                            etudiant.get("prénom"),
+                                            Date.valueOf(etudiant.get("date de naissance")),
+                                            groupe.getIdGroupe(),
+                                            etudiant.get("code") + "@etu.univ-usto.dz"
+                                    ));
                             } catch (SQLException e1) {
                                e1.printStackTrace();
                             }
@@ -211,5 +266,16 @@ public class GestionComptesController {
             }
 
         }
+    }
+
+    @FXML
+    private void exit(){
+        System.exit(0);
+    }
+
+    @FXML
+    private void fermer_button_onAction() {
+        Stage stage = (Stage) table_pan.getScene().getWindow();
+        stage.close();
     }
 }

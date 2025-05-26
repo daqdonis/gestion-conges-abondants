@@ -1,0 +1,38 @@
+#motifButton{
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+#motifButton:hover{
+    -fx-background-color: #4f92ff;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+#confirmerButton{
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+
+#confirmerButton:hover{
+    -fx-background-color: GREEN;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+#fermerButton{
+    -fx-background-color: transparent;
+}
+#fermerButton:hover{
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}

@@ -51,6 +51,7 @@ CREATE TABLE Etudiant(
                          prenom VARCHAR(255) NOT NULL,
                          date_naiss DATE NOT NULL,
                          id_groupe VARCHAR(15) NOT NULL,
+                         email_etu VARCHAR(35) NOT NULL,
                          FOREIGN KEY (id_groupe) REFERENCES Groupe(id_groupe)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -59,6 +60,7 @@ CREATE TABLE Conge(
                       id_demande VARCHAR(15) PRIMARY KEY,
                       id_etu BIGINT NOT NULL,
                       date_demande DATE NOT NULL,
+                      type ENUM('Maladie chronique invalidante', 'Maternité', 'Maladie longue durée', 'Service national', 'Obligations familiales', 'Accidents graves') DEFAULT 'Maladie longue durée',
                       duree INT,
                       etat ENUM('En attente','Refusé','Accepté') DEFAULT 'En attente',
                       justificatif MEDIUMBLOB NOT NULL,
@@ -80,14 +82,14 @@ CREATE TABLE Admin(
                       id_admin VARCHAR(10) PRIMARY KEY,
                       nom VARCHAR(255) NOT NULL,
                       prenom VARCHAR(255) NOT NULL,
-                      roles SET('admin_conge','admin_abondant','admin_comptes') NOT NULL,
+                      roles SET('admin_conge_abandont','admin_comptes') NOT NULL,
                       email VARCHAR(63) UNIQUE NOT NULL,
                       mot_passe VARCHAR(63) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Abondant
 CREATE TABLE Abondant(
-                         id_etu BIGINT NOT NULL,
+                         id_etu BIGINT UNIQUE NOT NULL,
                          id_admin VARCHAR(10) NOT NULL,
                          date_dec DATE NOT NULL,
                          FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu),
@@ -106,5 +108,12 @@ CREATE TABLE Action_admin(
                              FOREIGN KEY (id_admin) REFERENCES Admin(id_admin),
                              FOREIGN KEY (id_conge) REFERENCES Conge(id_demande),
                              FOREIGN KEY (id_reins) REFERENCES Dem_reins(id_demande),
-                             FOREIGN KEY (pk_abond) REFERENCES Abondant(id_etu)
+                             FOREIGN KEY (pk_abond) REFERENCES Etudiant(id_etu)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE Reintegrated_Students(
+    id_etu BIGINT PRIMARY KEY,
+    reintegration_date DATE NOT NULL,
+    original_conge_id VARCHAR(15) NOT NULL,
+    FOREIGN KEY (id_etu) REFERENCES Etudiant(id_etu)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="493.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.reinsctiprionController">
+   <children>
+      <Pane fx:id="main_Panel" layoutX="7.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="505.0" prefWidth="500.0" style="-fx-background-color: white;" stylesheets="@style/ajouter-une-demande.css">
+         <children>
+            <CubicCurve controlX1="-374.8194885253906" controlX2="-278.4974365234375" controlY1="-262.5640869140625" controlY2="-16.67034912109375" endX="209.30133056640625" endY="-169.0" fill="#1f75ff" layoutX="96.0" layoutY="716.0" startX="-128.86050415039062" startY="-284.8603515625" stroke="#21ff3b" strokeType="INSIDE" strokeWidth="0.0" />
+            <CubicCurve controlX1="-476.3875732421875" controlX2="353.6124267578125" controlY1="-276.48736572265625" controlY2="-339.48736572265625" endX="263.6124267578125" endY="-60.4873046875" fill="#1f75ff" layoutX="274.0" layoutY="166.0" startX="-333.3875732421875" startY="-60.4873046875" stroke="#21ff3b" strokeType="INSIDE" strokeWidth="0.0" />
+            <Text fill="WHITE" layoutX="-7.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reinsctiprion" textAlignment="CENTER" wrappingWidth="334.4521484375">
+               <font>
+                  <Font name="Arial Bold" size="46.0" />
+               </font>
+            </Text>
+            <Label alignment="CENTER" layoutX="101.0" layoutY="182.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
+               <font>
+                  <Font name="Calibri" size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="reinsctiprion_matricule" layoutX="209.0" layoutY="180.0" prefHeight="27.0" prefWidth="142.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="231.0" prefHeight="17.0" prefWidth="78.0" text="Nom :" textFill="#4b4b4b">
+               <font>
+                  <Font name="Calibri" size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="reinsctiprion_Nom" layoutX="77.0" layoutY="260.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <Label alignment="CENTER" layoutX="23.0" layoutY="301.0" prefHeight="17.0" prefWidth="78.0" text="Prenom :" textFill="#4b4b4b">
+               <font>
+                  <Font name="Calibri" size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="reinsctiprion_PreNom" layoutX="77.0" layoutY="337.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <Label alignment="CENTER" layoutX="273.0" layoutY="301.0" prefHeight="17.0" prefWidth="78.0" text="GroupID :" textFill="#4b4b4b">
+               <font>
+                  <Font name="Calibri" size="19.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="273.0" layoutY="225.0" prefHeight="35.0" prefWidth="155.0" text="Date De Naissence :" textAlignment="CENTER" textFill="#4b4b4b" wrapText="true">
+               <font>
+                  <Font name="Calibri" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="AJT_D_ConfirmerButton" layoutX="185.0" layoutY="429.0" mnemonicParsing="false" onAction="#handleConfirmerButton" prefHeight="43.0" prefWidth="132.0" text="Confirmer" textFill="#3cd14e" />
+            <TextField fx:id="reinsctiprion_Date" layoutX="321.0" layoutY="260.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <TextField fx:id="reinsctiprion_GroupID" layoutX="321.0" layoutY="337.0" prefHeight="27.0" prefWidth="142.0" style="-fx-border-color: black;" />
+            <Button fx:id="fermer_button" layoutX="469.0" layoutY="14.0" mnemonicParsing="false" onAction="#fermer_button_onAction" prefHeight="27.0" prefWidth="34.0" text="🗙" textFill="#9a1818">
+               <font>
+                  <Font name="Arial" size="13.0" />
+               </font>
+            </Button>
+            <Circle fx:id="234shape" fill="#1f75ff" layoutX="416.0" layoutY="118.0" radius="31.0" stroke="#21ff3b00" strokeType="INSIDE" />
+            <Circle fx:id="2344shape" fill="#1f75ff" layoutX="363.0" layoutY="106.0" radius="12.0" stroke="#21ff3b00" strokeType="INSIDE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

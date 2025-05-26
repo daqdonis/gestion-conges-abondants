@@ -1,0 +1,26 @@
+#mainPanel{
+    -fx-background-color: #dedede;
+}
+
+#AjouterCompte_button{
+     -fx-background-color: #1f75ff;
+     -fx-background-radius: 20px;
+}
+
+#loginPanel {
+    -fx-background-color: WHITE;
+    -fx-background-radius: 20px;
+}
+
+#exitButton {
+    -fx-background-color: #dedede ;
+}
+
+#exitButton:hover{
+    -fx-background-color : grey ;
+    -fx-text-fill : red ;
+}
+#white_background{
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+}

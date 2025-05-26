@@ -1,0 +1,24 @@
+#button_ajouter_demande:hover{
+    -fx-background-color: #1964a6;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2); /* X=0, Y=5 */
+}
+#button_ajouter_demande{
+    -fx-background-color: #1f75ff;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+#search_field{
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+}
+#main_background{
+    -fx-background-color: #dedede;
+    -fx-background-radius: 0px 20px 20px 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.5, 4, 5); /* X=0, Y=5 */
+}

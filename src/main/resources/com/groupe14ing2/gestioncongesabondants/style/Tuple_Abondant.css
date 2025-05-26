@@ -1,0 +1,21 @@
+#reinscription_button {
+    -fx-background-color: #2f8a47;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+}
+
+#reinscription_button:hover {
+    -fx-background-color: #006609;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+}
+#traiter_jst_button{
+    -fx-background-color: #dfa300;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}
+#traiter_jst_button:hover{
+    -fx-background-color: #f7980a;
+    -fx-text-fill: white;
+    -fx-background-radius: 20px;
+}

@@ -19,7 +19,7 @@
     -fx-border-color:  #1f75ff;
     -fx-border-width:   0px 0px 2px 0px ;
 }
-#loginButton{
+#AjouterCompte_button{
     -fx-background-color :  #1f75ff;
 }
 #exitButton{
