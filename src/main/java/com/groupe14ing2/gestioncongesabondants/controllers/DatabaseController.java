@@ -742,6 +742,7 @@ public class DatabaseController extends DatabaseLink {
 
             while (rs.next()) {
                 abondants.add(new Abondant(
+
                         rs.getLong("id_etu"),
                         rs.getString("id_admin"),
                         rs.getDate("date_dec")
@@ -814,6 +815,7 @@ public class DatabaseController extends DatabaseLink {
 
     public Conge getCongeByEtudiant(long idEtu) throws SQLException {
         String sql = "SELECT c.*, e.* FROM Conge c " +
+
                 "JOIN Etudiant e ON c.id_etu = e.id_etu " +
                 "WHERE c.id_etu = ? " +
                 "ORDER BY c.date_demande DESC " +
@@ -823,6 +825,7 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setLong(1, idEtu);
 
         ResultSet resultSet = preparedStatement.executeQuery();
+
 
         if (resultSet.next()) {
             Etudiant etudiant = new Etudiant(
@@ -838,6 +841,7 @@ public class DatabaseController extends DatabaseLink {
             EtatTraitement etat = EtatTraitement.fromDisplayName(etatStr);
 
             Conge conge = new Conge(
+
                     resultSet.getString("id_demande"),
                     resultSet.getDate("date_demande"),
                     resultSet.getInt("duree"),
@@ -919,4 +923,5 @@ public class DatabaseController extends DatabaseLink {
         }
         return 0;
     }
+
 }

@@ -27,12 +27,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.application.Platform;
+
 import javafx.util.Duration;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+
 import java.util.function.Consumer;
+
 import java.util.stream.Collectors;
 
 public class MenuViewController {
@@ -51,6 +55,7 @@ public class MenuViewController {
     @FXML private TextField text_field_rechercher_demande;
     @FXML private ScrollPane scrollPane;
     @FXML private VBox requestsContainer;
+
     @FXML public Parent mainRoot;
     @FXML private Button return_button;
     @FXML private VBox slid_sbox;
@@ -68,6 +73,7 @@ public class MenuViewController {
     @FXML
     public void initialize() {
         myPieChart.setLabelsVisible(false);
+
         updatePieChart(0, 0, 0);
         text_field_rechercher_demande.textProperty().addListener((observable, oldValue, newValue) -> {
             filterDemands(newValue);
@@ -110,6 +116,7 @@ public class MenuViewController {
             }
         }
     }
+
 
     public void setAdmin(Admin admin) {
         this.currentAdmin = admin;
@@ -169,6 +176,7 @@ public class MenuViewController {
         }
     }
 
+
     private void filterDemands(String matricule) {
         if (allConges == null) return;
 
@@ -177,12 +185,14 @@ public class MenuViewController {
         int enAttenteCount = 0;
         int refuseCount = 0;
 
+
         List<Conge> filteredConges = matricule == null || matricule.trim().isEmpty() ?
                 allConges :
                 allConges.stream()
                         .filter(conge -> conge.getEtudiant() != null &&
                                 String.valueOf(conge.getEtudiant().getIdEtu()).contains(matricule))
                         .collect(Collectors.toList());
+
 
         for (Conge conge : filteredConges) {
             try {
@@ -203,9 +213,11 @@ public class MenuViewController {
             }
         }
 
+
         final int finalAccepteCount = accepteCount;
         final int finalEnAttenteCount = enAttenteCount;
         final int finalRefuseCount = refuseCount;
+
 
         Platform.runLater(() -> updatePieChart(finalAccepteCount, finalEnAttenteCount, finalRefuseCount));
     }
@@ -231,7 +243,6 @@ public class MenuViewController {
                         tupleController.setMenuController(this);
                         tupleController.setData(conge);
                         requestsContainer.getChildren().add(hBox);
-
                         switch (conge.getEtat()) {
                             case ACCEPTÉ: accepteCount++; break;
                             case ENATTENTE: enAttenteCount++; break;
@@ -275,11 +286,13 @@ public class MenuViewController {
             stage.setScene(new Scene(root));
             stage.setTitle("Ajouter une demande");
 
+
             GaussianBlur blur = new GaussianBlur(10);
             mainRoot.setEffect(blur);
             stage.setOnHidden(e -> mainRoot.setEffect(null));
 
             stage.initStyle(StageStyle.UNDECORATED);
+
 
             stage.show();
         } catch (IOException ex) {

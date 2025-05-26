@@ -11,6 +11,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -23,6 +24,7 @@ import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.groupe14ing2.gestioncongesabondants.utils.EmailUtils;
+
 
 public class TraiterDemandeController  {
 
@@ -59,8 +61,10 @@ public class TraiterDemandeController  {
     @FXML
     private TextField traiter_prenom;
 
+
     @FXML
     private TextField traiter_type_conge;
+
 
     // Référence du contrôleur MenuViewController
     private MenuViewController menuController;
@@ -74,15 +78,19 @@ public class TraiterDemandeController  {
     }
 
     public void setConge(Conge conge) {
+
         this.conge = conge; // Store the Conge object
+
         if (conge != null && conge.getEtudiant() != null) {
             traiter_nom.setText(conge.getEtudiant().getNom());
             traiter_prenom.setText(conge.getEtudiant().getPrenom());
             traiter_matricule_etudiant.setText(String.valueOf(conge.getEtudiant().getIdEtu()));
             traiter_idGroupe.setText(String.valueOf(conge.getEtudiant().getIdGroupe()));
+
             traiter_numero_demande.setText(String.valueOf(conge.getIdDemande()));
             traiter_date_de_nessance.setText(String.valueOf(conge.getEtudiant().getDateNaiss()));
             traiter_type_conge.setText(String.valueOf(conge.getType()));
+
         }
     }
 
@@ -93,6 +101,7 @@ public class TraiterDemandeController  {
     @FXML
     private void handleRefuser() {
         try {
+
             if (conge == null) {
                 showAlert("Erreur", "Données de congé non disponibles");
                 return;
@@ -125,6 +134,7 @@ public class TraiterDemandeController  {
             conge.setEtat(EtatTraitement.REFUSÉ);
             AddActionAdmin.changeEtat(menuController.getAdmin(), etudiant, conge);
 
+
             // Call the status update callback first
             if (onStatusUpdated != null) {
                 javafx.application.Platform.runLater(() -> {
@@ -140,6 +150,7 @@ public class TraiterDemandeController  {
             }
 
             showAlert("Succès", "Demande refusée avec succès.");
+
             
             if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
                 sendEmail(etudiant.getemail_etu(), m);
@@ -148,6 +159,7 @@ public class TraiterDemandeController  {
             }
             
             fermer_button_onAction(); // fermer la fenêtre après refus
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -158,6 +170,7 @@ public class TraiterDemandeController  {
     @FXML
     private void handleAccepter() {
         try {
+
             if (conge == null) {
                 showAlert("Erreur", "Données de congé non disponibles");
                 return;
@@ -186,22 +199,25 @@ public class TraiterDemandeController  {
             String idDemande = conge.getIdDemande();
             DatabaseController dbController = new DatabaseController();
             
+
             String updateDateSql = "UPDATE Conge SET date_demande = CURRENT_DATE() WHERE id_demande = ?";
             try (PreparedStatement stmt = dbController.getConnection().prepareStatement(updateDateSql)) {
                 stmt.setString(1, idDemande);
                 stmt.executeUpdate();
             }
+
             dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);
             // logs the admins action
             conge.setEtat(EtatTraitement.ACCEPTÉ);
             AddActionAdmin.changeEtat(menuController.getAdmin(), etudiant, conge);
+
 
             if (onStatusUpdated != null) {
                 javafx.application.Platform.runLater(() -> {
                     onStatusUpdated.run();
                 });
             }
-            
+
             if (menuController != null) {
                 javafx.application.Platform.runLater(() -> {
                     menuController.refreshTable();
@@ -209,6 +225,7 @@ public class TraiterDemandeController  {
             }
 
             showAlert("Succès", "Demande acceptée avec succès.");
+
             
             if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
                 sendEmail(etudiant.getemail_etu(), m);
@@ -216,6 +233,7 @@ public class TraiterDemandeController  {
                 System.out.println("Warning: Student email not available, skipping email notification");
             }
             
+
             fermer_button_onAction(); // fermer la fenêtre après acceptation
 
         } catch (Exception e) {

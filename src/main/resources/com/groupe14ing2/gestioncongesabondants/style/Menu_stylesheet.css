@@ -106,6 +106,7 @@
 }
 
 .reintegration-button-enabled {
+
     -fx-background-color: #2f8a47;
     -fx-text-fill: white;
 }
@@ -117,3 +118,4 @@
 .reintegration-button-disabled {
     -fx-opacity: 0.45;
 }
+

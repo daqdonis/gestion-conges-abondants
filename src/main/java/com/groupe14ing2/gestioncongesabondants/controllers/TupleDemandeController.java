@@ -13,7 +13,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
 import javafx.scene.effect.GaussianBlur;
+
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import com.groupe14ing2.gestioncongesabondants.controllers.MenuViewController.*;
@@ -45,6 +47,7 @@ public class TupleDemandeController extends MenuViewController {
 
     @FXML
     public void initialize() {
+
     }
 
     public void setData(Conge conge) {
@@ -54,6 +57,7 @@ public class TupleDemandeController extends MenuViewController {
             matriculeLabel.setText(String.valueOf(conge.getEtudiant().getIdEtu()));
             nomLabel.setText(conge.getEtudiant().getNom());
             prenomLabel.setText(conge.getEtudiant().getPrenom());
+
         } else {
             matriculeLabel.setText("N/A");
             nomLabel.setText("N/A");
@@ -65,13 +69,16 @@ public class TupleDemandeController extends MenuViewController {
             reintegrationButton.getStyleClass().remove("reintegration-button-disabled");
             reintegrationButton.getStyleClass().add("reintegration-button-enabled");
         } else {
+
             reintegrationButton.setDisable(true);
             reintegrationButton.getStyleClass().remove("reintegration-button-enabled");
             reintegrationButton.getStyleClass().add("reintegration-button-disabled");
         }
 
         voir_jst_button.setOnAction(e -> {
+
             viewJustification();
+
         });
 
         traiter_jst_button.setOnAction(e -> {
@@ -84,10 +91,12 @@ public class TupleDemandeController extends MenuViewController {
                 controller.setMenuController(menuController);
                 controller.setConge(conge);
                 controller.setOnStatusUpdated(() -> {
+
                     if (menuController != null) {
                         menuController.refreshTable();
                     }
                 });
+
 
                 controller.setButton_justificationAction(event -> viewJustification());
 
@@ -98,12 +107,14 @@ public class TupleDemandeController extends MenuViewController {
 
 
                 stage.initStyle(StageStyle.UNDECORATED);
+
                 stage.show();
 
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         });
+
     }
 
     private void updateReintegrationButton() {
@@ -180,5 +191,6 @@ public class TupleDemandeController extends MenuViewController {
                 }
             }).start();
         }
+
     }
 }

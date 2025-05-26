@@ -3,12 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <HBox fx:id="main_hbox" alignment="CENTER_LEFT" prefHeight="67.0" prefWidth="1159.0" stylesheets="@style/TupleDemande.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.groupe14ing2.gestioncongesabondants.controllers.TupleDemandeController">
    <children>
+
       <Text layoutX="163.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="13.33343505859375" />
       <Label fx:id="matriculeLabel" alignment="CENTER" prefHeight="30.0" prefWidth="141.0" text="matricule">
          <font>
@@ -17,37 +19,48 @@
       </Label>
       <Text layoutX="350.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="9.33343505859375" />
       <Label fx:id="nomLabel" alignment="CENTER" prefHeight="30.0" prefWidth="158.0" text="nom">
+
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
+
       <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="46.33343505859375" />
       <Label fx:id="prenomLabel" alignment="CENTER" prefHeight="30.0" prefWidth="77.0" text="prenom">
+
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
+
       <Text layoutX="535.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="111.33343505859375" />
       <Button fx:id="voir_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="83.0" text="Voir">
+
          <font>
             <Font name="Arial" size="18.0" />
          </font>
+
       </Button>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="86.33343505859375" />
       <Label fx:id="etatLabel" alignment="CENTER" prefHeight="30.0" prefWidth="113.0" text="etat">
+
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
+
       <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="34.3333740234375" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.3333740234375" />
       <Button fx:id="reintegrationButton" mnemonicParsing="false" onAction="#handleReintegrationButton" prefHeight="35.0" prefWidth="134.0" text="Reintegration">
+
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
+
       <Text layoutX="840.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="7.3333740234375" />
       <Button fx:id="traiter_jst_button" mnemonicParsing="false" prefHeight="35.0" prefWidth="98.0" text="Traiter">
+
          <font>
             <Font name="Arial" size="18.0" />
          </font>

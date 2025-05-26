@@ -86,6 +86,7 @@ public class LoginViewController {
         }
     }
 
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -103,6 +104,7 @@ public class LoginViewController {
         MenuViewController controller = loader.getController();
         controller.setAdmin(admin);
 
+
         Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
             @Override
             public void accept(javafx.event.ActionEvent actionEvent) {
@@ -113,6 +115,7 @@ public class LoginViewController {
                 }
             }
         };
+
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -134,6 +137,7 @@ public class LoginViewController {
         MenuGestionAbdandenementController controller = loader.getController();
         controller.setAdmin(admin);
 
+
         Consumer<javafx.event.ActionEvent> switchMenu = new Consumer<javafx.event.ActionEvent>() {
             @Override
             public void accept(javafx.event.ActionEvent actionEvent) {
@@ -146,6 +150,7 @@ public class LoginViewController {
         };
 
         controller.setSwitchAction(switchMenu);
+
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         scene = new Scene(root);

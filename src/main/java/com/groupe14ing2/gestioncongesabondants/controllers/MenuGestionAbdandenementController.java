@@ -1,12 +1,15 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
+
 import com.groupe14ing2.gestioncongesabondants.models.*;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -15,7 +18,9 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
 import javafx.stage.*;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +28,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -58,8 +64,11 @@ public class MenuGestionAbdandenementController {
     @FXML
     private Pane switch_chap;
 
-    @FXML
-    private Pane table_pan;
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
 
     @FXML
     private TextField search_field;
@@ -69,6 +78,7 @@ public class MenuGestionAbdandenementController {
 
     @FXML
     private VBox requestsContainer;
+
 
     @FXML
     private Label Totalstudent;
@@ -151,8 +161,10 @@ public class MenuGestionAbdandenementController {
         }
     }
 
+
     public void refreshTable() {
         System.out.println("Refreshing table...");
+
         try {
             DatabaseController db = new DatabaseController();
             allAbondants = db.getAbondant(); // Store all abondants for filtering
@@ -164,6 +176,7 @@ public class MenuGestionAbdandenementController {
     }
 
     @FXML
+
     private void selectFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Liste des étudiants");
@@ -195,6 +208,7 @@ public class MenuGestionAbdandenementController {
 
             refreshTable();
         }
+
     }
 
     public void setAdmin(Admin admin) {
@@ -209,6 +223,7 @@ public class MenuGestionAbdandenementController {
         System.exit(0);
     }
 
+
     @FXML
     public void setSwitchAction(Consumer<ActionEvent> f) {
         gestion_des_abondant_button.setOnAction(e -> f.accept(e));
@@ -216,5 +231,6 @@ public class MenuGestionAbdandenementController {
 
     public void setMenuController(MenuViewController menuController) {
         this.menuController = menuController;
+
     }
 }
