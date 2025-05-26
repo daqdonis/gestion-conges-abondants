@@ -754,7 +754,7 @@ public class DatabaseController extends DatabaseLink {
     // ActionAdmin methods
     public void addActionAdmin(ActionAdmin actionAdmin) throws SQLException {
         String sql = "INSERT INTO Action_admin (id_admin, action, temps_action, id_conge, id_reins, pk_abond) VALUES (?, ?, ?, ?, ?, ?)";
-
+        System.out.println("pkAbond: " + actionAdmin.getPkAbond());
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, actionAdmin.getIdAdmin());
         preparedStatement.setString(2, actionAdmin.getAction());

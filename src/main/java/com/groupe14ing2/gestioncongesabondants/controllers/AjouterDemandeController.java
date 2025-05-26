@@ -86,7 +86,7 @@ public class AjouterDemandeController {
             // Créer l'objet Conge avec les données
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
-                    new Date(LocalDate.now().toEpochDay()),
+                    Date.valueOf(LocalDate.now()),
                     2, // Durée par défaut
                     EtatTraitement.ENATTENTE,
                     fileInputStream,
@@ -98,7 +98,7 @@ public class AjouterDemandeController {
             dbController.addConge(conge);
             System.out.println(conge.getIdDemande());
             System.out.println(menuController.getAdmin().getNom());
-            System.out.println("C" + (LocalDate.now().getYear() - 100) + etudiant.getIdEtu());
+            System.out.println("C" + (conge.getDateDemande().getYear() - 100) + etudiant.getIdEtu());
             // logs the admins action
             AddActionAdmin.addConge(menuController.getAdmin(), etudiant, conge);
 

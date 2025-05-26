@@ -108,7 +108,7 @@ CREATE TABLE Action_admin(
                              FOREIGN KEY (id_admin) REFERENCES Admin(id_admin),
                              FOREIGN KEY (id_conge) REFERENCES Conge(id_demande),
                              FOREIGN KEY (id_reins) REFERENCES Dem_reins(id_demande),
-                             FOREIGN KEY (pk_abond) REFERENCES Abondant(id_etu)
+                             FOREIGN KEY (pk_abond) REFERENCES Etudiant(id_etu)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE Reintegrated_Students(
