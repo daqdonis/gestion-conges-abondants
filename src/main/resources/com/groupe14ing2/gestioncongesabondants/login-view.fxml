@@ -15,7 +15,7 @@
    <left>
       <AnchorPane fx:id="infoPanel" prefHeight="500.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <Hyperlink alignment="CENTER" layoutX="111.0" layoutY="443.0" prefHeight="23.0" prefWidth="139.0" text="USTO MB" textFill="#f5f5f5">
+            <Hyperlink fx:id="usto_Link" alignment="CENTER" layoutX="111.0" layoutY="440.0" onAction="#openWebsiteUSTO" prefHeight="23.0" prefWidth="139.0" text="USTO MB" textFill="#f5f5f5">
                <font>
                   <Font size="19.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Font name="Franklin Gothic Medium" size="14.0" />
                </font>
             </Button>
-            <Hyperlink layoutX="120.0" layoutY="430.0" prefHeight="23.0" prefWidth="135.0" text="Forgot Your Password ?" />
+            <Hyperlink fx:id="forgot_pass_link" layoutX="119.0" layoutY="440.0" onAction="#forgotPassWeb" prefHeight="23.0" prefWidth="135.0" text="Forgot Your Password ?" />
             <ImageView fx:id="userIcon" fitHeight="25.0" fitWidth="25.0" layoutX="89.0" layoutY="224.0">
                <image>
                   <Image url="@img/user.png" />

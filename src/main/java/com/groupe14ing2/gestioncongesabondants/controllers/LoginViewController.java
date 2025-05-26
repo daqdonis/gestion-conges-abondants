@@ -1,11 +1,14 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
 import java.util.function.Consumer;
 
 import com.groupe14ing2.gestioncongesabondants.models.Admin;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -164,5 +167,21 @@ public class LoginViewController {
     private void minimizeWindow() {
         Stage stage = (Stage) minimizeButton.getScene().getWindow();
         stage.setIconified(true);
+    }
+
+    public void openWebsiteUSTO(ActionEvent event) {
+        try {
+            Desktop.getDesktop().browse(new URI("https://www.univ-usto.dz/en/"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void forgotPassWeb(ActionEvent event) {
+        try {
+            Desktop.getDesktop().browse(new URI("https://progres.mesrs.dz/webfve/forget_password.xhtml"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
