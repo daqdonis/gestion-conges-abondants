@@ -226,17 +226,24 @@ public class GestionComptesController {
                                         semestrePair.getIdSemestre(),
                                         semestreImpair.getIdSemestre()
                                 );
-
+                                // the if-else block is to check if the student is already in the database
+                                // and to update his group accordingly
+                                long idEtu = Long.parseLong(etudiant.get("code"));
                                 db.addGroupe(groupe);
-
-                                db.addEtudiant(new Etudiant(
-                                        Long.parseLong(etudiant.get("code")),
-                                        etudiant.get("nom"),
-                                        etudiant.get("prénom"),
-                                        Date.valueOf(etudiant.get("date de naissance")),
-                                        groupe.getIdGroupe(),
-                                        etudiant.get("code") + "@etu.univ-usto.dz"
-                                ));
+                                Etudiant tempEtu = db.getEtudiant(idEtu);
+                                if (tempEtu != null) {
+                                    tempEtu.setIdGroupe(groupe.getIdGroupe());
+                                    db.updateEtudiant(tempEtu);
+                                }
+                                else
+                                    db.addEtudiant(new Etudiant(
+                                            idEtu,
+                                            etudiant.get("nom"),
+                                            etudiant.get("prénom"),
+                                            Date.valueOf(etudiant.get("date de naissance")),
+                                            groupe.getIdGroupe(),
+                                            etudiant.get("code") + "@etu.univ-usto.dz"
+                                    ));
                             } catch (SQLException e1) {
                                e1.printStackTrace();
                             }
