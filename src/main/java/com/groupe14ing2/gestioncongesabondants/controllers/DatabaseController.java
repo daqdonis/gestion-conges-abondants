@@ -447,17 +447,17 @@ public class DatabaseController extends DatabaseLink {
 
         // Generate conge ID (X-AA-00000000 format)
         String idPrefix = "C" + (conge.getDateDemande().getYear() - 100) + conge.getEtudiant().getIdEtu();
-        String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
+        /*String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
         PreparedStatement ps = connection.prepareStatement(sqlCount);
         ps.setString(1, idPrefix + "%");
         ResultSet rs = ps.executeQuery();
         rs.next();
-        String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);
+        String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);*/
 
         String sql = "INSERT IGNORE INTO Conge (id_demande, id_etu, date_demande, duree, etat,justificatif, type) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, id);
+            stmt.setString(1, idPrefix);
             stmt.setLong(2, conge.getEtudiant().getIdEtu());
             stmt.setDate(3, conge.getDateDemande());
             stmt.setInt(4, (int)conge.getDuree());
@@ -475,7 +475,7 @@ public class DatabaseController extends DatabaseLink {
             }
 
             stmt.executeUpdate();
-            conge.setIdDemande(id);
+            //conge.setIdDemande(id);
         }
     }
 
@@ -753,7 +753,7 @@ public class DatabaseController extends DatabaseLink {
 
     // ActionAdmin methods
     public void addActionAdmin(ActionAdmin actionAdmin) throws SQLException {
-        String sql = "INSERT IGNORE INTO Action_admin (id_admin, action, temps_action, id_conge, id_reins, pk_abond) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Action_admin (id_admin, action, temps_action, id_conge, id_reins, pk_abond) VALUES (?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, actionAdmin.getIdAdmin());
@@ -761,7 +761,10 @@ public class DatabaseController extends DatabaseLink {
         preparedStatement.setTimestamp(3, actionAdmin.getTempsAction());
         preparedStatement.setString(4, actionAdmin.getIdConge());
         preparedStatement.setString(5, actionAdmin.getIdReins());
-        preparedStatement.setLong(6, actionAdmin.getPkAbond());
+        if (actionAdmin.getPkAbond() > 0)
+            preparedStatement.setLong(6, actionAdmin.getPkAbond());
+        else
+            preparedStatement.setNull(6, Types.BIGINT);
 
         preparedStatement.executeUpdate();
     }

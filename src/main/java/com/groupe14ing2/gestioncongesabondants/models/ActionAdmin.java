@@ -10,7 +10,7 @@ public class ActionAdmin implements Serializable {
   private Timestamp tempsAction;
   private String idConge = null;
   private String idReins = null;
-  private long pkAbond = -1;
+  private Long pkAbond = -1L;
 
   public ActionAdmin(int idAction, String idAdmin, String action, Timestamp tempsAction,
                      String idConge, String idReins, long pkAbond) {
@@ -28,7 +28,6 @@ public class ActionAdmin implements Serializable {
     this.idAdmin = idAdmin;
     this.action = action;
     this.tempsAction = new Timestamp(System.currentTimeMillis());
-
     switch (actionChar) {
       case 'A':
         this.pkAbond = Long.parseLong(idActionfait);

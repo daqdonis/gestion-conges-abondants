@@ -99,12 +99,8 @@ public class AjouterDemandeController {
             System.out.println(conge.getIdDemande());
             System.out.println(menuController.getAdmin().getNom());
             System.out.println("C" + (LocalDate.now().getYear() - 100) + etudiant.getIdEtu());
-            dbController.addActionAdmin(new ActionAdmin(
-                    menuController.getAdmin().getIdAdmin(),
-                    "nouveau congé pour " + etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom(),
-                    "C" + (LocalDate.now().getYear() - 100) + etudiant.getIdEtu(),
-                    'C'
-            ));
+            // logs the admins action
+            AddActionAdmin.addConge(menuController.getAdmin(), etudiant, conge);
 
             // Afficher l'alerte de succès
             showAlert("Success", "Demand added successfully!");

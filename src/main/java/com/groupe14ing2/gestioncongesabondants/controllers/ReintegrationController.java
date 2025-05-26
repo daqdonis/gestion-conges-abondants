@@ -247,7 +247,8 @@ public class ReintegrationController {
 
                 // Remove the congé record
                 db.removeConge(currentConge.getIdDemande());
-
+                // logs the admins action
+                AddActionAdmin.reintegrer(menuController.getAdmin(), currentConge.getEtudiant(), currentConge);
                 // Send email notification
                 if (currentConge.getEtudiant() != null && currentConge.getEtudiant().getemail_etu() != null) {
                     String emailMessage = "Bonjour " + currentConge.getEtudiant().getNom() + " " + currentConge.getEtudiant().getPrenom() + ",\n\n" +

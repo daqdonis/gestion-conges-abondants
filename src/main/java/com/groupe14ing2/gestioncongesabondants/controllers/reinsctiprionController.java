@@ -99,7 +99,8 @@ public class reinsctiprionController {
 
             DatabaseController db = new DatabaseController();
             db.removeAbondant(etudiant.getIdEtu());
-
+            // logs the admins action
+            AddActionAdmin.reinscrit(menuController.getAdmin(), etudiant);
             // Send email notification
             if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
                 String emailMessage = "Bonjour " + etudiant.getNom() + " " + etudiant.getPrenom() + ",\n\n" +

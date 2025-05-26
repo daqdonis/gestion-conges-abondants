@@ -183,6 +183,8 @@ public class MenuGestionAbdandenementController {
                                 admin.getIdAdmin(),
                                 Date.valueOf(LocalDate.now())
                         ));
+                        // logs the admins action
+                        AddActionAdmin.addAbondant(menuController.getAdmin(), db.getEtudiant(id));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -197,6 +199,9 @@ public class MenuGestionAbdandenementController {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
+    }
+    public Admin getAdmin() {
+        return admin;
     }
 
     @FXML

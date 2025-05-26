@@ -121,6 +121,9 @@ public class TraiterDemandeController  {
             String idDemande = conge.getIdDemande();
             DatabaseController dbController = new DatabaseController();
             dbController.updateCongeEtat(idDemande, EtatTraitement.REFUSÉ);
+            // logs the admins action
+            conge.setEtat(EtatTraitement.REFUSÉ);
+            AddActionAdmin.changeEtat(menuController.getAdmin(), etudiant, conge);
 
             // Call the status update callback first
             if (onStatusUpdated != null) {
@@ -188,9 +191,11 @@ public class TraiterDemandeController  {
                 stmt.setString(1, idDemande);
                 stmt.executeUpdate();
             }
-            
             dbController.updateCongeEtat(idDemande, EtatTraitement.ACCEPTÉ);
-            
+            // logs the admins action
+            conge.setEtat(EtatTraitement.ACCEPTÉ);
+            AddActionAdmin.changeEtat(menuController.getAdmin(), etudiant, conge);
+
             if (onStatusUpdated != null) {
                 javafx.application.Platform.runLater(() -> {
                     onStatusUpdated.run();
