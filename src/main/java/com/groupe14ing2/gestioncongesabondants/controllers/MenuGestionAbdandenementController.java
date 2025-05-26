@@ -211,9 +211,7 @@ public class MenuGestionAbdandenementController {
 
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
+
     public Admin getAdmin() {
         return admin;
     }
