@@ -3,7 +3,7 @@ package com.groupe14ing2.gestioncongesabondants.models;
 public enum TypeConge {
 
     MALADIECHRONIQUE("Maladie chronique invalidante"),
-    MATERITÉ("Maternité"),
+    MATERNITÉ("Maternité"),
     MALADIELONGUEDURÉE("Maladie longue durée"),
     SERVICENATIONAL("Service national"),
     OBLIGATIONSFAMILIALES("Obligations familiales"),

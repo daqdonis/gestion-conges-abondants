@@ -23,6 +23,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import com.groupe14ing2.gestioncongesabondants.utils.EmailUtils;
 
 public class reinsctiprionController {
 
@@ -158,42 +159,7 @@ public class reinsctiprionController {
     }
 
     private void sendEmail(String to, String msg) {
-        if (to == null || to.trim().isEmpty()) {
-            System.out.println("❌ Email non envoyé: adresse email manquante");
-            return;
-        }
-
-        String from = "gestioncongesabondants@gmail.com";
-        Properties properties = new Properties();
-        
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
-        properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-
-        try {
-            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("abdallahbenmoussa488@gmail.com", "sulj xqma ewsn lsbw");
-                }
-            });
-
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Réponse à votre demande de réinscription", "UTF-8");
-            message.setText(msg, "UTF-8");
-            Transport.send(message);
-            
-            System.out.println("✅ Email envoyé avec succès à: " + to);
-            
-        } catch (MessagingException mex) {
-            System.out.println("❌ Échec de l'envoi de l'email à: " + to);
-            mex.printStackTrace();
-            showAlert("Erreur d'envoi", "L'email n'a pas pu être envoyé: " + mex.getMessage());
-        }
+        EmailUtils.sendEmail(to, "Réponse à votre demande de réinscription", msg);
     }
 
     @FXML
