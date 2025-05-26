@@ -26,7 +26,7 @@ public class AddActionAdmin {
         addAction(
                 admin,
                 "nouveau congé pour " + etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom(),
-                conge.getIdDemande(),
+                null,
                 'C'
         );
     }
@@ -44,7 +44,7 @@ public class AddActionAdmin {
         addAction(
                 admin,
                 "Changement d'état de congé pour " + etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom() + " vers " + conge.getEtat(),
-                conge.getIdDemande(),
+                null,
                 'C'
         );
     }
@@ -62,7 +62,7 @@ public class AddActionAdmin {
         addAction(
                 admin,
                 "Réintégration pour " + etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom(),
-                conge.getIdDemande(),
+                null,
                 'C'
         );
     }
