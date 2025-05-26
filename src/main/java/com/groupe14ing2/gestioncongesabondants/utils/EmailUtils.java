@@ -4,13 +4,28 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javafx.scene.control.Alert;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 
 public class EmailUtils {
-    private static final String FROM_EMAIL = "servicefmiusto@gmail.com";
-    private static final String AUTH_EMAIL = "servicefmiusto@gmail.com";
-    private static final String AUTH_PASSWORD = "eugd hnvv dbit cjpc";
-    
+    private static String FROM_EMAIL;
+    private static String AUTH_EMAIL;
+    private static String AUTH_PASSWORD;
+
+    public static void setValues() throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader("config.cfg"));
+        br.readLine();
+        br.readLine();
+        br.readLine();
+        FROM_EMAIL = AUTH_EMAIL = br.readLine();
+        AUTH_PASSWORD = br.readLine();
+        br.close();
+    }
+
     private static Properties getEmailProperties() {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
