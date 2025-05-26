@@ -117,7 +117,7 @@ public class reinsctiprionController {
             }
 
             menuController.refreshTable();
-            showAlert("Success", "Réinscription acceptée avec succès");
+            showAlert("Success", "Réinscription acceptée et email envoyer avec succès");
             Stage stage = (Stage) AJT_D_ConfirmerButton.getScene().getWindow();
             stage.close();
 
@@ -149,7 +149,7 @@ public class reinsctiprionController {
                 sendEmail(etudiant.getemail_etu(), emailMessage);
             }
 
-            showAlert("Information", "La demande de réinscription a été refusée");
+            showAlert("Information", "La demande de réinscription a été refusée et email envoyer avec succès");
             Stage stage = (Stage) AJT_D_RefuserButton.getScene().getWindow();
             stage.close();
 

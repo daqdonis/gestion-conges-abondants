@@ -265,7 +265,7 @@ public class ReintegrationController {
                 }
 
                 // Show success message
-                showAlert("Success", "Reintegration request accepted successfully.");
+                showAlert("Success", "Reintegration accorder et email envoyer avec succès");
 
                 // Clear the form
                 clearFields();
@@ -323,7 +323,7 @@ public class ReintegrationController {
             }
 
             // Show message and close window
-            showAlert("Information", "La demande de réintégration a été refusée.");
+            showAlert("Information", "La demande de réintégration a été refusée et email envoyer avec succès");
             Stage stage = (Stage) fermerButton.getScene().getWindow();
             stage.close();
 

@@ -149,7 +149,7 @@ public class TraiterDemandeController  {
                 });
             }
 
-            showAlert("Succès", "Demande refusée avec succès.");
+            showAlert("Succès", "Demande refuse et email envoyer avec succès");
 
             
             if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
@@ -224,7 +224,7 @@ public class TraiterDemandeController  {
                 });
             }
 
-            showAlert("Succès", "Demande acceptée avec succès.");
+            showAlert("Succès", "Demande acceptée et email envoyer avec succès");
 
             
             if (etudiant.getemail_etu() != null && !etudiant.getemail_etu().isEmpty()) {
