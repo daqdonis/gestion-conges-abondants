@@ -1,6 +1,8 @@
 package com.groupe14ing2.gestioncongesabondants.controllers;
 
 import com.groupe14ing2.gestioncongesabondants.models.Abondant;
+import com.groupe14ing2.gestioncongesabondants.models.DemReins;
+import com.groupe14ing2.gestioncongesabondants.models.EtatTraitement;
 import com.groupe14ing2.gestioncongesabondants.models.Etudiant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,8 +12,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Year;
@@ -38,6 +46,11 @@ public class reinsctiprionController {
 
     @FXML
     private Pane main_Panel;
+
+    @FXML
+    private Button just_butt;
+
+    private File selectedFile;
 
     @FXML
     private TextField reinsctiprion_Date;
@@ -83,6 +96,7 @@ public class reinsctiprionController {
         // Set up refuse button action
         AJT_D_RefuserButton.setOnAction(e -> handleRefuserButton());
         AJT_D_ConfirmerButton.setOnAction(e -> handleConfirmerButton());
+        just_butt.setOnAction(e -> handleMotifButton());
     }
 
     private void handleConfirmerButton() {
@@ -99,6 +113,18 @@ public class reinsctiprionController {
 
             DatabaseController db = new DatabaseController();
             db.removeAbondant(etudiant.getIdEtu());
+
+            try {
+                db.addDemReins(new DemReins(
+                        etudiant.getIdEtu(),
+                        Date.valueOf(LocalDate.now()),
+                        new FileInputStream(selectedFile),
+                        EtatTraitement.ACCEPTÉ
+                ), 'A');
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
             // logs the admins action
             AddActionAdmin.reinscrit(menuController.getAdmin(), etudiant);
             // Send email notification
@@ -218,6 +244,21 @@ public class reinsctiprionController {
                 statusLabel.setStyle("-fx-text-fill: red;");
                 AJT_D_ConfirmerButton.setDisable(true);
             }
+        }
+    }
+
+    @FXML
+    private void handleMotifButton() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Justification File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PDF Files", "*.pdf"),
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        selectedFile = fileChooser.showOpenDialog(main_Panel.getScene().getWindow());
+
+        if (selectedFile != null) {
+            just_butt.setText("File Selected");
         }
     }
 

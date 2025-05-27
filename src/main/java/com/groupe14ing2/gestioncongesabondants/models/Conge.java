@@ -31,6 +31,7 @@ public class Conge implements Serializable {
     createJustificatifFile(justificatif);
   }
   public Conge(Date dateDemande, int duree, EtatTraitement etat, InputStream justificatif, TypeConge type) {
+    this.idDemande = null;
     this.dateDemande = dateDemande;
     this.duree = duree;
     this.etat = etat;

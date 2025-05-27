@@ -446,7 +446,10 @@ public class DatabaseController extends DatabaseLink {
         }
 
         // Generate conge ID (X-AA-00000000 format)
-        String idPrefix = "C" + (conge.getDateDemande().getYear() - 100) + conge.getEtudiant().getIdEtu();
+        String idPrefix = "C" + (conge.getDateDemande().getYear() - 100) + conge.getEtudiant().getIdEtu() + "0";
+        if (conge.getIdDemande() != null) {
+            idPrefix = conge.getIdDemande();
+        }
         /*String sqlCount = "SELECT COUNT(*) FROM Conge WHERE id_demande LIKE ?";
         PreparedStatement ps = connection.prepareStatement(sqlCount);
         ps.setString(1, idPrefix + "%");
@@ -454,7 +457,7 @@ public class DatabaseController extends DatabaseLink {
         rs.next();
         String id = idPrefix + String.format("%06d", rs.getInt(1) + 1);*/
 
-        String sql = "INSERT IGNORE INTO Conge (id_demande, id_etu, date_demande, duree, etat,justificatif, type) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Conge (id_demande, id_etu, date_demande, duree, etat,justificatif, type) VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, idPrefix);

@@ -9,10 +9,7 @@ import java.time.format.DateTimeFormatter;
 import com.groupe14ing2.gestioncongesabondants.models.*;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -99,8 +96,6 @@ public class AjouterDemandeController {
                 return;
             }
 
-            if (tempConge != null) dbController.removeConge(tempConge.getIdDemande());
-
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
                     Date.valueOf(LocalDate.now()),
@@ -109,6 +104,14 @@ public class AjouterDemandeController {
                     fileInputStream,
                     typeChoiceBox.getSelectionModel().getSelectedItem()
             );
+            if (tempConge != null) {
+                try {
+                    conge.setIdDemande(tempConge.getIdDemande().substring(0,14) + (Integer.parseInt(String.valueOf(tempConge.getIdDemande().charAt(15))) + 1));
+                } catch (IndexOutOfBoundsException e) {
+                    conge.setIdDemande(tempConge.getIdDemande() + "1");
+                }
+
+            }
             conge.setEtudiant(etudiant);
             conge.setType(typeChoiceBox.getSelectionModel().getSelectedItem());
             // Ajouter à la base de données

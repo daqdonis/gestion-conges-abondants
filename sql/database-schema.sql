@@ -57,7 +57,7 @@ CREATE TABLE Etudiant(
 
 -- Conge (X-AA-00000000)
 CREATE TABLE Conge(
-                      id_demande VARCHAR(15) PRIMARY KEY,
+                      id_demande VARCHAR(16) PRIMARY KEY,
                       id_etu BIGINT NOT NULL,
                       date_demande DATE NOT NULL,
                       type ENUM('Maladie chronique invalidante', 'Maternité', 'Maladie longue durée', 'Service national', 'Obligations familiales', 'Accidents graves') DEFAULT 'Maladie longue durée',
@@ -102,7 +102,7 @@ CREATE TABLE Action_admin(
                              id_admin VARCHAR(10) NOT NULL,
                              action TINYTEXT NOT NULL,
                              temps_action TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                             id_conge VARCHAR(15),
+                             id_conge VARCHAR(16),
                              id_reins VARCHAR(15),
                              pk_abond BIGINT,
                              FOREIGN KEY (id_admin) REFERENCES Admin(id_admin),
