@@ -191,13 +191,15 @@ public class MenuGestionAbdandenementController {
                 GetAbandonts.getIdsFromFile(selectedFile).forEach(id -> {
                     System.out.println("student id : " + id);
                     try {
-                        db.addAbondant(new Abondant(
-                                id,
-                                admin.getIdAdmin(),
-                                Date.valueOf(LocalDate.now())
-                        ));
-                        // logs the admins action
-                        AddActionAdmin.addAbondant(menuController.getAdmin(), db.getEtudiant(id));
+                        if(db.getCongeByEtudiant(id) == null) {
+                            db.addAbondant(new Abondant(
+                                    id,
+                                    admin.getIdAdmin(),
+                                    Date.valueOf(LocalDate.now())
+                            ));
+                            // logs the admins action
+                            AddActionAdmin.addAbondant(menuController.getAdmin(), db.getEtudiant(id));
+                        }
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

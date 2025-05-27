@@ -73,18 +73,34 @@ public class AjouterDemandeController {
                 return;
             }
 
+
             // ID étudiant
             long etudiantId = Long.parseLong(AJT_D_matricule.getText());
 
             // Vérifier si l'étudiant existe
             DatabaseController dbController = new DatabaseController();
+
+            // check if the student is an abandon
+            if (dbController.getAbondant(etudiantId) != null) {
+                showAlert("Error", "L'étudiant(e) est déclaré(e) comme abandont.");
+                return;
+            }
+
             Etudiant etudiant = dbController.getEtudiant(etudiantId);
             if (etudiant == null) {
                 showAlert("Error", "Student not found with ID: " + etudiantId);
                 return;
             }
 
-            // Créer l'objet Conge avec les données
+            // Créer l'objet Conge avec les données*
+            Conge tempConge = dbController.getCongeByEtudiant(etudiantId);
+            if (tempConge != null && tempConge.getEtat() != EtatTraitement.REFUSÉ) {
+                showAlert("Error", "L'étudiant(e) a déja un congé");
+                return;
+            }
+
+            if (tempConge != null) dbController.removeConge(tempConge.getIdDemande());
+
             FileInputStream fileInputStream = new FileInputStream(selectedFile);
             Conge conge = new Conge(
                     Date.valueOf(LocalDate.now()),
@@ -129,6 +145,13 @@ public class AjouterDemandeController {
 
             long matricule = Long.parseLong(AJT_D_matricule.getText());
             DatabaseController dbController = new DatabaseController();
+
+            // checks if the student abandoned
+            if (dbController.getAbondant(matricule) != null) {
+                showAlert("Error", "L'étudiant(e) est déclaré(e) comme abandont.");
+                return;
+            }
+
             Etudiant etudiant = dbController.getEtudiant(matricule);
 
             if (etudiant == null) {
