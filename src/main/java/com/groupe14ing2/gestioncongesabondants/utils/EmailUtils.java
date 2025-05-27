@@ -1,8 +1,8 @@
 package com.groupe14ing2.gestioncongesabondants.utils;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import javafx.scene.control.Alert;
 
 import java.io.BufferedReader;

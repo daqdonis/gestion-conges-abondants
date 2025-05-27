@@ -13,7 +13,8 @@ module com.groupe14ing2.gestioncongesabondants {
     requires jbcrypt;
     requires org.apache.commons.csv;
     requires java.sql;
-    requires java.mail;
+    requires jakarta.mail;
+    requires org.eclipse.angus.mail;
 
     opens com.groupe14ing2.gestioncongesabondants to javafx.fxml;
     exports com.groupe14ing2.gestioncongesabondants;
