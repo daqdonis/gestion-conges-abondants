@@ -76,9 +76,6 @@ public class reinsctiprionController {
     @FXML
     private Label statusLabel;
 
-    @FXML
-    private Label studentNameLabel;
-
     private Etudiant etudiant;
     private String abandonmentYear;
     private MenuGestionAbdandenementController menuController;
@@ -220,7 +217,6 @@ public class reinsctiprionController {
         reinsctiprion_PreNom.setText(etudiant.getPrenom());
         reinsctiprion_GroupID.setText(etudiant.getIdGroupe());
         reinsctiprion_Date.setText(etudiant.getDateNaiss().toString());
-        studentNameLabel.setText(etudiant.getNom() + " " + etudiant.getPrenom());
         updateEligibilityStatus();
     }
 

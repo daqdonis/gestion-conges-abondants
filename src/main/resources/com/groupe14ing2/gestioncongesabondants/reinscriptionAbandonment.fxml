@@ -18,11 +18,6 @@
                   <Font name="Arial Bold" size="40.0" />
                </font>
             </Text>
-            <Label fx:id="studentNameLabel" alignment="CENTER" layoutX="295.0" layoutY="197.0" prefHeight="22.0" prefWidth="176.0" textFill="#4b4b4b">
-               <font>
-                  <Font name="Calibri" size="19.0" />
-               </font>
-            </Label>
             <Label alignment="CENTER" layoutX="12.0" layoutY="174.0" prefHeight="22.0" prefWidth="101.0" text="Matricule :" textFill="#4b4b4b">
                <font>
                   <Font name="Calibri" size="19.0" />
@@ -74,7 +69,7 @@
             </Label>
             <TextField fx:id="abandonmentYearField" layoutX="161.0" layoutY="355.0" prefHeight="27.0" prefWidth="178.0" style="-fx-border-color: black;" />
             <Button fx:id="AJT_D_RefuserButton" layoutX="112.0" layoutY="479.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="Refuser" textFill="#3cd14e" />
-            <Button fx:id="just_butt" layoutX="189.0" layoutY="407.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="justification" textFill="#1f75ff" />
+            <Button fx:id="just_butt" layoutX="189.0" layoutY="407.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="132.0" text="justification" textFill="#1f75ff" styleClass="justification-button" />
          </children>
       </Pane>
    </children>

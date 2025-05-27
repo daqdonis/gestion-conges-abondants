@@ -86,3 +86,20 @@
 
 }
 
+.justification-button {
+    -fx-background-color: #dedede;
+    -fx-text-fill: #1f75ff;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+}
+
+.justification-button:hover {
+    -fx-background-color: #4f92ff;
+    -fx-text-fill: white;
+    -fx-background-radius: 200px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 2, 0.2, 2, 2);
+}
+
